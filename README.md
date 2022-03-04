@@ -9,7 +9,7 @@ This is the Convoy PHP SDK. This SDK contains methods for easily interacting wit
 ## Installation
 To install the package, you will need to be using Composer in your project. 
 
-The Convoy PHP SDK is not hard coupled to any HTTP Client such as Guzzle or any other library used to make HTTP requests. The HTTP Client implementation is based on PSR-18(https://www.php-fig.org/psr/psr-18/). This provides you with the convenience of choosing what PSR-7(https://packagist.org/providers/psr/http-message-implementation) and HTTP Client(https://packagist.org/providers/psr/http-client-implementation) you want to use.
+The Convoy PHP SDK is not hard coupled to any HTTP Client such as Guzzle or any other library used to make HTTP requests. The HTTP Client implementation is based on [PSR-18](https://www.php-fig.org/psr/psr-18/). This provides you with the convenience of choosing what [PSR-7](https://packagist.org/providers/psr/http-message-implementation) and [HTTP Client](https://packagist.org/providers/psr/http-client-implementation) you want to use.
 
 To get started quickly, 
 
