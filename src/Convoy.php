@@ -3,6 +3,10 @@
 namespace Convoy;
 
 use Convoy\Api\Application;
+use Convoy\Api\DeliveryAttempt;
+use Convoy\Api\Endpoint;
+use Convoy\Api\Event;
+use Convoy\Api\EventDelivery;
 use Convoy\Api\Group;
 use Convoy\HttpClient\ClientBuilder;
 use Convoy\HttpClient\Config;
@@ -50,5 +54,25 @@ class Convoy
     public function applications(): Application
     {
         return new Application($this->getHttpClient());
+    }
+
+    public function events(): Event
+    {
+        return new Event($this->getHttpClient());
+    }
+
+    public function eventDeliveries(): EventDelivery
+    {
+        return new EventDelivery($this->getHttpClient());
+    }
+
+    public function endpoints(): Endpoint
+    {
+        return new Endpoint($this->getHttpClient());
+    }
+
+    public function deliveryAttempts(): DeliveryAttempt
+    {
+        return new DeliveryAttempt($this->getHttpClient());
     }
 }

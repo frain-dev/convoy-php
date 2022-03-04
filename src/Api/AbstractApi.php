@@ -14,8 +14,12 @@ abstract class AbstractApi
         $this->httpClient = $httpClient;
     }
 
-    public function httpPost(string $path, array $body = [], array $requestHeaders = []): array
+    public function httpPost(string $path, array $body = [], array $parameters = [], array $requestHeaders = []): array
     {
+        if (! empty($parameters)) {
+            $path .= $this->buildQueryString($parameters);
+        }
+
         $response = $this->httpClient->post($path, $requestHeaders, $this->createJsonBody($body));
 
         return ResponseHelper::getContent($response);
@@ -24,7 +28,7 @@ abstract class AbstractApi
     public function httpGet(string $path, array $parameters = [], array $requestHeaders = [])
     {
         if (! empty($parameters)) {
-            $path .= '?'.http_build_query($parameters, '', '&', PHP_QUERY_RFC3986);
+            $path .= $this->buildQueryString($parameters);
         }
 
         $response = $this->httpClient->get($path, $requestHeaders);
@@ -49,5 +53,10 @@ abstract class AbstractApi
     protected function createJsonBody(array $parameters)
     {
         return (count($parameters) === 0) ? null : json_encode($parameters, empty($parameters) ? JSON_FORCE_OBJECT : 0);
+    }
+
+    protected function buildQueryString(array $parameters): string
+    {
+        return '?' .http_build_query($parameters, '', '&', PHP_QUERY_RFC3986);
     }
 }

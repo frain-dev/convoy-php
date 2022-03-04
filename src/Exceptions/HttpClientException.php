@@ -20,25 +20,19 @@ class HttpClientException extends RuntimeException
 
     public static function badRequest(ResponseInterface $response)
     {
-        $body = $response->getBody()->getContents();
-
-        $jsonDecoded = json_decode($body, true);
-
-        $validationMessage = isset($jsonDecoded['message']) ? $jsonDecoded['message'] : $body;
-
-        $message = sprintf("The parameters passed to the API were invalid. Check your inputs!\n\n%s", $validationMessage);
+        $message = sprintf("The parameters passed to the API were invalid. Check your inputs!\n\n%s", self::getJsonMessage($response));
 
         return new self($message, $response->getStatusCode(), $response);
     }
 
     public static function unauthorized(ResponseInterface $response)
     {
-        return new self('Unauthorized credentials', 401, $response);
+        return new self(self::getJsonMessage($response), $response->getStatusCode(), $response);
     }
 
     public static function notFound(ResponseInterface $response)
     {
-        return new self('The endpoint you have tried to access does not exist', $response->getStatusCode(), $response);
+        return new self(self::getJsonMessage($response), $response->getStatusCode(), $response);
     }
 
     public static function tooManyRequests(ResponseInterface $response)
@@ -48,26 +42,14 @@ class HttpClientException extends RuntimeException
 
     public static function forbidden(ResponseInterface $response)
     {
-        $body = $response->getBody()->getContents();
-
-        $jsonDecoded = json_decode($body, true);
-
-        $validationMessage = isset($jsonDecoded['message']) ? $jsonDecoded['message'] : $body;
-
-        $message = sprintf("Forbidden!\n\n%s", $validationMessage);
+        $message = sprintf("Forbidden!\n\n%s", self::getJsonMessage($response));
 
         return new self($message, $response->getStatusCode(), $response);
     }
 
     public static function serverError(ResponseInterface $response)
     {
-        $body = $response->getBody()->getContents();
-
-        $jsonDecoded = json_decode($body, true);
-
-        $message = isset($jsonDecoded['message']) ? $jsonDecoded['message'] : $body;
-
-        return new self($message, $response->getStatusCode(), $response);
+        return new self(self::getJsonMessage($response), $response->getStatusCode(), $response);
     }
 
     public function getResponse(): ?ResponseInterface
@@ -78,5 +60,14 @@ class HttpClientException extends RuntimeException
     public function getResponseCode(): int
     {
         return $this->responseCode;
+    }
+
+    protected static function getJsonMessage(ResponseInterface $response)
+    {
+        $body = $response->getBody()->getContents();
+
+        $jsonDecoded = json_decode($body, true);
+
+        return isset($jsonDecoded['message']) ? $jsonDecoded['message'] : $body;
     }
 }

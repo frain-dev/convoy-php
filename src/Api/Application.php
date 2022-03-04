@@ -4,14 +4,14 @@ namespace Convoy\Api;
 
 class Application extends AbstractApi
 {
-    public function all(array $parameters = [])
+    public function all(array $parameters = []): array
     {
         return $this->httpGet('/applications', $parameters);
     }
 
-    public function create(array $data): array
+    public function create(array $data, array $parameters = []): array
     {
-        return $this->httpPost('/applications', $data);
+        return $this->httpPost('/applications', $data, $parameters);
     }
 
     public function find(string $id, array $parameters = []): array
