@@ -14,7 +14,6 @@ use Http\Client\Common\HttpMethodsClientInterface;
 use Http\Client\Common\Plugin\AuthenticationPlugin;
 use Http\Client\Common\Plugin\BaseUriPlugin;
 use Http\Client\Common\Plugin\HeaderDefaultsPlugin;
-use Http\Message\Authentication\Bearer;
 
 class Convoy
 {
@@ -38,7 +37,7 @@ class Convoy
             )
         );
 
-        $this->clientBuilder->addPlugin(new AuthenticationPlugin(new Bearer($config->getApiKey())));
+        $this->clientBuilder->addPlugin(new AuthenticationPlugin($config->getAuthenticationPlugin()));
     }
 
     public function getHttpClient(): HttpMethodsClientInterface

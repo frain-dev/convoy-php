@@ -3,6 +3,9 @@
 namespace Convoy\HttpClient;
 
 use Http\Discovery\Psr17FactoryDiscovery;
+use Http\Message\Authentication;
+use Http\Message\Authentication\BasicAuth;
+use Http\Message\Authentication\Bearer;
 use Psr\Http\Message\UriFactoryInterface;
 use Psr\Http\Message\UriInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -29,6 +32,8 @@ class Config
             'uri_factory' => Psr17FactoryDiscovery::findUriFactory(),
             'uri' => self::URI,
             'api_key' => '',
+            'username' => '',
+            'password' => '',
         ]);
 
 
@@ -39,6 +44,8 @@ class Config
     {
         $resolver->setAllowedTypes('uri', 'string');
         $resolver->setAllowedTypes('api_key', 'string');
+        $resolver->setAllowedTypes('username', 'string');
+        $resolver->setAllowedTypes('password', 'string');
         $resolver->setAllowedTypes('client_builder', ClientBuilder::class);
         $resolver->setAllowedTypes('uri_factory', UriFactoryInterface::class);
     }
@@ -61,5 +68,29 @@ class Config
     public function getApiKey(): string
     {
         return $this->config['api_key'];
+    }
+
+    public function getUsername(): string
+    {
+        return $this->config['username'];
+    }
+
+    public function getPassword(): string
+    {
+        return $this->config['password'];
+    }
+
+    public function isBearerTokenAuthentication(): bool
+    {
+        return array_key_exists('api_key', $this->config) && ! empty($this->config['api_key']);
+    }
+
+    public function getAuthenticationPlugin(): Authentication
+    {
+        if ($this->isBearerTokenAuthentication()) {
+            return new Bearer($this->getApiKey());
+        }
+
+        return new BasicAuth($this->getUsername(), $this->getPassword());
     }
 }
