@@ -19,7 +19,7 @@ class EventDelivery extends AbstractApi
         return $this->httpPut(sprintf('/eventdeliveries/%s/resend', $id));
     }
 
-    public function batchResend(string $id, array $data): array
+    public function batchResend(array $data): array
     {
         return $this->httpPost('/eventdeliveries/batchretry', $data);
     }
