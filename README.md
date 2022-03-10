@@ -20,14 +20,13 @@ composer require frain/convoy symfony/http-client nyholm/psr7
 ## Usage
 
 ```php
-use Convoy\HttpClient\Config;
 use Convoy\Convoy;
 
 
-$config = new Config([
+$config = [
     'api_key' => 'your_api_key',
     'uri' => 'https://self-hosted-convoy' //This is optional and will default to https://cloud.getconvoy.io/api/v1
-]);
+];
 
 $convoy = new Convoy($config);
 

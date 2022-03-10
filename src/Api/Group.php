@@ -9,9 +9,9 @@ class Group extends AbstractApi
         return $this->httpGet('/groups', $parameters);
     }
 
-    public function create(array $data): array
+    public function create(array $data, array $parameters = []): array
     {
-        return $this->httpPost('/groups', $data);
+        return $this->httpPost('/groups', $data, $parameters);
     }
 
     public function find(string $id, array $parameters = []): array
@@ -19,13 +19,13 @@ class Group extends AbstractApi
         return $this->httpGet(sprintf('/groups/%s', $id), $parameters);
     }
 
-    public function update(string $id, array $data): array
+    public function update(string $id, array $data, array $parameters = []): array
     {
-        return $this->httpPut(sprintf('/groups/%s', $id), $data);
+        return $this->httpPut(sprintf('/groups/%s', $id), $data, $parameters);
     }
 
-    public function delete(string $id, array $data = []): array
+    public function delete(string $id, array $data = [], array $parameters = []): array
     {
-        return $this->httpDelete(sprintf('/groups/%s', $id), $data);
+        return $this->httpDelete(sprintf('/groups/%s', $id), $data, $parameters);
     }
 }

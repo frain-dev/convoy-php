@@ -19,9 +19,9 @@ class Convoy
 {
     private ClientBuilder $clientBuilder;
 
-    public function __construct(Config $config = null)
+    public function __construct(array $config = [])
     {
-        $config = $config ?? new Config();
+        $config = new Config($config);
 
         $this->clientBuilder = $config->getClientBuilder();
 

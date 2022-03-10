@@ -9,9 +9,9 @@ class Endpoint extends AbstractApi
         return $this->httpGet(sprintf('/applications/%s/endpoints', $appId), $parameters);
     }
 
-    public function create(string $appId, array $data): array
+    public function create(string $appId, array $data, array $parameters): array
     {
-        return $this->httpPost(sprintf('/applications/%s/endpoints', $appId), $data);
+        return $this->httpPost(sprintf('/applications/%s/endpoints', $appId), $data, $parameters);
     }
 
     public function find(string $appId, string $endpointId, array $parameters = []): array
@@ -19,13 +19,13 @@ class Endpoint extends AbstractApi
         return $this->httpGet(sprintf('/applications/%s/endpoints/%s', $appId, $endpointId), $parameters);
     }
 
-    public function update(string $appId, string $endpointId, array $data): array
+    public function update(string $appId, string $endpointId, array $data, array $parameters = []): array
     {
-        return $this->httpPut(sprintf('/applications/%s/endpoints/%s', $appId, $endpointId), $data);
+        return $this->httpPut(sprintf('/applications/%s/endpoints/%s', $appId, $endpointId), $data, $parameters);
     }
 
-    public function delete(string $appId, string $endpointId, array $data = []): array
+    public function delete(string $appId, string $endpointId, array $data = [], array $parameters = []): array
     {
-        return $this->httpDelete(sprintf('/applications/%s/endpoints/%s', $appId, $endpointId), $data);
+        return $this->httpDelete(sprintf('/applications/%s/endpoints/%s', $appId, $endpointId), $data, $parameters);
     }
 }

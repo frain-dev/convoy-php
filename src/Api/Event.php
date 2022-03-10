@@ -9,9 +9,9 @@ class Event extends AbstractApi
         return $this->httpGet('/events', $parameters);
     }
 
-    public function create(array $data): array
+    public function create(array $data, array $parameters = []): array
     {
-        return $this->httpPost('/events', $data);
+        return $this->httpPost('/events', $data, $parameters);
     }
 
     public function find(string $id, array $parameters = []): array

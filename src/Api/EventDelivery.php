@@ -14,13 +14,13 @@ class EventDelivery extends AbstractApi
         return $this->httpGet(sprintf('/eventdeliveries/%s', $id), $parameters);
     }
 
-    public function resend(string $id): array
+    public function resend(string $id, array $parameters = []): array
     {
-        return $this->httpPut(sprintf('/eventdeliveries/%s/resend', $id));
+        return $this->httpPut(sprintf('/eventdeliveries/%s/resend', $id), $parameters);
     }
 
-    public function batchResend(array $data): array
+    public function batchResend(array $data, array $parameters = []): array
     {
-        return $this->httpPost('/eventdeliveries/batchretry', $data);
+        return $this->httpPost('/eventdeliveries/batchretry', $data, $parameters);
     }
 }

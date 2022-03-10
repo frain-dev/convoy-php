@@ -36,15 +36,23 @@ abstract class AbstractApi
         return ResponseHelper::getContent($response);
     }
 
-    public function httpPut(string $path, array $body = [], array $requestHeaders = []): array
+    public function httpPut(string $path, array $body = [], array $parameters = [], array $requestHeaders = []): array
     {
+        if (! empty($parameters)) {
+            $path .= $this->buildQueryString($parameters);
+        }
+
         $response = $this->httpClient->put($path, $requestHeaders, $this->createJsonBody($body));
 
         return ResponseHelper::getContent($response);
     }
 
-    public function httpDelete(string $path, array $body = [], array $requestHeaders = []): array
+    public function httpDelete(string $path, array $body = [], array $parameters = [], array $requestHeaders = []): array
     {
+        if (! empty($parameters)) {
+            $path .= $this->buildQueryString($parameters);
+        }
+
         $response = $this->httpClient->delete($path, $requestHeaders, $this->createJsonBody($body));
 
         return ResponseHelper::getContent($response);

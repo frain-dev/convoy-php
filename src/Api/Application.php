@@ -19,13 +19,13 @@ class Application extends AbstractApi
         return $this->httpGet(sprintf('/applications/%s', $id), $parameters);
     }
 
-    public function update(string $id, array $data): array
+    public function update(string $id, array $data, array $parameters = []): array
     {
-        return $this->httpPut(sprintf('/applications/%s', $id), $data);
+        return $this->httpPut(sprintf('/applications/%s', $id), $data, $parameters);
     }
 
-    public function delete(string $id, array $data = []): array
+    public function delete(string $id, array $data = [], array $parameters = []): array
     {
-        return $this->httpDelete(sprintf('/applications/%s', $id), $data);
+        return $this->httpDelete(sprintf('/applications/%s', $id), $data, $parameters);
     }
 }
