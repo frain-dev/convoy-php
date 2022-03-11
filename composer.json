@@ -1,10 +1,10 @@
 {
     "name": "frain/convoy",
-    "version": "0.1.0",
     "description": "Convoy PHP SDK Library",
     "keywords": [
         "frain",
-        "convoy"
+        "convoy",
+        "webhooks"
     ],
     "homepage": "https://github.com/frain/convoy",
     "license": "MIT",
