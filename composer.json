@@ -1,5 +1,6 @@
 {
     "name": "frain/convoy",
+    "version": "0.1.0",
     "description": "Convoy PHP SDK Library",
     "keywords": [
         "frain",
