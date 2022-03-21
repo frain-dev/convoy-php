@@ -42,9 +42,9 @@ $convoy = new Convoy([
 ]);
 ```
 
-#### Creating an Application
+### Creating an Application
 
-An application represents a user's application trying to receive webhooks. Once you create an application, you'll receive a `uid` that you should save and supply in subsequent API calls to perform other requests such as creating an event.
+An application represents a user's application trying to receive webhooks. Once you create an application, you'll receive a `uid` as part of the response that you should save and supply in subsequent API calls to perform other requests such as creating an event.
 
 ```php
 $appData = ["name" => "my_app", "support_email" => "support@myapp.com"];
@@ -71,7 +71,7 @@ $response = $convoy->endpoints()->create($appId, $endpointData);
 
 ### Sending an Event
 
-To send an event, you'll need the `app_id` we created in the earlier section
+To send an event, you'll need the `uid` from the application we created earlier.
 
 ```php
 $eventData = [
