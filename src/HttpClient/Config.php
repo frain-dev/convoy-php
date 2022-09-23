@@ -14,7 +14,7 @@ class Config
 {
     private array $config;
 
-    public const URI = 'https://cloud.getconvoy.io/api/v1';
+    public const URI = 'https://dashboard.getconvoy.io/api/v1';
 
     public function __construct(array $config = [])
     {
