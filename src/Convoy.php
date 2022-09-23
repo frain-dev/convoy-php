@@ -8,6 +8,8 @@ use Convoy\Api\Endpoint;
 use Convoy\Api\Event;
 use Convoy\Api\EventDelivery;
 use Convoy\Api\Group;
+use Convoy\Api\Source;
+use Convoy\Api\Subscription;
 use Convoy\HttpClient\ClientBuilder;
 use Convoy\HttpClient\Config;
 use Http\Client\Common\HttpMethodsClientInterface;
@@ -73,5 +75,15 @@ class Convoy
     public function deliveryAttempts(): DeliveryAttempt
     {
         return new DeliveryAttempt($this->getHttpClient());
+    }
+
+    public function sources(): Source
+    {
+        return new Source($this->getHttpClient());
+    }
+
+    public function subscriptions(): Subscription
+    {
+        return new Subscription($this->getHttpClient());
     }
 }
