@@ -31,9 +31,8 @@ class Config
             'client_builder' => new ClientBuilder(),
             'uri_factory' => Psr17FactoryDiscovery::findUriFactory(),
             'uri' => self::URI,
+            'project_id' => '',
             'api_key' => '',
-            'username' => '',
-            'password' => '',
         ]);
 
 
@@ -44,8 +43,7 @@ class Config
     {
         $resolver->setAllowedTypes('uri', 'string');
         $resolver->setAllowedTypes('api_key', 'string');
-        $resolver->setAllowedTypes('username', 'string');
-        $resolver->setAllowedTypes('password', 'string');
+        $resolver->setAllowedTypes('project_id', 'string');
         $resolver->setAllowedTypes('client_builder', ClientBuilder::class);
         $resolver->setAllowedTypes('uri_factory', UriFactoryInterface::class);
     }
@@ -62,7 +60,9 @@ class Config
 
     public function getUri(): UriInterface
     {
-        return $this->getUriFactory()->createUri($this->config['uri']);
+        $uri = sprintf('%s/projects/%s', $this->config['uri'], $this->config['project_id']);
+        
+        return $this->getUriFactory()->createUri($uri);
     }
 
     public function getApiKey(): string
@@ -70,27 +70,8 @@ class Config
         return $this->config['api_key'];
     }
 
-    public function getUsername(): string
-    {
-        return $this->config['username'];
-    }
-
-    public function getPassword(): string
-    {
-        return $this->config['password'];
-    }
-
-    public function isBearerTokenAuthentication(): bool
-    {
-        return array_key_exists('api_key', $this->config) && ! empty($this->config['api_key']);
-    }
-
     public function getAuthenticationPlugin(): Authentication
     {
-        if ($this->isBearerTokenAuthentication()) {
-            return new Bearer($this->getApiKey());
-        }
-
-        return new BasicAuth($this->getUsername(), $this->getPassword());
+        return new Bearer($this->getApiKey());
     }
 }

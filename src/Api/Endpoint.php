@@ -4,28 +4,28 @@ namespace Convoy\Api;
 
 class Endpoint extends AbstractApi
 {
-    public function all(string $appId, array $parameters = []): array
+    public function all(array $parameters = []): array
     {
-        return $this->httpGet(sprintf('/applications/%s/endpoints', $appId), $parameters);
+        return $this->httpGet('/endpoints', $parameters);
     }
 
-    public function create(string $appId, array $data, array $parameters): array
+    public function create(array $data, array $parameters): array
     {
-        return $this->httpPost(sprintf('/applications/%s/endpoints', $appId), $data, $parameters);
+        return $this->httpPost('/endpoints', $data, $parameters);
     }
 
-    public function find(string $appId, string $endpointId, array $parameters = []): array
+    public function find(string $endpointId, array $parameters = []): array
     {
-        return $this->httpGet(sprintf('/applications/%s/endpoints/%s', $appId, $endpointId), $parameters);
+        return $this->httpGet(sprintf('/endpoints/%s', $endpointId), $parameters);
     }
 
-    public function update(string $appId, string $endpointId, array $data, array $parameters = []): array
+    public function update(string $endpointId, array $data, array $parameters = []): array
     {
-        return $this->httpPut(sprintf('/applications/%s/endpoints/%s', $appId, $endpointId), $data, $parameters);
+        return $this->httpPut(sprintf('/endpoints/%s', $endpointId), $data, $parameters);
     }
 
-    public function delete(string $appId, string $endpointId, array $data = [], array $parameters = []): array
+    public function delete(string $endpointId, array $data = [], array $parameters = []): array
     {
-        return $this->httpDelete(sprintf('/applications/%s/endpoints/%s', $appId, $endpointId), $data, $parameters);
+        return $this->httpDelete(sprintf('/endpoints/%s', $endpointId), $data, $parameters);
     }
 }
