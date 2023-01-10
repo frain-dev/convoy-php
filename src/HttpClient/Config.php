@@ -4,7 +4,6 @@ namespace Convoy\HttpClient;
 
 use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Message\Authentication;
-use Http\Message\Authentication\BasicAuth;
 use Http\Message\Authentication\Bearer;
 use Psr\Http\Message\UriFactoryInterface;
 use Psr\Http\Message\UriInterface;
@@ -61,7 +60,7 @@ class Config
     public function getUri(): UriInterface
     {
         $uri = sprintf('%s/projects/%s', $this->config['uri'], $this->config['project_id']);
-        
+
         return $this->getUriFactory()->createUri($uri);
     }
 
