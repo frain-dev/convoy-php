@@ -24,7 +24,7 @@ Next, import the `convoy` module and setup with your auth credentials.
 ```php
 use Convoy\Convoy;
 
-$convoy = new Convoy(["api_key" => "your_api_key"]);
+$convoy = new Convoy(["api_key" => "your_api_key", "project_id" => "01GTVFD8E7FCNRKKCBJ51N0SN5"]);
 ```
 
 ### Create an Endpoint
@@ -38,9 +38,25 @@ $endpointData = [
     "description" => "Default Endpoint",
     "secret" => "endpoint-secret",
     "events" => ["*"]
-]
+];
 
 $response = $convoy->endpoints()->create($endpointData);
+```
+
+### Update an Endpoint
+
+```php
+$endpointId = "01GTVFSGBAH8NJTMT5Y1ENE218";
+
+$endpointData = [
+    "name" => "Default Endpoint",
+    "url" => "https://0d87-102-89-2-172.ngrok.io",
+    "description" => "Default Endpoint",
+    "secret" => "endpoint-secret",
+    "events" => ["*"]
+];
+
+$response = $convoy->endpoints()->update($endpointId, $endpointData);
 ```
 
 ### Sending an Event
