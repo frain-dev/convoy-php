@@ -24,7 +24,7 @@ Next, import the `convoy` module and setup with your auth credentials.
 ```php
 use Convoy\Convoy;
 
-$convoy = new Convoy(["api_key" => "your_api_key", "project_id" => "01GTVFD8E7FCNRKKCBJ51N0SN5"]);
+$convoy = new Convoy(["api_key" => "your_api_key", "project_id" => "your_project_id"]);
 ```
 
 ### Create an Endpoint
