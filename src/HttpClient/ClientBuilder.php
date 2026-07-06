@@ -19,7 +19,7 @@ class ClientBuilder
     private StreamFactoryInterface $streamFactoryInterface;
     private array $plugins = [];
 
-    public function __construct(ClientInterface $httpClient = null, RequestFactoryInterface $requestFactoryInterface = null, StreamFactoryInterface $streamFactoryInterface = null)
+    public function __construct(?ClientInterface $httpClient = null, ?RequestFactoryInterface $requestFactoryInterface = null, ?StreamFactoryInterface $streamFactoryInterface = null)
     {
         $this->httpClient = $httpClient ?? HttpClientDiscovery::find();
         $this->requestFactoryInterface = $requestFactoryInterface ?? Psr17FactoryDiscovery::findRequestFactory();

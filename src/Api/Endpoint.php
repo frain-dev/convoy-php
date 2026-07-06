@@ -9,7 +9,7 @@ class Endpoint extends AbstractApi
         return $this->httpGet('/endpoints', $parameters);
     }
 
-    public function create(array $data, array $parameters): array
+    public function create(array $data, array $parameters = []): array
     {
         return $this->httpPost('/endpoints', $data, $parameters);
     }
@@ -27,5 +27,15 @@ class Endpoint extends AbstractApi
     public function delete(string $endpointId, array $data = [], array $parameters = []): array
     {
         return $this->httpDelete(sprintf('/endpoints/%s', $endpointId), $data, $parameters);
+    }
+
+    public function pause(string $endpointId): array
+    {
+        return $this->httpPut(sprintf('/endpoints/%s/pause', $endpointId));
+    }
+
+    public function expireSecret(string $endpointId, array $data): array
+    {
+        return $this->httpPut(sprintf('/endpoints/%s/expire_secret', $endpointId), $data);
     }
 }
