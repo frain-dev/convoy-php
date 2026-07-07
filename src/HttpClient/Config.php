@@ -13,8 +13,6 @@ class Config
 {
     private array $config;
 
-    public const URI = 'https://dashboard.getconvoy.io/api/v1';
-
     public function __construct(array $config = [])
     {
         $resolver = new OptionsResolver();
@@ -29,11 +27,11 @@ class Config
         $resolver->setDefaults([
             'client_builder' => new ClientBuilder(),
             'uri_factory' => Psr17FactoryDiscovery::findUriFactory(),
-            'uri' => self::URI,
-            'project_id' => '',
-            'api_key' => '',
         ]);
 
+        // uri is the instance API base, e.g. https://us.getconvoy.cloud/api/v1;
+        // there is no default host, callers must state where their project lives.
+        $resolver->setRequired(['uri', 'api_key', 'project_id']);
 
         $this->setAllowedTypes($resolver);
     }

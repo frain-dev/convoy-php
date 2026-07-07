@@ -16,11 +16,20 @@ class EventDelivery extends AbstractApi
 
     public function resend(string $id, array $parameters = []): array
     {
-        return $this->httpPut(sprintf('/eventdeliveries/%s/resend', $id), $parameters);
+        return $this->httpPut(sprintf('/eventdeliveries/%s/resend', $id), [], $parameters);
     }
 
-    public function batchResend(array $data, array $parameters = []): array
+    /**
+     * Batch retries deliveries matching the query filters; the server reads
+     * filters from query params only (e.g. endpointId, eventId, status).
+     */
+    public function batchResend(array $parameters = []): array
     {
-        return $this->httpPost('/eventdeliveries/batchretry', $data, $parameters);
+        return $this->httpPost('/eventdeliveries/batchretry', [], $parameters);
+    }
+
+    public function forceResend(array $data, array $parameters = []): array
+    {
+        return $this->httpPost('/eventdeliveries/forceresend', $data, $parameters);
     }
 }

@@ -107,8 +107,6 @@ class Webhook
 
     private function verifySimpleSignature(string $payload, string $header): bool
     {
-        $signature = $this->computeSignature($payload, $header);
-
         return $this->secureCompare($this->computeSignature($payload), $header);
     }
 

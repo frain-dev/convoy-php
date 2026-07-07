@@ -3,7 +3,7 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/frain/convoy.svg?style=flat-square)](https://packagist.org/packages/frain/convoy)
 [![Total Downloads](https://img.shields.io/packagist/dt/frain/convoy.svg?style=flat-square)](https://packagist.org/packages/frain/convoy)
 
-This is the Convoy PHP SDK. This SDK contains methods for easily interacting with Convoy's API. Below are examples to get you started. For additional examples, please see our official documentation at (https://convoy.readme.io/reference)
+This is the Convoy PHP SDK. This SDK contains methods for easily interacting with Convoy's API. Below are examples to get you started. See our [API Reference](https://getconvoy.io/docs/api-reference/welcome) for more.
 
 
 ## Installation
@@ -19,13 +19,23 @@ composer require frain/convoy symfony/http-client nyholm/psr7
 
 ### Setup Client
 
-Next, import the `convoy` module and setup with your auth credentials.
+Set up the client with your instance URL, API key, and project ID. Both the API key and project ID are available from your **Project Settings** page.
 
 ```php
 use Convoy\Convoy;
 
-$convoy = new Convoy(["api_key" => "your_api_key", "project_id" => "your_project_id"]);
+$convoy = new Convoy([
+    "uri" => "https://us.getconvoy.cloud/api/v1",
+    "api_key" => "your_api_key",
+    "project_id" => "your_project_id"
+]);
 ```
+
+Your instance URL depends on where your project lives:
+
+- Convoy Cloud (US): `https://us.getconvoy.cloud/api/v1`
+- Convoy Cloud (EU): `https://eu.getconvoy.cloud/api/v1`
+- Self-hosted: `https://your-instance/api/v1`
 
 ### Create an Endpoint
 
@@ -33,30 +43,27 @@ An endpoint represents a target URL to receive events.
 
 ```php
 $endpointData = [
-    "name" => "Default Endpoint",
-    "url" => "https://0d87-102-89-2-172.ngrok.io",
+    "name" => "default-endpoint",
+    "url" => "https://example.com/webhooks/convoy",
     "description" => "Default Endpoint",
-    "secret" => "endpoint-secret",
-    "events" => ["*"]
+    "secret" => "endpoint-secret"
 ];
 
 $response = $convoy->endpoints()->create($endpointData);
+$endpointId = $response["data"]["uid"];
 ```
 
-### Update an Endpoint
+### Create a Subscription
+
+Subscriptions route events from a source to an endpoint.
 
 ```php
-$endpointId = "01GTVFSGBAH8NJTMT5Y1ENE218";
-
-$endpointData = [
-    "name" => "Default Endpoint",
-    "url" => "https://0d87-102-89-2-172.ngrok.io",
-    "description" => "Default Endpoint",
-    "secret" => "endpoint-secret",
-    "events" => ["*"]
+$subscriptionData = [
+    "name" => "event-sub",
+    "endpoint_id" => $endpointId
 ];
 
-$response = $convoy->endpoints()->update($endpointId, $endpointData);
+$response = $convoy->subscriptions()->create($subscriptionData);
 ```
 
 ### Sending an Event
@@ -68,16 +75,42 @@ $eventData = [
     "endpoint_id" => $endpointId,
     "event_type" => "payment.success",
     "data" => [
-        "event" => "payment.success",
-        "data" => [
-            "status" => "Completed",
-            "description" => "Transaction Successful",
-            "userID" => "test_user_id808"
-        ]
+        "status" => "Completed",
+        "description" => "Transaction Successful"
     ]
 ];
 
 $response = $convoy->events()->create($eventData);
+```
+
+To fan an event out to all endpoints with the same `owner_id`, or broadcast to every endpoint in the project:
+
+```php
+$response = $convoy->events()->fanout(["owner_id" => "owner-1", "event_type" => "payment.success", "data" => []]);
+$response = $convoy->events()->broadcast(["event_type" => "payment.success", "data" => []]);
+```
+
+### Verifying Webhook Signatures
+
+Verify with the raw request body, before parsing it. Always check the return value: `verify` returns `false` for an invalid simple signature, and throws `WebhookVerificationException` for invalid advanced signatures and malformed headers.
+
+```php
+use Convoy\Webhook;
+
+$webhook = new Webhook("endpoint-secret");
+
+try {
+    $valid = $webhook->verify($rawRequestBody, $_SERVER["HTTP_X_CONVOY_SIGNATURE"]);
+} catch (\Convoy\Exceptions\WebhookVerificationException $e) {
+    $valid = false;
+}
+
+if ($valid !== true) {
+    http_response_code(400);
+    exit;
+}
+
+// signature is valid; process the event
 ```
 
 ## Testing

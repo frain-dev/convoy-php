@@ -18,4 +18,19 @@ class Event extends AbstractApi
     {
         return $this->httpGet(sprintf('/events/%s', $id), $parameters);
     }
+
+    public function fanout(array $data, array $parameters = []): array
+    {
+        return $this->httpPost('/events/fanout', $data, $parameters);
+    }
+
+    public function broadcast(array $data, array $parameters = []): array
+    {
+        return $this->httpPost('/events/broadcast', $data, $parameters);
+    }
+
+    public function replay(string $id): array
+    {
+        return $this->httpPut(sprintf('/events/%s/replay', $id));
+    }
 }

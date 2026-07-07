@@ -34,6 +34,9 @@ class Convoy
                 [
                     'Content-Type' => 'application/json',
                     'Accept' => 'application/json',
+                    // Pin the API version this SDK release was built against; the
+                    // server's request migrations translate for older instances.
+                    'X-Convoy-Version' => '2025-11-24',
                 ]
             )
         );
