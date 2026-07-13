@@ -97,7 +97,7 @@ class Webhook
 
         foreach ($items as $item) {
             $itemParts = explode('=', $item, 2);
-            if (str_contains(trim($itemParts[0]), "v")) {
+            if (str_starts_with(trim($itemParts[0]), "v")) {
                 $signatures[] = $itemParts[1];
             }
         }
