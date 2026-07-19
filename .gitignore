@@ -11,3 +11,6 @@ psalm.xml
 vendor
 .php-cs-fixer.cache
 
+
+# OpenAPI Generator cache (scripts/generate.sh)
+.cache/
