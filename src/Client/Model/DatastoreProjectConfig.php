@@ -103,18 +103,18 @@ class DatastoreProjectConfig implements ModelInterface, ArrayAccess, \JsonSerial
      */
     protected static array $openAPINullables = [
         'add_event_id_trace_headers' => false,
-        'circuit_breaker' => false,
+        'circuit_breaker' => true,
         'disable_endpoint' => false,
         'max_payload_read_size' => false,
-        'meta_event' => false,
+        'meta_event' => true,
         'multiple_endpoint_subscriptions' => false,
-        'ratelimit' => false,
+        'ratelimit' => true,
         'replay_attacks_prevention_enabled' => false,
         'request_id_header' => false,
         'search_policy' => false,
-        'signature' => false,
-        'ssl' => false,
-        'strategy' => false
+        'signature' => true,
+        'ssl' => true,
+        'strategy' => true
     ];
 
     /**
@@ -421,7 +421,14 @@ class DatastoreProjectConfig implements ModelInterface, ArrayAccess, \JsonSerial
     public function setCircuitBreaker($circuit_breaker)
     {
         if (is_null($circuit_breaker)) {
-            throw new \InvalidArgumentException('non-nullable circuit_breaker cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'circuit_breaker');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('circuit_breaker', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['circuit_breaker'] = $circuit_breaker;
 
@@ -502,7 +509,14 @@ class DatastoreProjectConfig implements ModelInterface, ArrayAccess, \JsonSerial
     public function setMetaEvent($meta_event)
     {
         if (is_null($meta_event)) {
-            throw new \InvalidArgumentException('non-nullable meta_event cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'meta_event');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('meta_event', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['meta_event'] = $meta_event;
 
@@ -556,7 +570,14 @@ class DatastoreProjectConfig implements ModelInterface, ArrayAccess, \JsonSerial
     public function setRatelimit($ratelimit)
     {
         if (is_null($ratelimit)) {
-            throw new \InvalidArgumentException('non-nullable ratelimit cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'ratelimit');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('ratelimit', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['ratelimit'] = $ratelimit;
 
@@ -664,7 +685,14 @@ class DatastoreProjectConfig implements ModelInterface, ArrayAccess, \JsonSerial
     public function setSignature($signature)
     {
         if (is_null($signature)) {
-            throw new \InvalidArgumentException('non-nullable signature cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'signature');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('signature', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['signature'] = $signature;
 
@@ -691,7 +719,14 @@ class DatastoreProjectConfig implements ModelInterface, ArrayAccess, \JsonSerial
     public function setSsl($ssl)
     {
         if (is_null($ssl)) {
-            throw new \InvalidArgumentException('non-nullable ssl cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'ssl');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('ssl', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['ssl'] = $ssl;
 
@@ -718,7 +753,14 @@ class DatastoreProjectConfig implements ModelInterface, ArrayAccess, \JsonSerial
     public function setStrategy($strategy)
     {
         if (is_null($strategy)) {
-            throw new \InvalidArgumentException('non-nullable strategy cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'strategy');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('strategy', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['strategy'] = $strategy;
 

@@ -47,6 +47,8 @@ class DatastoreDeliveryMode
 
     public const AT_MOST_ONCE_DELIVERY_MODE = 'at_most_once';
 
+    public const EMPTY = '';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -55,7 +57,8 @@ class DatastoreDeliveryMode
     {
         return [
             self::AT_LEAST_ONCE_DELIVERY_MODE,
-            self::AT_MOST_ONCE_DELIVERY_MODE
+            self::AT_MOST_ONCE_DELIVERY_MODE,
+            self::EMPTY
         ];
     }
 }

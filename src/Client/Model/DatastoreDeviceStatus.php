@@ -49,6 +49,8 @@ class DatastoreDeviceStatus
 
     public const DEVICE_STATUS_DISABLED = 'disabled';
 
+    public const EMPTY = '';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -58,7 +60,8 @@ class DatastoreDeviceStatus
         return [
             self::DEVICE_STATUS_OFFLINE,
             self::DEVICE_STATUS_ONLINE,
-            self::DEVICE_STATUS_DISABLED
+            self::DEVICE_STATUS_DISABLED,
+            self::EMPTY
         ];
     }
 }

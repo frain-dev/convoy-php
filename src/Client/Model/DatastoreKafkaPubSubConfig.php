@@ -84,7 +84,7 @@ class DatastoreKafkaPubSubConfig implements ModelInterface, ArrayAccess, \JsonSe
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'auth' => false,
+        'auth' => true,
         'brokers' => false,
         'consumer_group_id' => false,
         'topic_name' => false
@@ -331,7 +331,14 @@ class DatastoreKafkaPubSubConfig implements ModelInterface, ArrayAccess, \JsonSe
     public function setAuth($auth)
     {
         if (is_null($auth)) {
-            throw new \InvalidArgumentException('non-nullable auth cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'auth');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('auth', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['auth'] = $auth;
 

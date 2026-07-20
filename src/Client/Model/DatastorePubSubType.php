@@ -51,6 +51,8 @@ class DatastorePubSubType
 
     public const AMQP_PUB_SUB = 'amqp';
 
+    public const EMPTY = '';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -61,7 +63,8 @@ class DatastorePubSubType
             self::SQS_PUB_SUB,
             self::GOOGLE_PUB_SUB,
             self::KAFKA_PUB_SUB,
-            self::AMQP_PUB_SUB
+            self::AMQP_PUB_SUB,
+            self::EMPTY
         ];
     }
 }

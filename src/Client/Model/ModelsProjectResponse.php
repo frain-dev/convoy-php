@@ -98,14 +98,14 @@ class ModelsProjectResponse implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'config' => false,
+        'config' => true,
         'created_at' => false,
-        'deleted_at' => false,
+        'deleted_at' => true,
         'logo_url' => false,
         'name' => false,
         'organisation_id' => false,
         'retained_events' => false,
-        'statistics' => false,
+        'statistics' => true,
         'type' => false,
         'uid' => false,
         'updated_at' => false
@@ -380,7 +380,14 @@ class ModelsProjectResponse implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setConfig($config)
     {
         if (is_null($config)) {
-            throw new \InvalidArgumentException('non-nullable config cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'config');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('config', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['config'] = $config;
 
@@ -434,7 +441,14 @@ class ModelsProjectResponse implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setDeletedAt($deleted_at)
     {
         if (is_null($deleted_at)) {
-            throw new \InvalidArgumentException('non-nullable deleted_at cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'deleted_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('deleted_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['deleted_at'] = $deleted_at;
 
@@ -569,7 +583,14 @@ class ModelsProjectResponse implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setStatistics($statistics)
     {
         if (is_null($statistics)) {
-            throw new \InvalidArgumentException('non-nullable statistics cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'statistics');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('statistics', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['statistics'] = $statistics;
 

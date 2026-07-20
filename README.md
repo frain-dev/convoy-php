@@ -30,8 +30,7 @@ use Convoy\Client\Model\ModelsCreateEvent;
 
 $config = (new Configuration())
     ->setHost('https://us.getconvoy.cloud/api')
-    ->setApiKeyPrefix('Authorization', 'Bearer')
-    ->setApiKey('Authorization', $apiKey);
+    ->setAccessToken($apiKey); // the client adds the Bearer prefix
 
 // Pin the API version this client was generated from.
 $http = new \GuzzleHttp\Client([

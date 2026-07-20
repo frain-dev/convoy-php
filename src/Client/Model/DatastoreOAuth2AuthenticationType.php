@@ -47,6 +47,8 @@ class DatastoreOAuth2AuthenticationType
 
     public const CLIENT_ASSERTION_AUTH = 'client_assertion';
 
+    public const EMPTY = '';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -55,7 +57,8 @@ class DatastoreOAuth2AuthenticationType
     {
         return [
             self::SHARED_SECRET_AUTH,
-            self::CLIENT_ASSERTION_AUTH
+            self::CLIENT_ASSERTION_AUTH,
+            self::EMPTY
         ];
     }
 }

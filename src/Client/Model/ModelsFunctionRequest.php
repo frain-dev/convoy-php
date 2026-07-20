@@ -83,7 +83,7 @@ class ModelsFunctionRequest implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     protected static array $openAPINullables = [
         'function' => false,
-        'payload' => false,
+        'payload' => true,
         'type' => false
     ];
 
@@ -351,7 +351,14 @@ class ModelsFunctionRequest implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setPayload($payload)
     {
         if (is_null($payload)) {
-            throw new \InvalidArgumentException('non-nullable payload cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'payload');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('payload', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['payload'] = $payload;
 

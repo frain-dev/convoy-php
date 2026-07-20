@@ -47,6 +47,8 @@ class DatastoreStrategyProvider
 
     public const EXPONENTIAL_STRATEGY_PROVIDER = 'exponential';
 
+    public const EMPTY = '';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -55,7 +57,8 @@ class DatastoreStrategyProvider
     {
         return [
             self::LINEAR_STRATEGY_PROVIDER,
-            self::EXPONENTIAL_STRATEGY_PROVIDER
+            self::EXPONENTIAL_STRATEGY_PROVIDER,
+            self::EMPTY
         ];
     }
 }

@@ -110,7 +110,7 @@ class DatastorePortalLinkResponse implements ModelInterface, ArrayAccess, \JsonS
         'auth_type' => false,
         'can_manage_endpoint' => false,
         'created_at' => false,
-        'deleted_at' => false,
+        'deleted_at' => true,
         'endpoint_count' => false,
         'endpoints' => false,
         'endpoints_metadata' => false,
@@ -516,7 +516,14 @@ class DatastorePortalLinkResponse implements ModelInterface, ArrayAccess, \JsonS
     public function setDeletedAt($deleted_at)
     {
         if (is_null($deleted_at)) {
-            throw new \InvalidArgumentException('non-nullable deleted_at cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'deleted_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('deleted_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['deleted_at'] = $deleted_at;
 

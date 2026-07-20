@@ -49,6 +49,8 @@ class DatastoreEndpointAuthenticationType
 
     public const BASIC_AUTHENTICATION = 'basic_auth';
 
+    public const EMPTY = '';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -58,7 +60,8 @@ class DatastoreEndpointAuthenticationType
         return [
             self::API_KEY_AUTHENTICATION,
             self::O_AUTH2_AUTHENTICATION,
-            self::BASIC_AUTHENTICATION
+            self::BASIC_AUTHENTICATION,
+            self::EMPTY
         ];
     }
 }

@@ -76,7 +76,7 @@ class OnboardApi
     /** @var string[] $contentTypes **/
     public const contentTypes = [
         'bulkOnboard' => [
-            'application/octet-stream',
+            'application/json',
         ],
     ];
 
@@ -133,16 +133,16 @@ class OnboardApi
      *
      * @param  string $project_id Project ID (required)
      * @param  bool|null $dry_run Validate without creating (optional)
-     * @param  \SplFileObject|null $body Onboard Details (JSON) (optional)
+     * @param  \Convoy\Client\Model\ModelsBulkOnboardRequest|null $models_bulk_onboard_request Onboard Details (JSON) (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['bulkOnboard'] to see the possible values for this operation
      *
      * @throws \Convoy\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Convoy\Client\Model\BulkOnboard200Response|\Convoy\Client\Model\BulkOnboard202Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response
      */
-    public function bulkOnboard($project_id, $dry_run = null, $body = null, string $contentType = self::contentTypes['bulkOnboard'][0])
+    public function bulkOnboard($project_id, $dry_run = null, $models_bulk_onboard_request = null, string $contentType = self::contentTypes['bulkOnboard'][0])
     {
-        list($response) = $this->bulkOnboardWithHttpInfo($project_id, $dry_run, $body, $contentType);
+        list($response) = $this->bulkOnboardWithHttpInfo($project_id, $dry_run, $models_bulk_onboard_request, $contentType);
         return $response;
     }
 
@@ -153,16 +153,16 @@ class OnboardApi
      *
      * @param  string $project_id Project ID (required)
      * @param  bool|null $dry_run Validate without creating (optional)
-     * @param  \SplFileObject|null $body Onboard Details (JSON) (optional)
+     * @param  \Convoy\Client\Model\ModelsBulkOnboardRequest|null $models_bulk_onboard_request Onboard Details (JSON) (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['bulkOnboard'] to see the possible values for this operation
      *
      * @throws \Convoy\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Convoy\Client\Model\BulkOnboard200Response|\Convoy\Client\Model\BulkOnboard202Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function bulkOnboardWithHttpInfo($project_id, $dry_run = null, $body = null, string $contentType = self::contentTypes['bulkOnboard'][0])
+    public function bulkOnboardWithHttpInfo($project_id, $dry_run = null, $models_bulk_onboard_request = null, string $contentType = self::contentTypes['bulkOnboard'][0])
     {
-        $request = $this->bulkOnboardRequest($project_id, $dry_run, $body, $contentType);
+        $request = $this->bulkOnboardRequest($project_id, $dry_run, $models_bulk_onboard_request, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -296,15 +296,15 @@ class OnboardApi
      *
      * @param  string $project_id Project ID (required)
      * @param  bool|null $dry_run Validate without creating (optional)
-     * @param  \SplFileObject|null $body Onboard Details (JSON) (optional)
+     * @param  \Convoy\Client\Model\ModelsBulkOnboardRequest|null $models_bulk_onboard_request Onboard Details (JSON) (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['bulkOnboard'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function bulkOnboardAsync($project_id, $dry_run = null, $body = null, string $contentType = self::contentTypes['bulkOnboard'][0])
+    public function bulkOnboardAsync($project_id, $dry_run = null, $models_bulk_onboard_request = null, string $contentType = self::contentTypes['bulkOnboard'][0])
     {
-        return $this->bulkOnboardAsyncWithHttpInfo($project_id, $dry_run, $body, $contentType)
+        return $this->bulkOnboardAsyncWithHttpInfo($project_id, $dry_run, $models_bulk_onboard_request, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -319,16 +319,16 @@ class OnboardApi
      *
      * @param  string $project_id Project ID (required)
      * @param  bool|null $dry_run Validate without creating (optional)
-     * @param  \SplFileObject|null $body Onboard Details (JSON) (optional)
+     * @param  \Convoy\Client\Model\ModelsBulkOnboardRequest|null $models_bulk_onboard_request Onboard Details (JSON) (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['bulkOnboard'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function bulkOnboardAsyncWithHttpInfo($project_id, $dry_run = null, $body = null, string $contentType = self::contentTypes['bulkOnboard'][0])
+    public function bulkOnboardAsyncWithHttpInfo($project_id, $dry_run = null, $models_bulk_onboard_request = null, string $contentType = self::contentTypes['bulkOnboard'][0])
     {
         $returnType = '\Convoy\Client\Model\BulkOnboard200Response';
-        $request = $this->bulkOnboardRequest($project_id, $dry_run, $body, $contentType);
+        $request = $this->bulkOnboardRequest($project_id, $dry_run, $models_bulk_onboard_request, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -371,13 +371,13 @@ class OnboardApi
      *
      * @param  string $project_id Project ID (required)
      * @param  bool|null $dry_run Validate without creating (optional)
-     * @param  \SplFileObject|null $body Onboard Details (JSON) (optional)
+     * @param  \Convoy\Client\Model\ModelsBulkOnboardRequest|null $models_bulk_onboard_request Onboard Details (JSON) (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['bulkOnboard'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function bulkOnboardRequest($project_id, $dry_run = null, $body = null, string $contentType = self::contentTypes['bulkOnboard'][0])
+    public function bulkOnboardRequest($project_id, $dry_run = null, $models_bulk_onboard_request = null, string $contentType = self::contentTypes['bulkOnboard'][0])
     {
 
         // verify the required parameter 'project_id' is set
@@ -425,12 +425,12 @@ class OnboardApi
         );
 
         // for model (json/xml)
-        if (isset($body)) {
+        if (isset($models_bulk_onboard_request)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($body));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($models_bulk_onboard_request));
             } else {
-                $httpBody = $body;
+                $httpBody = $models_bulk_onboard_request;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -456,10 +456,9 @@ class OnboardApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
-        if ($apiKey !== null) {
-            $headers['Authorization'] = $apiKey;
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
         }
 
         $defaultHeaders = [];

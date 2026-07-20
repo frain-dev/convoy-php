@@ -5,7 +5,7 @@ set -euo pipefail
 # (php), then sync it into src/Client/ without touching the hand-written SDK
 # code (the rest of src/, incl. webhook verify).
 #
-# Requires: java 17+, rsync, curl. Run from the repo root.
+# Requires: java 17+, rsync, curl, yq (mikefarah v4). Run from the repo root.
 
 SPEC_URL="${SPEC_URL:-https://raw.githubusercontent.com/frain-dev/convoy/main/docs/v3/openapi3.yaml}"
 # Pin so regeneration output is reproducible; bump deliberately.
@@ -32,6 +32,23 @@ echo "${GENERATOR_SHA256}  ${GENERATOR_JAR}" | shasum -a 256 -c - >/dev/null || 
 }
 
 curl -fsSL "$SPEC_URL" -o "$tmp/openapi3.yaml"
+
+# The spec marks portal link endpoints_metadata items nullable via
+# {allOf: [{$ref: ...}], nullable: true} so strict clients tolerate [null]
+# elements from the server. OpenAPI Generator's php generator mangles that
+# wrapper into a namespace-less class reference (\ConvoyClientModel...), which
+# breaks ObjectSerializer at runtime
+# (https://github.com/OpenAPITools/openapi-generator/issues/23141). Unwrap the
+# single-$ref nullable items back to a plain $ref before generation: the PHP
+# runtime already tolerates null array elements (ObjectSerializer::deserialize
+# returns null before instantiating the class), so nothing is lost. No-op when
+# the spec stops using the wrapper shape.
+yq -i '
+  (.components.schemas[] | select(has("properties")) | .properties[]
+   | select(has("items")) | .items
+   | select(has("allOf") and .nullable == true and (.allOf | length) == 1 and (.allOf[0] | has("$ref")))
+  ) |= .allOf[0]
+' "$tmp/openapi3.yaml"
 
 java -jar "$GENERATOR_JAR" generate \
   -i "$tmp/openapi3.yaml" \

@@ -47,6 +47,8 @@ class DatastoreEncodingType
 
     public const HEX_ENCODING = 'hex';
 
+    public const EMPTY = '';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -55,7 +57,8 @@ class DatastoreEncodingType
     {
         return [
             self::BASE64_ENCODING,
-            self::HEX_ENCODING
+            self::HEX_ENCODING,
+            self::EMPTY
         ];
     }
 }

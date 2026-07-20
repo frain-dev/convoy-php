@@ -128,26 +128,26 @@ class ModelsEventDeliveryResponse implements ModelInterface, ArrayAccess, \JsonS
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'acknowledged_at' => false,
-        'cli_metadata' => false,
+        'acknowledged_at' => true,
+        'cli_metadata' => true,
         'created_at' => false,
-        'deleted_at' => false,
+        'deleted_at' => true,
         'delivery_mode' => false,
         'description' => false,
         'device_id' => false,
-        'device_metadata' => false,
+        'device_metadata' => true,
         'endpoint_id' => false,
-        'endpoint_metadata' => false,
+        'endpoint_metadata' => true,
         'event_id' => false,
-        'event_metadata' => false,
+        'event_metadata' => true,
         'event_type' => false,
-        'headers' => false,
+        'headers' => true,
         'idempotency_key' => false,
         'latency' => false,
         'latency_seconds' => false,
-        'metadata' => false,
+        'metadata' => true,
         'project_id' => false,
-        'source_metadata' => false,
+        'source_metadata' => true,
         'status' => false,
         'subscription_id' => false,
         'target_url' => false,
@@ -485,7 +485,14 @@ class ModelsEventDeliveryResponse implements ModelInterface, ArrayAccess, \JsonS
     public function setAcknowledgedAt($acknowledged_at)
     {
         if (is_null($acknowledged_at)) {
-            throw new \InvalidArgumentException('non-nullable acknowledged_at cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'acknowledged_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('acknowledged_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['acknowledged_at'] = $acknowledged_at;
 
@@ -512,7 +519,14 @@ class ModelsEventDeliveryResponse implements ModelInterface, ArrayAccess, \JsonS
     public function setCliMetadata($cli_metadata)
     {
         if (is_null($cli_metadata)) {
-            throw new \InvalidArgumentException('non-nullable cli_metadata cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'cli_metadata');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('cli_metadata', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['cli_metadata'] = $cli_metadata;
 
@@ -566,7 +580,14 @@ class ModelsEventDeliveryResponse implements ModelInterface, ArrayAccess, \JsonS
     public function setDeletedAt($deleted_at)
     {
         if (is_null($deleted_at)) {
-            throw new \InvalidArgumentException('non-nullable deleted_at cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'deleted_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('deleted_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['deleted_at'] = $deleted_at;
 
@@ -674,7 +695,14 @@ class ModelsEventDeliveryResponse implements ModelInterface, ArrayAccess, \JsonS
     public function setDeviceMetadata($device_metadata)
     {
         if (is_null($device_metadata)) {
-            throw new \InvalidArgumentException('non-nullable device_metadata cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'device_metadata');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('device_metadata', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['device_metadata'] = $device_metadata;
 
@@ -728,7 +756,14 @@ class ModelsEventDeliveryResponse implements ModelInterface, ArrayAccess, \JsonS
     public function setEndpointMetadata($endpoint_metadata)
     {
         if (is_null($endpoint_metadata)) {
-            throw new \InvalidArgumentException('non-nullable endpoint_metadata cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'endpoint_metadata');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('endpoint_metadata', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['endpoint_metadata'] = $endpoint_metadata;
 
@@ -782,7 +817,14 @@ class ModelsEventDeliveryResponse implements ModelInterface, ArrayAccess, \JsonS
     public function setEventMetadata($event_metadata)
     {
         if (is_null($event_metadata)) {
-            throw new \InvalidArgumentException('non-nullable event_metadata cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'event_metadata');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('event_metadata', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['event_metadata'] = $event_metadata;
 
@@ -836,7 +878,14 @@ class ModelsEventDeliveryResponse implements ModelInterface, ArrayAccess, \JsonS
     public function setHeaders($headers)
     {
         if (is_null($headers)) {
-            throw new \InvalidArgumentException('non-nullable headers cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'headers');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('headers', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['headers'] = $headers;
 
@@ -944,7 +993,14 @@ class ModelsEventDeliveryResponse implements ModelInterface, ArrayAccess, \JsonS
     public function setMetadata($metadata)
     {
         if (is_null($metadata)) {
-            throw new \InvalidArgumentException('non-nullable metadata cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'metadata');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('metadata', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['metadata'] = $metadata;
 
@@ -998,7 +1054,14 @@ class ModelsEventDeliveryResponse implements ModelInterface, ArrayAccess, \JsonS
     public function setSourceMetadata($source_metadata)
     {
         if (is_null($source_metadata)) {
-            throw new \InvalidArgumentException('non-nullable source_metadata cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'source_metadata');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('source_metadata', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['source_metadata'] = $source_metadata;
 

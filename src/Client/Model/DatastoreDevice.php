@@ -95,7 +95,7 @@ class DatastoreDevice implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static array $openAPINullables = [
         'created_at' => false,
-        'deleted_at' => false,
+        'deleted_at' => true,
         'endpoint_id' => false,
         'host_name' => false,
         'last_seen_at' => false,
@@ -393,7 +393,14 @@ class DatastoreDevice implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setDeletedAt($deleted_at)
     {
         if (is_null($deleted_at)) {
-            throw new \InvalidArgumentException('non-nullable deleted_at cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'deleted_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('deleted_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['deleted_at'] = $deleted_at;
 

@@ -84,9 +84,9 @@ class DatastoreEndpointAuthentication implements ModelInterface, ArrayAccess, \J
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'api_key' => false,
-        'basic_auth' => false,
-        'oauth2' => false,
+        'api_key' => true,
+        'basic_auth' => true,
+        'oauth2' => true,
         'type' => false
     ];
 
@@ -331,7 +331,14 @@ class DatastoreEndpointAuthentication implements ModelInterface, ArrayAccess, \J
     public function setApiKey($api_key)
     {
         if (is_null($api_key)) {
-            throw new \InvalidArgumentException('non-nullable api_key cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'api_key');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('api_key', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['api_key'] = $api_key;
 
@@ -358,7 +365,14 @@ class DatastoreEndpointAuthentication implements ModelInterface, ArrayAccess, \J
     public function setBasicAuth($basic_auth)
     {
         if (is_null($basic_auth)) {
-            throw new \InvalidArgumentException('non-nullable basic_auth cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'basic_auth');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('basic_auth', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['basic_auth'] = $basic_auth;
 
@@ -385,7 +399,14 @@ class DatastoreEndpointAuthentication implements ModelInterface, ArrayAccess, \J
     public function setOauth2($oauth2)
     {
         if (is_null($oauth2)) {
-            throw new \InvalidArgumentException('non-nullable oauth2 cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'oauth2');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('oauth2', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['oauth2'] = $oauth2;
 

@@ -49,6 +49,8 @@ class DatastoreSourceProvider
 
     public const SHOPIFY_SOURCE_PROVIDER = 'shopify';
 
+    public const EMPTY = '';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -58,7 +60,8 @@ class DatastoreSourceProvider
         return [
             self::GITHUB_SOURCE_PROVIDER,
             self::TWITTER_SOURCE_PROVIDER,
-            self::SHOPIFY_SOURCE_PROVIDER
+            self::SHOPIFY_SOURCE_PROVIDER,
+            self::EMPTY
         ];
     }
 }

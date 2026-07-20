@@ -60,7 +60,7 @@ class GetProjects400Response implements ModelInterface, ArrayAccess, \JsonSerial
     protected static $openAPITypes = [
         'message' => 'string',
         'status' => 'bool',
-        'data' => 'object'
+        'data' => 'array<string,mixed>'
     ];
 
     /**
@@ -84,7 +84,7 @@ class GetProjects400Response implements ModelInterface, ArrayAccess, \JsonSerial
     protected static array $openAPINullables = [
         'message' => false,
         'status' => false,
-        'data' => false
+        'data' => true
     ];
 
     /**
@@ -361,7 +361,7 @@ class GetProjects400Response implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Gets data
      *
-     * @return object|null
+     * @return array<string,mixed>|null
      */
     public function getData()
     {
@@ -371,14 +371,21 @@ class GetProjects400Response implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets data
      *
-     * @param object|null $data data
+     * @param array<string,mixed>|null $data data
      *
      * @return self
      */
     public function setData($data)
     {
         if (is_null($data)) {
-            throw new \InvalidArgumentException('non-nullable data cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'data');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('data', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['data'] = $data;
 

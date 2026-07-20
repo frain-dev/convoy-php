@@ -100,16 +100,16 @@ class ModelsFilterResponse implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'body' => false,
-        'enabled_at' => false,
+        'body' => true,
+        'enabled_at' => true,
         'event_type' => false,
-        'headers' => false,
-        'path' => false,
-        'query' => false,
-        'raw_body' => false,
-        'raw_headers' => false,
-        'raw_path' => false,
-        'raw_query' => false,
+        'headers' => true,
+        'path' => true,
+        'query' => true,
+        'raw_body' => true,
+        'raw_headers' => true,
+        'raw_path' => true,
+        'raw_query' => true,
         'subscription_id' => false,
         'uid' => false
     ];
@@ -387,7 +387,14 @@ class ModelsFilterResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setBody($body)
     {
         if (is_null($body)) {
-            throw new \InvalidArgumentException('non-nullable body cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'body');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('body', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['body'] = $body;
 
@@ -414,7 +421,14 @@ class ModelsFilterResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setEnabledAt($enabled_at)
     {
         if (is_null($enabled_at)) {
-            throw new \InvalidArgumentException('non-nullable enabled_at cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'enabled_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('enabled_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['enabled_at'] = $enabled_at;
 
@@ -468,7 +482,14 @@ class ModelsFilterResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setHeaders($headers)
     {
         if (is_null($headers)) {
-            throw new \InvalidArgumentException('non-nullable headers cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'headers');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('headers', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['headers'] = $headers;
 
@@ -495,7 +516,14 @@ class ModelsFilterResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setPath($path)
     {
         if (is_null($path)) {
-            throw new \InvalidArgumentException('non-nullable path cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'path');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('path', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['path'] = $path;
 
@@ -522,7 +550,14 @@ class ModelsFilterResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setQuery($query)
     {
         if (is_null($query)) {
-            throw new \InvalidArgumentException('non-nullable query cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'query');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('query', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['query'] = $query;
 
@@ -549,7 +584,14 @@ class ModelsFilterResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setRawBody($raw_body)
     {
         if (is_null($raw_body)) {
-            throw new \InvalidArgumentException('non-nullable raw_body cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'raw_body');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('raw_body', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['raw_body'] = $raw_body;
 
@@ -576,7 +618,14 @@ class ModelsFilterResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setRawHeaders($raw_headers)
     {
         if (is_null($raw_headers)) {
-            throw new \InvalidArgumentException('non-nullable raw_headers cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'raw_headers');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('raw_headers', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['raw_headers'] = $raw_headers;
 
@@ -603,7 +652,14 @@ class ModelsFilterResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setRawPath($raw_path)
     {
         if (is_null($raw_path)) {
-            throw new \InvalidArgumentException('non-nullable raw_path cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'raw_path');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('raw_path', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['raw_path'] = $raw_path;
 
@@ -630,7 +686,14 @@ class ModelsFilterResponse implements ModelInterface, ArrayAccess, \JsonSerializ
     public function setRawQuery($raw_query)
     {
         if (is_null($raw_query)) {
-            throw new \InvalidArgumentException('non-nullable raw_query cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'raw_query');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('raw_query', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['raw_query'] = $raw_query;
 

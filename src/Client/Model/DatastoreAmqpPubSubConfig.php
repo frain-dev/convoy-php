@@ -95,14 +95,14 @@ class DatastoreAmqpPubSubConfig implements ModelInterface, ArrayAccess, \JsonSer
      */
     protected static array $openAPINullables = [
         'host' => false,
-        'auth' => false,
-        'binded_exchange' => false,
-        'dead_letter_exchange' => false,
+        'auth' => true,
+        'binded_exchange' => true,
+        'dead_letter_exchange' => true,
         'port' => false,
         'queue' => false,
         'routing_key' => false,
         'schema' => false,
-        'vhost' => false
+        'vhost' => true
     ];
 
     /**
@@ -393,7 +393,14 @@ class DatastoreAmqpPubSubConfig implements ModelInterface, ArrayAccess, \JsonSer
     public function setAuth($auth)
     {
         if (is_null($auth)) {
-            throw new \InvalidArgumentException('non-nullable auth cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'auth');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('auth', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['auth'] = $auth;
 
@@ -420,7 +427,14 @@ class DatastoreAmqpPubSubConfig implements ModelInterface, ArrayAccess, \JsonSer
     public function setBindedExchange($binded_exchange)
     {
         if (is_null($binded_exchange)) {
-            throw new \InvalidArgumentException('non-nullable binded_exchange cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'binded_exchange');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('binded_exchange', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['binded_exchange'] = $binded_exchange;
 
@@ -447,7 +461,14 @@ class DatastoreAmqpPubSubConfig implements ModelInterface, ArrayAccess, \JsonSer
     public function setDeadLetterExchange($dead_letter_exchange)
     {
         if (is_null($dead_letter_exchange)) {
-            throw new \InvalidArgumentException('non-nullable dead_letter_exchange cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'dead_letter_exchange');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('dead_letter_exchange', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['dead_letter_exchange'] = $dead_letter_exchange;
 
@@ -582,7 +603,14 @@ class DatastoreAmqpPubSubConfig implements ModelInterface, ArrayAccess, \JsonSer
     public function setVhost($vhost)
     {
         if (is_null($vhost)) {
-            throw new \InvalidArgumentException('non-nullable vhost cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'vhost');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('vhost', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['vhost'] = $vhost;
 

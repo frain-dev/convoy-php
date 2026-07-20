@@ -78,7 +78,7 @@ class DatastoreTwitterProviderConfig implements ModelInterface, ArrayAccess, \Js
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'crc_verified_at' => false
+        'crc_verified_at' => true
     ];
 
     /**
@@ -310,7 +310,14 @@ class DatastoreTwitterProviderConfig implements ModelInterface, ArrayAccess, \Js
     public function setCrcVerifiedAt($crc_verified_at)
     {
         if (is_null($crc_verified_at)) {
-            throw new \InvalidArgumentException('non-nullable crc_verified_at cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'crc_verified_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('crc_verified_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['crc_verified_at'] = $crc_verified_at;
 

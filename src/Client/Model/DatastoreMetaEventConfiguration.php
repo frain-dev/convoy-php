@@ -90,7 +90,7 @@ class DatastoreMetaEventConfiguration implements ModelInterface, ArrayAccess, \J
     protected static array $openAPINullables = [
         'event_type' => false,
         'is_enabled' => false,
-        'pub_sub' => false,
+        'pub_sub' => true,
         'secret' => false,
         'type' => false,
         'url' => false
@@ -399,7 +399,14 @@ class DatastoreMetaEventConfiguration implements ModelInterface, ArrayAccess, \J
     public function setPubSub($pub_sub)
     {
         if (is_null($pub_sub)) {
-            throw new \InvalidArgumentException('non-nullable pub_sub cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'pub_sub');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('pub_sub', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['pub_sub'] = $pub_sub;
 

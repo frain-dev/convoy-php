@@ -84,7 +84,7 @@ class ModelsUpdateEventType implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static array $openAPINullables = [
         'category' => false,
         'description' => false,
-        'json_schema' => false
+        'json_schema' => true
     ];
 
     /**
@@ -378,7 +378,14 @@ class ModelsUpdateEventType implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setJsonSchema($json_schema)
     {
         if (is_null($json_schema)) {
-            throw new \InvalidArgumentException('non-nullable json_schema cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'json_schema');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('json_schema', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['json_schema'] = $json_schema;
 

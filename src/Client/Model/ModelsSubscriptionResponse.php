@@ -108,19 +108,19 @@ class ModelsSubscriptionResponse implements ModelInterface, ArrayAccess, \JsonSe
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'alert_config' => false,
+        'alert_config' => true,
         'created_at' => false,
-        'deleted_at' => false,
+        'deleted_at' => true,
         'delivery_mode' => false,
-        'device_metadata' => false,
-        'endpoint_metadata' => false,
-        'filter_config' => false,
-        'function' => false,
+        'device_metadata' => true,
+        'endpoint_metadata' => true,
+        'filter_config' => true,
+        'function' => true,
         'name' => false,
         'project_id' => false,
-        'rate_limit_config' => false,
-        'retry_config' => false,
-        'source_metadata' => false,
+        'rate_limit_config' => true,
+        'retry_config' => true,
+        'source_metadata' => true,
         'type' => false,
         'uid' => false,
         'updated_at' => false
@@ -415,7 +415,14 @@ class ModelsSubscriptionResponse implements ModelInterface, ArrayAccess, \JsonSe
     public function setAlertConfig($alert_config)
     {
         if (is_null($alert_config)) {
-            throw new \InvalidArgumentException('non-nullable alert_config cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'alert_config');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('alert_config', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['alert_config'] = $alert_config;
 
@@ -469,7 +476,14 @@ class ModelsSubscriptionResponse implements ModelInterface, ArrayAccess, \JsonSe
     public function setDeletedAt($deleted_at)
     {
         if (is_null($deleted_at)) {
-            throw new \InvalidArgumentException('non-nullable deleted_at cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'deleted_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('deleted_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['deleted_at'] = $deleted_at;
 
@@ -523,7 +537,14 @@ class ModelsSubscriptionResponse implements ModelInterface, ArrayAccess, \JsonSe
     public function setDeviceMetadata($device_metadata)
     {
         if (is_null($device_metadata)) {
-            throw new \InvalidArgumentException('non-nullable device_metadata cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'device_metadata');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('device_metadata', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['device_metadata'] = $device_metadata;
 
@@ -550,7 +571,14 @@ class ModelsSubscriptionResponse implements ModelInterface, ArrayAccess, \JsonSe
     public function setEndpointMetadata($endpoint_metadata)
     {
         if (is_null($endpoint_metadata)) {
-            throw new \InvalidArgumentException('non-nullable endpoint_metadata cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'endpoint_metadata');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('endpoint_metadata', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['endpoint_metadata'] = $endpoint_metadata;
 
@@ -577,7 +605,14 @@ class ModelsSubscriptionResponse implements ModelInterface, ArrayAccess, \JsonSe
     public function setFilterConfig($filter_config)
     {
         if (is_null($filter_config)) {
-            throw new \InvalidArgumentException('non-nullable filter_config cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'filter_config');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('filter_config', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['filter_config'] = $filter_config;
 
@@ -604,7 +639,14 @@ class ModelsSubscriptionResponse implements ModelInterface, ArrayAccess, \JsonSe
     public function setFunction($function)
     {
         if (is_null($function)) {
-            throw new \InvalidArgumentException('non-nullable function cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'function');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('function', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['function'] = $function;
 
@@ -685,7 +727,14 @@ class ModelsSubscriptionResponse implements ModelInterface, ArrayAccess, \JsonSe
     public function setRateLimitConfig($rate_limit_config)
     {
         if (is_null($rate_limit_config)) {
-            throw new \InvalidArgumentException('non-nullable rate_limit_config cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'rate_limit_config');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('rate_limit_config', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['rate_limit_config'] = $rate_limit_config;
 
@@ -712,7 +761,14 @@ class ModelsSubscriptionResponse implements ModelInterface, ArrayAccess, \JsonSe
     public function setRetryConfig($retry_config)
     {
         if (is_null($retry_config)) {
-            throw new \InvalidArgumentException('non-nullable retry_config cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'retry_config');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('retry_config', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['retry_config'] = $retry_config;
 
@@ -739,7 +795,14 @@ class ModelsSubscriptionResponse implements ModelInterface, ArrayAccess, \JsonSe
     public function setSourceMetadata($source_metadata)
     {
         if (is_null($source_metadata)) {
-            throw new \InvalidArgumentException('non-nullable source_metadata cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'source_metadata');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('source_metadata', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['source_metadata'] = $source_metadata;
 

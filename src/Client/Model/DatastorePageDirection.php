@@ -47,6 +47,8 @@ class DatastorePageDirection
 
     public const PREV = 'prev';
 
+    public const EMPTY = '';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -55,7 +57,8 @@ class DatastorePageDirection
     {
         return [
             self::NEXT,
-            self::PREV
+            self::PREV,
+            self::EMPTY
         ];
     }
 }

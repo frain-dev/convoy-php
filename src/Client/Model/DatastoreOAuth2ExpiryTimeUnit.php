@@ -51,6 +51,8 @@ class DatastoreOAuth2ExpiryTimeUnit
 
     public const EXPIRY_TIME_UNIT_HOURS = 'hours';
 
+    public const EMPTY = '';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -61,7 +63,8 @@ class DatastoreOAuth2ExpiryTimeUnit
             self::EXPIRY_TIME_UNIT_SECONDS,
             self::EXPIRY_TIME_UNIT_MILLISECONDS,
             self::EXPIRY_TIME_UNIT_MINUTES,
-            self::EXPIRY_TIME_UNIT_HOURS
+            self::EXPIRY_TIME_UNIT_HOURS,
+            self::EMPTY
         ];
     }
 }

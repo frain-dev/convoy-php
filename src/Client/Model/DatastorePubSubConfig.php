@@ -88,10 +88,10 @@ class DatastorePubSubConfig implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'amqp' => false,
-        'google' => false,
-        'kafka' => false,
-        'sqs' => false,
+        'amqp' => true,
+        'google' => true,
+        'kafka' => true,
+        'sqs' => true,
         'type' => false,
         'workers' => false
     ];
@@ -345,7 +345,14 @@ class DatastorePubSubConfig implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setAmqp($amqp)
     {
         if (is_null($amqp)) {
-            throw new \InvalidArgumentException('non-nullable amqp cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'amqp');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('amqp', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['amqp'] = $amqp;
 
@@ -372,7 +379,14 @@ class DatastorePubSubConfig implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setGoogle($google)
     {
         if (is_null($google)) {
-            throw new \InvalidArgumentException('non-nullable google cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'google');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('google', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['google'] = $google;
 
@@ -399,7 +413,14 @@ class DatastorePubSubConfig implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setKafka($kafka)
     {
         if (is_null($kafka)) {
-            throw new \InvalidArgumentException('non-nullable kafka cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'kafka');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('kafka', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['kafka'] = $kafka;
 
@@ -426,7 +447,14 @@ class DatastorePubSubConfig implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setSqs($sqs)
     {
         if (is_null($sqs)) {
-            throw new \InvalidArgumentException('non-nullable sqs cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'sqs');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('sqs', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['sqs'] = $sqs;
 
