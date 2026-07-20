@@ -87,10 +87,10 @@ class ModelsTestFilterRequestScopes implements ModelInterface, ArrayAccess, \Jso
      */
     protected static array $openAPINullables = [
         'body' => true,
-        'header' => false,
-        'headers' => false,
-        'path' => false,
-        'query' => false
+        'header' => true,
+        'headers' => true,
+        'path' => true,
+        'query' => true
     ];
 
     /**
@@ -372,7 +372,14 @@ class ModelsTestFilterRequestScopes implements ModelInterface, ArrayAccess, \Jso
     public function setHeader($header)
     {
         if (is_null($header)) {
-            throw new \InvalidArgumentException('non-nullable header cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'header');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('header', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['header'] = $header;
 
@@ -399,7 +406,14 @@ class ModelsTestFilterRequestScopes implements ModelInterface, ArrayAccess, \Jso
     public function setHeaders($headers)
     {
         if (is_null($headers)) {
-            throw new \InvalidArgumentException('non-nullable headers cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'headers');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('headers', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['headers'] = $headers;
 
@@ -426,7 +440,14 @@ class ModelsTestFilterRequestScopes implements ModelInterface, ArrayAccess, \Jso
     public function setPath($path)
     {
         if (is_null($path)) {
-            throw new \InvalidArgumentException('non-nullable path cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'path');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('path', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['path'] = $path;
 
@@ -453,7 +474,14 @@ class ModelsTestFilterRequestScopes implements ModelInterface, ArrayAccess, \Jso
     public function setQuery($query)
     {
         if (is_null($query)) {
-            throw new \InvalidArgumentException('non-nullable query cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'query');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('query', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['query'] = $query;
 

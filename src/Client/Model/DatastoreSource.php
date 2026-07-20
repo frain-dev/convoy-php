@@ -116,26 +116,26 @@ class DatastoreSource implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'body_function' => false,
+        'body_function' => true,
         'created_at' => false,
         'custom_response' => false,
-        'deleted_at' => false,
+        'deleted_at' => true,
         'event_type_location' => false,
         'forward_headers' => false,
-        'header_function' => false,
+        'header_function' => true,
         'idempotency_keys' => false,
         'is_disabled' => false,
         'mask_id' => false,
         'name' => false,
         'project_id' => false,
         'provider' => false,
-        'provider_config' => false,
-        'pub_sub' => false,
+        'provider_config' => true,
+        'pub_sub' => true,
         'type' => false,
         'uid' => false,
         'updated_at' => false,
         'url' => false,
-        'verifier' => false
+        'verifier' => true
     ];
 
     /**
@@ -443,7 +443,14 @@ class DatastoreSource implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setBodyFunction($body_function)
     {
         if (is_null($body_function)) {
-            throw new \InvalidArgumentException('non-nullable body_function cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'body_function');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('body_function', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['body_function'] = $body_function;
 
@@ -524,7 +531,14 @@ class DatastoreSource implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setDeletedAt($deleted_at)
     {
         if (is_null($deleted_at)) {
-            throw new \InvalidArgumentException('non-nullable deleted_at cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'deleted_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('deleted_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['deleted_at'] = $deleted_at;
 
@@ -605,7 +619,14 @@ class DatastoreSource implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setHeaderFunction($header_function)
     {
         if (is_null($header_function)) {
-            throw new \InvalidArgumentException('non-nullable header_function cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'header_function');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('header_function', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['header_function'] = $header_function;
 
@@ -794,7 +815,14 @@ class DatastoreSource implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setProviderConfig($provider_config)
     {
         if (is_null($provider_config)) {
-            throw new \InvalidArgumentException('non-nullable provider_config cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'provider_config');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('provider_config', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['provider_config'] = $provider_config;
 
@@ -821,7 +849,14 @@ class DatastoreSource implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setPubSub($pub_sub)
     {
         if (is_null($pub_sub)) {
-            throw new \InvalidArgumentException('non-nullable pub_sub cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'pub_sub');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('pub_sub', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['pub_sub'] = $pub_sub;
 
@@ -956,7 +991,14 @@ class DatastoreSource implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setVerifier($verifier)
     {
         if (is_null($verifier)) {
-            throw new \InvalidArgumentException('non-nullable verifier cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'verifier');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('verifier', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['verifier'] = $verifier;
 

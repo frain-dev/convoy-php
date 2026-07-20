@@ -51,6 +51,8 @@ class DatastoreVerifierType
 
     public const API_KEY_VERIFIER = 'api_key';
 
+    public const EMPTY = '';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -61,7 +63,8 @@ class DatastoreVerifierType
             self::NOOP_VERIFIER,
             self::H_MAC_VERIFIER,
             self::BASIC_AUTH_VERIFIER,
-            self::API_KEY_VERIFIER
+            self::API_KEY_VERIFIER,
+            self::EMPTY
         ];
     }
 }

@@ -131,28 +131,28 @@ class DatastoreEndpoint implements ModelInterface, ArrayAccess, \JsonSerializabl
      */
     protected static array $openAPINullables = [
         'advanced_signatures' => false,
-        'authentication' => false,
-        'cb_state' => false,
+        'authentication' => true,
+        'cb_state' => true,
         'content_type' => false,
         'created_at' => false,
-        'deleted_at' => false,
+        'deleted_at' => true,
         'description' => false,
         'events' => false,
-        'failure_count' => false,
-        'failure_rate' => false,
+        'failure_count' => true,
+        'failure_rate' => true,
         'http_timeout' => false,
-        'mtls_client_cert' => false,
+        'mtls_client_cert' => true,
         'name' => false,
         'owner_id' => false,
-        'period_failure_rate' => false,
+        'period_failure_rate' => true,
         'project_id' => false,
         'rate_limit' => false,
         'rate_limit_duration' => false,
-        'retry_count' => false,
+        'retry_count' => true,
         'secrets' => false,
         'slack_webhook_url' => false,
         'status' => false,
-        'success_count' => false,
+        'success_count' => true,
         'support_email' => false,
         'uid' => false,
         'updated_at' => false,
@@ -519,7 +519,14 @@ class DatastoreEndpoint implements ModelInterface, ArrayAccess, \JsonSerializabl
     public function setAuthentication($authentication)
     {
         if (is_null($authentication)) {
-            throw new \InvalidArgumentException('non-nullable authentication cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'authentication');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('authentication', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['authentication'] = $authentication;
 
@@ -546,7 +553,14 @@ class DatastoreEndpoint implements ModelInterface, ArrayAccess, \JsonSerializabl
     public function setCbState($cb_state)
     {
         if (is_null($cb_state)) {
-            throw new \InvalidArgumentException('non-nullable cb_state cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'cb_state');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('cb_state', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['cb_state'] = $cb_state;
 
@@ -627,7 +641,14 @@ class DatastoreEndpoint implements ModelInterface, ArrayAccess, \JsonSerializabl
     public function setDeletedAt($deleted_at)
     {
         if (is_null($deleted_at)) {
-            throw new \InvalidArgumentException('non-nullable deleted_at cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'deleted_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('deleted_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['deleted_at'] = $deleted_at;
 
@@ -708,7 +729,14 @@ class DatastoreEndpoint implements ModelInterface, ArrayAccess, \JsonSerializabl
     public function setFailureCount($failure_count)
     {
         if (is_null($failure_count)) {
-            throw new \InvalidArgumentException('non-nullable failure_count cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'failure_count');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('failure_count', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['failure_count'] = $failure_count;
 
@@ -735,7 +763,14 @@ class DatastoreEndpoint implements ModelInterface, ArrayAccess, \JsonSerializabl
     public function setFailureRate($failure_rate)
     {
         if (is_null($failure_rate)) {
-            throw new \InvalidArgumentException('non-nullable failure_rate cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'failure_rate');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('failure_rate', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['failure_rate'] = $failure_rate;
 
@@ -789,7 +824,14 @@ class DatastoreEndpoint implements ModelInterface, ArrayAccess, \JsonSerializabl
     public function setMtlsClientCert($mtls_client_cert)
     {
         if (is_null($mtls_client_cert)) {
-            throw new \InvalidArgumentException('non-nullable mtls_client_cert cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'mtls_client_cert');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('mtls_client_cert', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['mtls_client_cert'] = $mtls_client_cert;
 
@@ -870,7 +912,14 @@ class DatastoreEndpoint implements ModelInterface, ArrayAccess, \JsonSerializabl
     public function setPeriodFailureRate($period_failure_rate)
     {
         if (is_null($period_failure_rate)) {
-            throw new \InvalidArgumentException('non-nullable period_failure_rate cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'period_failure_rate');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('period_failure_rate', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['period_failure_rate'] = $period_failure_rate;
 
@@ -978,7 +1027,14 @@ class DatastoreEndpoint implements ModelInterface, ArrayAccess, \JsonSerializabl
     public function setRetryCount($retry_count)
     {
         if (is_null($retry_count)) {
-            throw new \InvalidArgumentException('non-nullable retry_count cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'retry_count');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('retry_count', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['retry_count'] = $retry_count;
 
@@ -1086,7 +1142,14 @@ class DatastoreEndpoint implements ModelInterface, ArrayAccess, \JsonSerializabl
     public function setSuccessCount($success_count)
     {
         if (is_null($success_count)) {
-            throw new \InvalidArgumentException('non-nullable success_count cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'success_count');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('success_count', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['success_count'] = $success_count;
 

@@ -94,11 +94,11 @@ class ModelsMetaEventResponse implements ModelInterface, ArrayAccess, \JsonSeria
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'attempt' => false,
+        'attempt' => true,
         'created_at' => false,
-        'deleted_at' => false,
+        'deleted_at' => true,
         'event_type' => false,
-        'metadata' => false,
+        'metadata' => true,
         'project_id' => false,
         'status' => false,
         'uid' => false,
@@ -366,7 +366,14 @@ class ModelsMetaEventResponse implements ModelInterface, ArrayAccess, \JsonSeria
     public function setAttempt($attempt)
     {
         if (is_null($attempt)) {
-            throw new \InvalidArgumentException('non-nullable attempt cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'attempt');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('attempt', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['attempt'] = $attempt;
 
@@ -420,7 +427,14 @@ class ModelsMetaEventResponse implements ModelInterface, ArrayAccess, \JsonSeria
     public function setDeletedAt($deleted_at)
     {
         if (is_null($deleted_at)) {
-            throw new \InvalidArgumentException('non-nullable deleted_at cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'deleted_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('deleted_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['deleted_at'] = $deleted_at;
 
@@ -474,7 +488,14 @@ class ModelsMetaEventResponse implements ModelInterface, ArrayAccess, \JsonSeria
     public function setMetadata($metadata)
     {
         if (is_null($metadata)) {
-            throw new \InvalidArgumentException('non-nullable metadata cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'metadata');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('metadata', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['metadata'] = $metadata;
 

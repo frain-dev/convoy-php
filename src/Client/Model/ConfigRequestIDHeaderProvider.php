@@ -45,6 +45,8 @@ class ConfigRequestIDHeaderProvider
      */
     public const DEFAULT_REQUEST_ID_HEADER = 'X-Convoy-Idempotency-Key';
 
+    public const EMPTY = '';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -52,7 +54,8 @@ class ConfigRequestIDHeaderProvider
     public static function getAllowableEnumValues()
     {
         return [
-            self::DEFAULT_REQUEST_ID_HEADER
+            self::DEFAULT_REQUEST_ID_HEADER,
+            self::EMPTY
         ];
     }
 }

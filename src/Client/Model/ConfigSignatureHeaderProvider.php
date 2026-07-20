@@ -45,6 +45,8 @@ class ConfigSignatureHeaderProvider
      */
     public const DEFAULT_SIGNATURE_HEADER = 'X-Convoy-Signature';
 
+    public const EMPTY = '';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -52,7 +54,8 @@ class ConfigSignatureHeaderProvider
     public static function getAllowableEnumValues()
     {
         return [
-            self::DEFAULT_SIGNATURE_HEADER
+            self::DEFAULT_SIGNATURE_HEADER,
+            self::EMPTY
         ];
     }
 }

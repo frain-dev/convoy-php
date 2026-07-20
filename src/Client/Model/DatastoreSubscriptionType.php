@@ -47,6 +47,8 @@ class DatastoreSubscriptionType
 
     public const SUBSCRIPTION_TYPE_API = 'api';
 
+    public const EMPTY = '';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -55,7 +57,8 @@ class DatastoreSubscriptionType
     {
         return [
             self::SUBSCRIPTION_TYPE_CLI,
-            self::SUBSCRIPTION_TYPE_API
+            self::SUBSCRIPTION_TYPE_API,
+            self::EMPTY
         ];
     }
 }

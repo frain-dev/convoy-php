@@ -55,6 +55,8 @@ class DatastoreEventDeliveryStatus
 
     public const RETRY_EVENT_STATUS = 'Retry';
 
+    public const EMPTY = '';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -67,7 +69,8 @@ class DatastoreEventDeliveryStatus
             self::DISCARDED_EVENT_STATUS,
             self::FAILURE_EVENT_STATUS,
             self::SUCCESS_EVENT_STATUS,
-            self::RETRY_EVENT_STATUS
+            self::RETRY_EVENT_STATUS,
+            self::EMPTY
         ];
     }
 }

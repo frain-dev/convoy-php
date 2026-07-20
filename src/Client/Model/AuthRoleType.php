@@ -73,6 +73,8 @@ class AuthRoleType
      */
     public const ROLE_API = 'api';
 
+    public const EMPTY = '';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -85,7 +87,8 @@ class AuthRoleType
             self::ROLE_BILLING_ADMIN,
             self::ROLE_PROJECT_ADMIN,
             self::ROLE_PROJECT_VIEWER,
-            self::ROLE_API
+            self::ROLE_API,
+            self::EMPTY
         ];
     }
 }

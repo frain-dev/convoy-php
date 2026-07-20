@@ -25,8 +25,8 @@ test('create endpoint event sends expected request', function () {
 
     $config = (new Configuration())
         ->setHost('https://us.getconvoy.cloud/api')
-        ->setApiKeyPrefix('Authorization', 'Bearer')
-        ->setApiKey('Authorization', 'test-key');
+        // spec now models auth as http bearer; the client adds the Bearer prefix
+        ->setAccessToken('test-key');
 
     $event = (new ModelsCreateEvent())
         ->setEndpointId('ep-1')

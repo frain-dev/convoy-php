@@ -51,6 +51,8 @@ class DatastoreSourceType
 
     public const DB_CHANGE_STREAM = 'db_change_stream';
 
+    public const EMPTY = '';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -61,7 +63,8 @@ class DatastoreSourceType
             self::HTTP_SOURCE,
             self::REST_API_SOURCE,
             self::PUB_SUB_SOURCE,
-            self::DB_CHANGE_STREAM
+            self::DB_CHANGE_STREAM,
+            self::EMPTY
         ];
     }
 }

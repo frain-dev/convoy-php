@@ -78,7 +78,7 @@ class DatastoreProviderConfig implements ModelInterface, ArrayAccess, \JsonSeria
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'twitter' => false
+        'twitter' => true
     ];
 
     /**
@@ -310,7 +310,14 @@ class DatastoreProviderConfig implements ModelInterface, ArrayAccess, \JsonSeria
     public function setTwitter($twitter)
     {
         if (is_null($twitter)) {
-            throw new \InvalidArgumentException('non-nullable twitter cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'twitter');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('twitter', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['twitter'] = $twitter;
 

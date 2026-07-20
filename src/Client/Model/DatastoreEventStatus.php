@@ -53,6 +53,8 @@ class DatastoreEventStatus
 
     public const PENDING_STATUS = 'Pending';
 
+    public const EMPTY = '';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -64,7 +66,8 @@ class DatastoreEventStatus
             self::FAILURE_STATUS,
             self::SUCCESS_STATUS,
             self::RETRY_STATUS,
-            self::PENDING_STATUS
+            self::PENDING_STATUS,
+            self::EMPTY
         ];
     }
 }

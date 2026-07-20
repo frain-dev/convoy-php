@@ -107,12 +107,12 @@ class DatastoreOAuth2 implements ModelInterface, ArrayAccess, \JsonSerializable
         'client_id' => false,
         'client_secret' => false,
         'expiry_time_unit' => false,
-        'field_mapping' => false,
+        'field_mapping' => true,
         'grant_type' => false,
         'issuer' => false,
         'scope' => false,
         'signing_algorithm' => false,
-        'signing_key' => false,
+        'signing_key' => true,
         'subject' => false,
         'url' => false
     ];
@@ -529,7 +529,14 @@ class DatastoreOAuth2 implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setFieldMapping($field_mapping)
     {
         if (is_null($field_mapping)) {
-            throw new \InvalidArgumentException('non-nullable field_mapping cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'field_mapping');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('field_mapping', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['field_mapping'] = $field_mapping;
 
@@ -664,7 +671,14 @@ class DatastoreOAuth2 implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setSigningKey($signing_key)
     {
         if (is_null($signing_key)) {
-            throw new \InvalidArgumentException('non-nullable signing_key cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'signing_key');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('signing_key', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['signing_key'] = $signing_key;
 

@@ -47,6 +47,8 @@ class DatastoreProjectType
 
     public const INCOMING_PROJECT = 'incoming';
 
+    public const EMPTY = '';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -55,7 +57,8 @@ class DatastoreProjectType
     {
         return [
             self::OUTGOING_PROJECT,
-            self::INCOMING_PROJECT
+            self::INCOMING_PROJECT,
+            self::EMPTY
         ];
     }
 }

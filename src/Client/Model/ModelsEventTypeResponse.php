@@ -89,9 +89,9 @@ class ModelsEventTypeResponse implements ModelInterface, ArrayAccess, \JsonSeria
      */
     protected static array $openAPINullables = [
         'category' => false,
-        'deprecated_at' => false,
+        'deprecated_at' => true,
         'description' => false,
-        'json_schema' => false,
+        'json_schema' => true,
         'name' => false,
         'uid' => false
     ];
@@ -372,7 +372,14 @@ class ModelsEventTypeResponse implements ModelInterface, ArrayAccess, \JsonSeria
     public function setDeprecatedAt($deprecated_at)
     {
         if (is_null($deprecated_at)) {
-            throw new \InvalidArgumentException('non-nullable deprecated_at cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'deprecated_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('deprecated_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['deprecated_at'] = $deprecated_at;
 
@@ -426,7 +433,14 @@ class ModelsEventTypeResponse implements ModelInterface, ArrayAccess, \JsonSeria
     public function setJsonSchema($json_schema)
     {
         if (is_null($json_schema)) {
-            throw new \InvalidArgumentException('non-nullable json_schema cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'json_schema');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('json_schema', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['json_schema'] = $json_schema;
 

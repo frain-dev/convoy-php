@@ -84,9 +84,9 @@ class DatastoreVerifierConfig implements ModelInterface, ArrayAccess, \JsonSeria
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'api_key' => false,
-        'basic_auth' => false,
-        'hmac' => false,
+        'api_key' => true,
+        'basic_auth' => true,
+        'hmac' => true,
         'type' => false
     ];
 
@@ -331,7 +331,14 @@ class DatastoreVerifierConfig implements ModelInterface, ArrayAccess, \JsonSeria
     public function setApiKey($api_key)
     {
         if (is_null($api_key)) {
-            throw new \InvalidArgumentException('non-nullable api_key cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'api_key');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('api_key', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['api_key'] = $api_key;
 
@@ -358,7 +365,14 @@ class DatastoreVerifierConfig implements ModelInterface, ArrayAccess, \JsonSeria
     public function setBasicAuth($basic_auth)
     {
         if (is_null($basic_auth)) {
-            throw new \InvalidArgumentException('non-nullable basic_auth cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'basic_auth');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('basic_auth', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['basic_auth'] = $basic_auth;
 
@@ -385,7 +399,14 @@ class DatastoreVerifierConfig implements ModelInterface, ArrayAccess, \JsonSeria
     public function setHmac($hmac)
     {
         if (is_null($hmac)) {
-            throw new \InvalidArgumentException('non-nullable hmac cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'hmac');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('hmac', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['hmac'] = $hmac;
 

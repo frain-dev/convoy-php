@@ -49,6 +49,8 @@ class DatastoreEndpointStatus
 
     public const PAUSED_ENDPOINT_STATUS = 'paused';
 
+    public const EMPTY = '';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -58,7 +60,8 @@ class DatastoreEndpointStatus
         return [
             self::ACTIVE_ENDPOINT_STATUS,
             self::INACTIVE_ENDPOINT_STATUS,
-            self::PAUSED_ENDPOINT_STATUS
+            self::PAUSED_ENDPOINT_STATUS,
+            self::EMPTY
         ];
     }
 }

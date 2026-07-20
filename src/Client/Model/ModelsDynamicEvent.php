@@ -90,8 +90,8 @@ class ModelsDynamicEvent implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'custom_headers' => false,
-        'data' => false,
+        'custom_headers' => true,
+        'data' => true,
         'event_type' => false,
         'event_types' => false,
         'idempotency_key' => false,
@@ -352,7 +352,14 @@ class ModelsDynamicEvent implements ModelInterface, ArrayAccess, \JsonSerializab
     public function setCustomHeaders($custom_headers)
     {
         if (is_null($custom_headers)) {
-            throw new \InvalidArgumentException('non-nullable custom_headers cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'custom_headers');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('custom_headers', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['custom_headers'] = $custom_headers;
 
@@ -379,7 +386,14 @@ class ModelsDynamicEvent implements ModelInterface, ArrayAccess, \JsonSerializab
     public function setData($data)
     {
         if (is_null($data)) {
-            throw new \InvalidArgumentException('non-nullable data cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'data');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('data', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['data'] = $data;
 

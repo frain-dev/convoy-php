@@ -47,6 +47,8 @@ class DatastoreMetaEventType
 
     public const PUB_SUB_META_EVENT = 'pub_sub';
 
+    public const EMPTY = '';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -55,7 +57,8 @@ class DatastoreMetaEventType
     {
         return [
             self::HTTP_META_EVENT,
-            self::PUB_SUB_META_EVENT
+            self::PUB_SUB_META_EVENT,
+            self::EMPTY
         ];
     }
 }

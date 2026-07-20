@@ -90,12 +90,12 @@ class ModelsBulkUpdateFilterRequest implements ModelInterface, ArrayAccess, \Jso
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'body' => false,
+        'body' => true,
         'enabled_at' => false,
         'event_type' => false,
-        'headers' => false,
-        'path' => false,
-        'query' => false,
+        'headers' => true,
+        'path' => true,
+        'query' => true,
         'uid' => false
     ];
 
@@ -355,7 +355,14 @@ class ModelsBulkUpdateFilterRequest implements ModelInterface, ArrayAccess, \Jso
     public function setBody($body)
     {
         if (is_null($body)) {
-            throw new \InvalidArgumentException('non-nullable body cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'body');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('body', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['body'] = $body;
 
@@ -436,7 +443,14 @@ class ModelsBulkUpdateFilterRequest implements ModelInterface, ArrayAccess, \Jso
     public function setHeaders($headers)
     {
         if (is_null($headers)) {
-            throw new \InvalidArgumentException('non-nullable headers cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'headers');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('headers', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['headers'] = $headers;
 
@@ -463,7 +477,14 @@ class ModelsBulkUpdateFilterRequest implements ModelInterface, ArrayAccess, \Jso
     public function setPath($path)
     {
         if (is_null($path)) {
-            throw new \InvalidArgumentException('non-nullable path cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'path');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('path', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['path'] = $path;
 
@@ -490,7 +511,14 @@ class ModelsBulkUpdateFilterRequest implements ModelInterface, ArrayAccess, \Jso
     public function setQuery($query)
     {
         if (is_null($query)) {
-            throw new \InvalidArgumentException('non-nullable query cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'query');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('query', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['query'] = $query;
 

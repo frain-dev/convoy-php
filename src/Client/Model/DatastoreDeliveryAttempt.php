@@ -116,7 +116,7 @@ class DatastoreDeliveryAttempt implements ModelInterface, ArrayAccess, \JsonSeri
     protected static array $openAPINullables = [
         'api_version' => false,
         'created_at' => false,
-        'deleted_at' => false,
+        'deleted_at' => true,
         'endpoint_id' => false,
         'error' => false,
         'http_status' => false,
@@ -124,11 +124,11 @@ class DatastoreDeliveryAttempt implements ModelInterface, ArrayAccess, \JsonSeri
         'method' => false,
         'msg_id' => false,
         'project_id' => false,
-        'request_http_header' => false,
-        'requested_at' => false,
-        'responded_at' => false,
+        'request_http_header' => true,
+        'requested_at' => true,
+        'responded_at' => true,
         'response_data' => false,
-        'response_http_header' => false,
+        'response_http_header' => true,
         'status' => false,
         'uid' => false,
         'updated_at' => false,
@@ -490,7 +490,14 @@ class DatastoreDeliveryAttempt implements ModelInterface, ArrayAccess, \JsonSeri
     public function setDeletedAt($deleted_at)
     {
         if (is_null($deleted_at)) {
-            throw new \InvalidArgumentException('non-nullable deleted_at cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'deleted_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('deleted_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['deleted_at'] = $deleted_at;
 
@@ -706,7 +713,14 @@ class DatastoreDeliveryAttempt implements ModelInterface, ArrayAccess, \JsonSeri
     public function setRequestHttpHeader($request_http_header)
     {
         if (is_null($request_http_header)) {
-            throw new \InvalidArgumentException('non-nullable request_http_header cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'request_http_header');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('request_http_header', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['request_http_header'] = $request_http_header;
 
@@ -733,7 +747,14 @@ class DatastoreDeliveryAttempt implements ModelInterface, ArrayAccess, \JsonSeri
     public function setRequestedAt($requested_at)
     {
         if (is_null($requested_at)) {
-            throw new \InvalidArgumentException('non-nullable requested_at cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'requested_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('requested_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['requested_at'] = $requested_at;
 
@@ -760,7 +781,14 @@ class DatastoreDeliveryAttempt implements ModelInterface, ArrayAccess, \JsonSeri
     public function setRespondedAt($responded_at)
     {
         if (is_null($responded_at)) {
-            throw new \InvalidArgumentException('non-nullable responded_at cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'responded_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('responded_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['responded_at'] = $responded_at;
 
@@ -814,7 +842,14 @@ class DatastoreDeliveryAttempt implements ModelInterface, ArrayAccess, \JsonSeri
     public function setResponseHttpHeader($response_http_header)
     {
         if (is_null($response_http_header)) {
-            throw new \InvalidArgumentException('non-nullable response_http_header cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'response_http_header');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('response_http_header', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['response_http_header'] = $response_http_header;
 

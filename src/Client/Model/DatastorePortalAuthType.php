@@ -47,6 +47,8 @@ class DatastorePortalAuthType
 
     public const PORTAL_AUTH_TYPE_STATIC_TOKEN = 'static_token';
 
+    public const EMPTY = '';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -55,7 +57,8 @@ class DatastorePortalAuthType
     {
         return [
             self::PORTAL_AUTH_TYPE_REFRESH_TOKEN,
-            self::PORTAL_AUTH_TYPE_STATIC_TOKEN
+            self::PORTAL_AUTH_TYPE_STATIC_TOKEN,
+            self::EMPTY
         ];
     }
 }

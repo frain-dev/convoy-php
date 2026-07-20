@@ -82,9 +82,9 @@ class DatastoreMetaEventAttempt implements ModelInterface, ArrayAccess, \JsonSer
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'request_http_header' => false,
+        'request_http_header' => true,
         'response_data' => false,
-        'response_http_header' => false
+        'response_http_header' => true
     ];
 
     /**
@@ -324,7 +324,14 @@ class DatastoreMetaEventAttempt implements ModelInterface, ArrayAccess, \JsonSer
     public function setRequestHttpHeader($request_http_header)
     {
         if (is_null($request_http_header)) {
-            throw new \InvalidArgumentException('non-nullable request_http_header cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'request_http_header');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('request_http_header', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['request_http_header'] = $request_http_header;
 
@@ -378,7 +385,14 @@ class DatastoreMetaEventAttempt implements ModelInterface, ArrayAccess, \JsonSer
     public function setResponseHttpHeader($response_http_header)
     {
         if (is_null($response_http_header)) {
-            throw new \InvalidArgumentException('non-nullable response_http_header cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'response_http_header');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('response_http_header', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['response_http_header'] = $response_http_header;
 

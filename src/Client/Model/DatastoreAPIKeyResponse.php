@@ -93,7 +93,7 @@ class DatastoreAPIKeyResponse implements ModelInterface, ArrayAccess, \JsonSeria
      */
     protected static array $openAPINullables = [
         'created_at' => false,
-        'expires_at' => false,
+        'expires_at' => true,
         'key' => false,
         'key_type' => false,
         'name' => false,
@@ -386,7 +386,14 @@ class DatastoreAPIKeyResponse implements ModelInterface, ArrayAccess, \JsonSeria
     public function setExpiresAt($expires_at)
     {
         if (is_null($expires_at)) {
-            throw new \InvalidArgumentException('non-nullable expires_at cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'expires_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('expires_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['expires_at'] = $expires_at;
 
