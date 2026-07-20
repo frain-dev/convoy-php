@@ -1,0 +1,6 @@
+# OpenAPI Generator (php) config for the generated API client.
+# The generated code lives under src/Client/ (namespace Convoy\Client, mapped
+# by the existing PSR-4 rule "Convoy\" => src); the hand-written SDK code in
+# the rest of src/ is not generated and never touched by scripts/generate.sh.
+invokerPackage: "Convoy\\Client"
+hideGenerationTimestamp: true

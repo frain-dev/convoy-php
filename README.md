@@ -17,6 +17,38 @@ To get started quickly,
 composer require frain/convoy symfony/http-client nyholm/psr7
 ```
 
+## Generated API client (`Convoy\Client`)
+
+The `Convoy\Client` namespace (`src/Client/`) is generated from Convoy's
+OpenAPI spec via [OpenAPI Generator](https://openapi-generator.tech/) and
+covers the full `/api/v1` surface with typed models (Guzzle-based):
+
+```php
+use Convoy\Client\Api\EventsApi;
+use Convoy\Client\Configuration;
+use Convoy\Client\Model\ModelsCreateEvent;
+
+$config = (new Configuration())
+    ->setHost('https://us.getconvoy.cloud/api')
+    ->setApiKeyPrefix('Authorization', 'Bearer')
+    ->setApiKey('Authorization', $apiKey);
+
+// Pin the API version this client was generated from.
+$http = new \GuzzleHttp\Client([
+    'headers' => ['X-Convoy-Version' => '2025-11-24'],
+]);
+
+$events = new EventsApi($http, $config);
+$events->createEndpointEvent($projectId, (new ModelsCreateEvent())
+    ->setEndpointId('endpoint-id')
+    ->setEventType('invoice.paid')
+    ->setData(['amount' => 100, 'currency' => 'USD']));
+```
+
+Do not edit `src/Client/` by hand; regenerate with `./scripts/generate.sh`
+(CI on `frain-dev/convoy` dispatches this when the spec changes). The
+hand-written SDK below (incl. webhook verify) is never touched by generation.
+
 ### Setup Client
 
 Set up the client with your instance URL, API key, and project ID. Both the API key and project ID are available from your **Project Settings** page.
