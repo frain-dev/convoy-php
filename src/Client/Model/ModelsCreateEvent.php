@@ -433,7 +433,7 @@ class ModelsCreateEvent implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets endpoint_id
      *
-     * @param string|null $endpoint_id Specifies the endpoint to send this event to.
+     * @param string|null $endpoint_id Specifies the endpoint to send this event to. Required unless the deprecated app_id is provided.
      *
      * @return self
      */
