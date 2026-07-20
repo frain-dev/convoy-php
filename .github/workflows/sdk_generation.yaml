@@ -37,6 +37,14 @@ jobs:
   generate:
     runs-on: ubuntu-latest
     steps:
+      - name: Mint bot app token
+        id: bot-token
+        # Pin to commit SHA for v1 (mutable tags can be retargeted).
+        uses: actions/create-github-app-token@d72941d797fd3113feb6b93fd0dec494b13a2547 # v1
+        with:
+          app-id: ${{ secrets.SDK_BOT_APP_ID }}
+          private-key: ${{ secrets.SDK_BOT_APP_KEY }}
+
       - name: Checkout Code
         uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
@@ -44,9 +52,10 @@ jobs:
           # from convoy main, so a dispatch from another ref must not silently
           # commit generated output onto that ref's base.
           ref: main
-          # Prefer a PAT: PRs opened with GITHUB_TOKEN do not trigger
-          # pull_request workflows, so verify CI would never run on them.
-          token: ${{ secrets.SDK_BOT_PAT || secrets.GITHUB_TOKEN }}
+          # App token, not GITHUB_TOKEN: PRs opened with GITHUB_TOKEN do not
+          # trigger pull_request workflows, so verify CI would never run on
+          # them. The convoy-sdk-bot app token triggers CI like a PAT.
+          token: ${{ steps.bot-token.outputs.token }}
 
       - name: Setup Java
         uses: actions/setup-java@c1e323688fd81a25caa38c78aa6df2d33d3e20d9 # v4.8.0
@@ -115,11 +124,11 @@ jobs:
       - name: Push branch and open PR
         if: steps.diff.outputs.changed == 'true'
         env:
-          GH_TOKEN: ${{ secrets.SDK_BOT_PAT || secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ steps.bot-token.outputs.token }}
           BRANCH: ${{ steps.branch.outputs.name }}
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "convoy-sdk-bot[bot]"
+          git config user.email "307218117+convoy-sdk-bot[bot]@users.noreply.github.com"
 
           git checkout -B "$BRANCH"
           git add -A
@@ -137,4 +146,80 @@ jobs:
             echo "Opened PR for $BRANCH" >> "$GITHUB_STEP_SUMMARY"
           else
             echo "Updated existing PR #$existing" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Mint reviewer app token
+        if: steps.diff.outputs.changed == 'true'
+        id: app-token
+        # Pin to commit SHA for v1 (mutable tags can be retargeted).
+        uses: actions/create-github-app-token@d72941d797fd3113feb6b93fd0dec494b13a2547 # v1
+        with:
+          app-id: ${{ secrets.SDK_REVIEWER_APP_ID }}
+          private-key: ${{ secrets.SDK_REVIEWER_APP_KEY }}
+
+      - name: Approve and enable auto-merge
+        if: steps.diff.outputs.changed == 'true'
+        env:
+          APP_TOKEN: ${{ steps.app-token.outputs.token }}
+          # Merge via the bot app token, not GITHUB_TOKEN: merges performed
+          # by GITHUB_TOKEN do not trigger the downstream publish workflows.
+          MERGE_TOKEN: ${{ steps.bot-token.outputs.token }}
+          GH_REPO: ${{ github.repository }}
+          BRANCH: ${{ steps.branch.outputs.name }}
+        run: |
+          # Failure policy: fail open to human review, never to merge. If the
+          # diff touches anything outside the generated paths the PR is left
+          # unapproved with the offending paths printed. Auto-merge completes
+          # only after the required status checks pass.
+          pr=$(GH_TOKEN="$APP_TOKEN" gh pr list --head "$BRANCH" --state open --json number --jq '.[0].number // empty')
+          if [ -z "$pr" ]; then
+            echo "No open PR for $BRANCH; nothing to approve."
+            exit 0
+          fi
+
+          # Only regen PRs authored by the bot app qualify for auto-review.
+          # REST is used because it returns the stable "convoy-sdk-bot[bot]"
+          # login for app-authored PRs.
+          author=$(GH_TOKEN="$APP_TOKEN" gh api "repos/$GH_REPO/pulls/$pr" --jq '.user.login')
+          if [ "$author" != "convoy-sdk-bot[bot]" ]; then
+            echo "Not approving PR #$pr: author is $author, not convoy-sdk-bot[bot]."
+            GH_TOKEN="$APP_TOKEN" gh pr comment "$pr" --body "SDK reviewer app: not auto-approving; PR author is not convoy-sdk-bot[bot]. Left for human review (policy: fail open to human review, never to merge)."
+            exit 0
+          fi
+
+          # The head branch is the regen branch this run pushed, so the
+          # branch condition holds by construction of the lookup above.
+          # Allowlist mirrors scripts/generate.sh: only src/Client/ is
+          # generated; the rest of src/ is hand-written.
+          bad=$(GH_TOKEN="$APP_TOKEN" gh api "repos/$GH_REPO/pulls/$pr/files" --paginate --jq '.[].filename' \
+            | while read -r f; do
+                case "$f" in
+                  src/Client/*) ;;
+                  *) echo "$f" ;;
+                esac
+              done)
+          if [ -n "$bad" ]; then
+            echo "Not approving PR #$pr: diff touches non-generated paths:"
+            echo "$bad"
+            {
+              echo "SDK reviewer app: not auto-approving; the diff touches paths outside the generated allowlist:"
+              echo
+              echo '```'
+              echo "$bad"
+              echo '```'
+              echo
+              echo "Left for human review (policy: fail open to human review, never to merge)."
+            } | GH_TOKEN="$APP_TOKEN" gh pr comment "$pr" --body-file -
+            exit 0
+          fi
+
+          GH_TOKEN="$APP_TOKEN" gh api -X POST "repos/$GH_REPO/pulls/$pr/reviews" \
+            -f event=APPROVE \
+            -f body="SDK reviewer app: approving a generated-paths-only diff on the regen branch. Auto-merge completes only after required status checks pass."
+
+          enabled=$(GH_TOKEN="$APP_TOKEN" gh pr view "$pr" --json autoMergeRequest --jq '.autoMergeRequest != null')
+          if [ "$enabled" = "true" ]; then
+            echo "Auto-merge already enabled on PR #$pr."
+          else
+            GH_TOKEN="$MERGE_TOKEN" gh pr merge "$pr" --auto --squash
           fi
