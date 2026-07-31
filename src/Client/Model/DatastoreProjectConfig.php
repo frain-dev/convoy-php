@@ -70,7 +70,8 @@ class DatastoreProjectConfig implements ModelInterface, ArrayAccess, \JsonSerial
         'search_policy' => 'string',
         'signature' => '\Convoy\Client\Model\DatastoreSignatureConfiguration',
         'ssl' => '\Convoy\Client\Model\DatastoreSSLConfiguration',
-        'strategy' => '\Convoy\Client\Model\DatastoreStrategyConfiguration'
+        'strategy' => '\Convoy\Client\Model\DatastoreStrategyConfiguration',
+        'sync_dynamic_event_ack' => 'bool'
     ];
 
     /**
@@ -93,7 +94,8 @@ class DatastoreProjectConfig implements ModelInterface, ArrayAccess, \JsonSerial
         'search_policy' => null,
         'signature' => null,
         'ssl' => null,
-        'strategy' => null
+        'strategy' => null,
+        'sync_dynamic_event_ack' => null
     ];
 
     /**
@@ -114,7 +116,8 @@ class DatastoreProjectConfig implements ModelInterface, ArrayAccess, \JsonSerial
         'search_policy' => false,
         'signature' => true,
         'ssl' => true,
-        'strategy' => true
+        'strategy' => true,
+        'sync_dynamic_event_ack' => false
     ];
 
     /**
@@ -215,7 +218,8 @@ class DatastoreProjectConfig implements ModelInterface, ArrayAccess, \JsonSerial
         'search_policy' => 'search_policy',
         'signature' => 'signature',
         'ssl' => 'ssl',
-        'strategy' => 'strategy'
+        'strategy' => 'strategy',
+        'sync_dynamic_event_ack' => 'sync_dynamic_event_ack'
     ];
 
     /**
@@ -236,7 +240,8 @@ class DatastoreProjectConfig implements ModelInterface, ArrayAccess, \JsonSerial
         'search_policy' => 'setSearchPolicy',
         'signature' => 'setSignature',
         'ssl' => 'setSsl',
-        'strategy' => 'setStrategy'
+        'strategy' => 'setStrategy',
+        'sync_dynamic_event_ack' => 'setSyncDynamicEventAck'
     ];
 
     /**
@@ -257,7 +262,8 @@ class DatastoreProjectConfig implements ModelInterface, ArrayAccess, \JsonSerial
         'search_policy' => 'getSearchPolicy',
         'signature' => 'getSignature',
         'ssl' => 'getSsl',
-        'strategy' => 'getStrategy'
+        'strategy' => 'getStrategy',
+        'sync_dynamic_event_ack' => 'getSyncDynamicEventAck'
     ];
 
     /**
@@ -330,6 +336,7 @@ class DatastoreProjectConfig implements ModelInterface, ArrayAccess, \JsonSerial
         $this->setIfExists('signature', $data ?? [], null);
         $this->setIfExists('ssl', $data ?? [], null);
         $this->setIfExists('strategy', $data ?? [], null);
+        $this->setIfExists('sync_dynamic_event_ack', $data ?? [], null);
     }
 
     /**
@@ -763,6 +770,33 @@ class DatastoreProjectConfig implements ModelInterface, ArrayAccess, \JsonSerial
             }
         }
         $this->container['strategy'] = $strategy;
+
+        return $this;
+    }
+
+    /**
+     * Gets sync_dynamic_event_ack
+     *
+     * @return bool|null
+     */
+    public function getSyncDynamicEventAck()
+    {
+        return $this->container['sync_dynamic_event_ack'];
+    }
+
+    /**
+     * Sets sync_dynamic_event_ack
+     *
+     * @param bool|null $sync_dynamic_event_ack SyncDynamicEventAck waits for endpoint/subscription resolve before returning 2xx from POST /events/dynamic. Default false keeps 201-on-queue.
+     *
+     * @return self
+     */
+    public function setSyncDynamicEventAck($sync_dynamic_event_ack)
+    {
+        if (is_null($sync_dynamic_event_ack)) {
+            throw new \InvalidArgumentException('non-nullable sync_dynamic_event_ack cannot be null');
+        }
+        $this->container['sync_dynamic_event_ack'] = $sync_dynamic_event_ack;
 
         return $this;
     }
