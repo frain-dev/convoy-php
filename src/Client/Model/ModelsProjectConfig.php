@@ -70,7 +70,8 @@ class ModelsProjectConfig implements ModelInterface, ArrayAccess, \JsonSerializa
         'search_policy' => 'string',
         'signature' => '\Convoy\Client\Model\ModelsSignatureConfiguration',
         'ssl' => '\Convoy\Client\Model\ModelsSSLConfiguration',
-        'strategy' => '\Convoy\Client\Model\ModelsStrategyConfiguration'
+        'strategy' => '\Convoy\Client\Model\ModelsStrategyConfiguration',
+        'sync_dynamic_event_ack' => 'bool'
     ];
 
     /**
@@ -93,7 +94,8 @@ class ModelsProjectConfig implements ModelInterface, ArrayAccess, \JsonSerializa
         'search_policy' => null,
         'signature' => null,
         'ssl' => null,
-        'strategy' => null
+        'strategy' => null,
+        'sync_dynamic_event_ack' => null
     ];
 
     /**
@@ -114,7 +116,8 @@ class ModelsProjectConfig implements ModelInterface, ArrayAccess, \JsonSerializa
         'search_policy' => false,
         'signature' => false,
         'ssl' => false,
-        'strategy' => false
+        'strategy' => false,
+        'sync_dynamic_event_ack' => false
     ];
 
     /**
@@ -215,7 +218,8 @@ class ModelsProjectConfig implements ModelInterface, ArrayAccess, \JsonSerializa
         'search_policy' => 'search_policy',
         'signature' => 'signature',
         'ssl' => 'ssl',
-        'strategy' => 'strategy'
+        'strategy' => 'strategy',
+        'sync_dynamic_event_ack' => 'sync_dynamic_event_ack'
     ];
 
     /**
@@ -236,7 +240,8 @@ class ModelsProjectConfig implements ModelInterface, ArrayAccess, \JsonSerializa
         'search_policy' => 'setSearchPolicy',
         'signature' => 'setSignature',
         'ssl' => 'setSsl',
-        'strategy' => 'setStrategy'
+        'strategy' => 'setStrategy',
+        'sync_dynamic_event_ack' => 'setSyncDynamicEventAck'
     ];
 
     /**
@@ -257,7 +262,8 @@ class ModelsProjectConfig implements ModelInterface, ArrayAccess, \JsonSerializa
         'search_policy' => 'getSearchPolicy',
         'signature' => 'getSignature',
         'ssl' => 'getSsl',
-        'strategy' => 'getStrategy'
+        'strategy' => 'getStrategy',
+        'sync_dynamic_event_ack' => 'getSyncDynamicEventAck'
     ];
 
     /**
@@ -330,6 +336,7 @@ class ModelsProjectConfig implements ModelInterface, ArrayAccess, \JsonSerializa
         $this->setIfExists('signature', $data ?? [], null);
         $this->setIfExists('ssl', $data ?? [], null);
         $this->setIfExists('strategy', $data ?? [], null);
+        $this->setIfExists('sync_dynamic_event_ack', $data ?? [], null);
     }
 
     /**
@@ -721,6 +728,33 @@ class ModelsProjectConfig implements ModelInterface, ArrayAccess, \JsonSerializa
             throw new \InvalidArgumentException('non-nullable strategy cannot be null');
         }
         $this->container['strategy'] = $strategy;
+
+        return $this;
+    }
+
+    /**
+     * Gets sync_dynamic_event_ack
+     *
+     * @return bool|null
+     */
+    public function getSyncDynamicEventAck()
+    {
+        return $this->container['sync_dynamic_event_ack'];
+    }
+
+    /**
+     * Sets sync_dynamic_event_ack
+     *
+     * @param bool|null $sync_dynamic_event_ack SyncDynamicEventAck waits for dynamic endpoint/subscription resolve before acknowledging POST /events/dynamic. When false, the handler returns 201 after enqueue.
+     *
+     * @return self
+     */
+    public function setSyncDynamicEventAck($sync_dynamic_event_ack)
+    {
+        if (is_null($sync_dynamic_event_ack)) {
+            throw new \InvalidArgumentException('non-nullable sync_dynamic_event_ack cannot be null');
+        }
+        $this->container['sync_dynamic_event_ack'] = $sync_dynamic_event_ack;
 
         return $this;
     }
