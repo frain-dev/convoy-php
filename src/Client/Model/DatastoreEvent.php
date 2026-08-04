@@ -66,10 +66,10 @@ class DatastoreEvent implements ModelInterface, ArrayAccess, \JsonSerializable
         'endpoint_metadata' => '\Convoy\Client\Model\DatastoreEndpoint[]',
         'endpoints' => 'string[]',
         'event_type' => 'string',
+        'failure_reason' => 'string',
         'headers' => 'array<string,string[]>',
         'idempotency_key' => 'string',
         'is_duplicate_event' => 'bool',
-        'metadata' => 'string',
         'project_id' => 'string',
         'raw' => 'string',
         'source_id' => 'string',
@@ -97,10 +97,10 @@ class DatastoreEvent implements ModelInterface, ArrayAccess, \JsonSerializable
         'endpoint_metadata' => null,
         'endpoints' => null,
         'event_type' => null,
+        'failure_reason' => null,
         'headers' => null,
         'idempotency_key' => null,
         'is_duplicate_event' => null,
-        'metadata' => null,
         'project_id' => null,
         'raw' => null,
         'source_id' => null,
@@ -126,10 +126,10 @@ class DatastoreEvent implements ModelInterface, ArrayAccess, \JsonSerializable
         'endpoint_metadata' => false,
         'endpoints' => false,
         'event_type' => false,
+        'failure_reason' => false,
         'headers' => true,
         'idempotency_key' => false,
         'is_duplicate_event' => false,
-        'metadata' => false,
         'project_id' => false,
         'raw' => false,
         'source_id' => false,
@@ -235,10 +235,10 @@ class DatastoreEvent implements ModelInterface, ArrayAccess, \JsonSerializable
         'endpoint_metadata' => 'endpoint_metadata',
         'endpoints' => 'endpoints',
         'event_type' => 'event_type',
+        'failure_reason' => 'failure_reason',
         'headers' => 'headers',
         'idempotency_key' => 'idempotency_key',
         'is_duplicate_event' => 'is_duplicate_event',
-        'metadata' => 'metadata',
         'project_id' => 'project_id',
         'raw' => 'raw',
         'source_id' => 'source_id',
@@ -264,10 +264,10 @@ class DatastoreEvent implements ModelInterface, ArrayAccess, \JsonSerializable
         'endpoint_metadata' => 'setEndpointMetadata',
         'endpoints' => 'setEndpoints',
         'event_type' => 'setEventType',
+        'failure_reason' => 'setFailureReason',
         'headers' => 'setHeaders',
         'idempotency_key' => 'setIdempotencyKey',
         'is_duplicate_event' => 'setIsDuplicateEvent',
-        'metadata' => 'setMetadata',
         'project_id' => 'setProjectId',
         'raw' => 'setRaw',
         'source_id' => 'setSourceId',
@@ -293,10 +293,10 @@ class DatastoreEvent implements ModelInterface, ArrayAccess, \JsonSerializable
         'endpoint_metadata' => 'getEndpointMetadata',
         'endpoints' => 'getEndpoints',
         'event_type' => 'getEventType',
+        'failure_reason' => 'getFailureReason',
         'headers' => 'getHeaders',
         'idempotency_key' => 'getIdempotencyKey',
         'is_duplicate_event' => 'getIsDuplicateEvent',
-        'metadata' => 'getMetadata',
         'project_id' => 'getProjectId',
         'raw' => 'getRaw',
         'source_id' => 'getSourceId',
@@ -373,10 +373,10 @@ class DatastoreEvent implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('endpoint_metadata', $data ?? [], null);
         $this->setIfExists('endpoints', $data ?? [], null);
         $this->setIfExists('event_type', $data ?? [], null);
+        $this->setIfExists('failure_reason', $data ?? [], null);
         $this->setIfExists('headers', $data ?? [], null);
         $this->setIfExists('idempotency_key', $data ?? [], null);
         $this->setIfExists('is_duplicate_event', $data ?? [], null);
-        $this->setIfExists('metadata', $data ?? [], null);
         $this->setIfExists('project_id', $data ?? [], null);
         $this->setIfExists('raw', $data ?? [], null);
         $this->setIfExists('source_id', $data ?? [], null);
@@ -668,6 +668,33 @@ class DatastoreEvent implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets failure_reason
+     *
+     * @return string|null
+     */
+    public function getFailureReason()
+    {
+        return $this->container['failure_reason'];
+    }
+
+    /**
+     * Sets failure_reason
+     *
+     * @param string|null $failure_reason FailureReason explains a Failure status to whoever is looking at the dashboard. It carries operator facing text only, never endpoint credentials, headers, or payload content.
+     *
+     * @return self
+     */
+    public function setFailureReason($failure_reason)
+    {
+        if (is_null($failure_reason)) {
+            throw new \InvalidArgumentException('non-nullable failure_reason cannot be null');
+        }
+        $this->container['failure_reason'] = $failure_reason;
+
+        return $this;
+    }
+
+    /**
      * Gets headers
      *
      * @return array<string,string[]>|null
@@ -751,33 +778,6 @@ class DatastoreEvent implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable is_duplicate_event cannot be null');
         }
         $this->container['is_duplicate_event'] = $is_duplicate_event;
-
-        return $this;
-    }
-
-    /**
-     * Gets metadata
-     *
-     * @return string|null
-     */
-    public function getMetadata()
-    {
-        return $this->container['metadata'];
-    }
-
-    /**
-     * Sets metadata
-     *
-     * @param string|null $metadata metadata
-     *
-     * @return self
-     */
-    public function setMetadata($metadata)
-    {
-        if (is_null($metadata)) {
-            throw new \InvalidArgumentException('non-nullable metadata cannot be null');
-        }
-        $this->container['metadata'] = $metadata;
 
         return $this;
     }
