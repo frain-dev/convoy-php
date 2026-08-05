@@ -59,6 +59,7 @@ class ModelsProjectConfig implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     protected static $openAPITypes = [
         'add_event_id_trace_headers' => 'bool',
+        'allow_unmatched_dynamic_urls' => 'bool',
         'circuit_breaker' => '\Convoy\Client\Model\DatastoreCircuitBreakerConfiguration',
         'disable_endpoint' => 'bool',
         'max_payload_read_size' => 'int',
@@ -71,7 +72,7 @@ class ModelsProjectConfig implements ModelInterface, ArrayAccess, \JsonSerializa
         'signature' => '\Convoy\Client\Model\ModelsSignatureConfiguration',
         'ssl' => '\Convoy\Client\Model\ModelsSSLConfiguration',
         'strategy' => '\Convoy\Client\Model\ModelsStrategyConfiguration',
-        'sync_dynamic_event_ack' => 'bool'
+        'verify_dynamic_events' => 'bool'
     ];
 
     /**
@@ -83,6 +84,7 @@ class ModelsProjectConfig implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     protected static $openAPIFormats = [
         'add_event_id_trace_headers' => null,
+        'allow_unmatched_dynamic_urls' => null,
         'circuit_breaker' => null,
         'disable_endpoint' => null,
         'max_payload_read_size' => null,
@@ -95,7 +97,7 @@ class ModelsProjectConfig implements ModelInterface, ArrayAccess, \JsonSerializa
         'signature' => null,
         'ssl' => null,
         'strategy' => null,
-        'sync_dynamic_event_ack' => null
+        'verify_dynamic_events' => null
     ];
 
     /**
@@ -105,6 +107,7 @@ class ModelsProjectConfig implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     protected static array $openAPINullables = [
         'add_event_id_trace_headers' => false,
+        'allow_unmatched_dynamic_urls' => false,
         'circuit_breaker' => false,
         'disable_endpoint' => false,
         'max_payload_read_size' => false,
@@ -117,7 +120,7 @@ class ModelsProjectConfig implements ModelInterface, ArrayAccess, \JsonSerializa
         'signature' => false,
         'ssl' => false,
         'strategy' => false,
-        'sync_dynamic_event_ack' => false
+        'verify_dynamic_events' => false
     ];
 
     /**
@@ -207,6 +210,7 @@ class ModelsProjectConfig implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     protected static $attributeMap = [
         'add_event_id_trace_headers' => 'add_event_id_trace_headers',
+        'allow_unmatched_dynamic_urls' => 'allow_unmatched_dynamic_urls',
         'circuit_breaker' => 'circuit_breaker',
         'disable_endpoint' => 'disable_endpoint',
         'max_payload_read_size' => 'max_payload_read_size',
@@ -219,7 +223,7 @@ class ModelsProjectConfig implements ModelInterface, ArrayAccess, \JsonSerializa
         'signature' => 'signature',
         'ssl' => 'ssl',
         'strategy' => 'strategy',
-        'sync_dynamic_event_ack' => 'sync_dynamic_event_ack'
+        'verify_dynamic_events' => 'verify_dynamic_events'
     ];
 
     /**
@@ -229,6 +233,7 @@ class ModelsProjectConfig implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     protected static $setters = [
         'add_event_id_trace_headers' => 'setAddEventIdTraceHeaders',
+        'allow_unmatched_dynamic_urls' => 'setAllowUnmatchedDynamicUrls',
         'circuit_breaker' => 'setCircuitBreaker',
         'disable_endpoint' => 'setDisableEndpoint',
         'max_payload_read_size' => 'setMaxPayloadReadSize',
@@ -241,7 +246,7 @@ class ModelsProjectConfig implements ModelInterface, ArrayAccess, \JsonSerializa
         'signature' => 'setSignature',
         'ssl' => 'setSsl',
         'strategy' => 'setStrategy',
-        'sync_dynamic_event_ack' => 'setSyncDynamicEventAck'
+        'verify_dynamic_events' => 'setVerifyDynamicEvents'
     ];
 
     /**
@@ -251,6 +256,7 @@ class ModelsProjectConfig implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     protected static $getters = [
         'add_event_id_trace_headers' => 'getAddEventIdTraceHeaders',
+        'allow_unmatched_dynamic_urls' => 'getAllowUnmatchedDynamicUrls',
         'circuit_breaker' => 'getCircuitBreaker',
         'disable_endpoint' => 'getDisableEndpoint',
         'max_payload_read_size' => 'getMaxPayloadReadSize',
@@ -263,7 +269,7 @@ class ModelsProjectConfig implements ModelInterface, ArrayAccess, \JsonSerializa
         'signature' => 'getSignature',
         'ssl' => 'getSsl',
         'strategy' => 'getStrategy',
-        'sync_dynamic_event_ack' => 'getSyncDynamicEventAck'
+        'verify_dynamic_events' => 'getVerifyDynamicEvents'
     ];
 
     /**
@@ -324,6 +330,7 @@ class ModelsProjectConfig implements ModelInterface, ArrayAccess, \JsonSerializa
     public function __construct(?array $data = null)
     {
         $this->setIfExists('add_event_id_trace_headers', $data ?? [], null);
+        $this->setIfExists('allow_unmatched_dynamic_urls', $data ?? [], null);
         $this->setIfExists('circuit_breaker', $data ?? [], null);
         $this->setIfExists('disable_endpoint', $data ?? [], null);
         $this->setIfExists('max_payload_read_size', $data ?? [], null);
@@ -336,7 +343,7 @@ class ModelsProjectConfig implements ModelInterface, ArrayAccess, \JsonSerializa
         $this->setIfExists('signature', $data ?? [], null);
         $this->setIfExists('ssl', $data ?? [], null);
         $this->setIfExists('strategy', $data ?? [], null);
-        $this->setIfExists('sync_dynamic_event_ack', $data ?? [], null);
+        $this->setIfExists('verify_dynamic_events', $data ?? [], null);
     }
 
     /**
@@ -404,6 +411,33 @@ class ModelsProjectConfig implements ModelInterface, ArrayAccess, \JsonSerializa
             throw new \InvalidArgumentException('non-nullable add_event_id_trace_headers cannot be null');
         }
         $this->container['add_event_id_trace_headers'] = $add_event_id_trace_headers;
+
+        return $this;
+    }
+
+    /**
+     * Gets allow_unmatched_dynamic_urls
+     *
+     * @return bool|null
+     */
+    public function getAllowUnmatchedDynamicUrls()
+    {
+        return $this->container['allow_unmatched_dynamic_urls'];
+    }
+
+    /**
+     * Sets allow_unmatched_dynamic_urls
+     *
+     * @param bool|null $allow_unmatched_dynamic_urls AllowUnmatchedDynamicURLs lets a dynamic event URL that matches none of the project's endpoint URL templates auto-create an endpoint instead of failing. When false (the default), a project with templates configured rejects unmatched URLs.
+     *
+     * @return self
+     */
+    public function setAllowUnmatchedDynamicUrls($allow_unmatched_dynamic_urls)
+    {
+        if (is_null($allow_unmatched_dynamic_urls)) {
+            throw new \InvalidArgumentException('non-nullable allow_unmatched_dynamic_urls cannot be null');
+        }
+        $this->container['allow_unmatched_dynamic_urls'] = $allow_unmatched_dynamic_urls;
 
         return $this;
     }
@@ -733,28 +767,28 @@ class ModelsProjectConfig implements ModelInterface, ArrayAccess, \JsonSerializa
     }
 
     /**
-     * Gets sync_dynamic_event_ack
+     * Gets verify_dynamic_events
      *
      * @return bool|null
      */
-    public function getSyncDynamicEventAck()
+    public function getVerifyDynamicEvents()
     {
-        return $this->container['sync_dynamic_event_ack'];
+        return $this->container['verify_dynamic_events'];
     }
 
     /**
-     * Sets sync_dynamic_event_ack
+     * Sets verify_dynamic_events
      *
-     * @param bool|null $sync_dynamic_event_ack SyncDynamicEventAck waits for dynamic endpoint/subscription resolve before acknowledging POST /events/dynamic. When false, the handler returns 201 after enqueue.
+     * @param bool|null $verify_dynamic_events VerifyDynamicEvents waits for dynamic endpoint/subscription resolve before acknowledging POST /events/dynamic. When false, the handler returns 201 after enqueue.
      *
      * @return self
      */
-    public function setSyncDynamicEventAck($sync_dynamic_event_ack)
+    public function setVerifyDynamicEvents($verify_dynamic_events)
     {
-        if (is_null($sync_dynamic_event_ack)) {
-            throw new \InvalidArgumentException('non-nullable sync_dynamic_event_ack cannot be null');
+        if (is_null($verify_dynamic_events)) {
+            throw new \InvalidArgumentException('non-nullable verify_dynamic_events cannot be null');
         }
-        $this->container['sync_dynamic_event_ack'] = $sync_dynamic_event_ack;
+        $this->container['verify_dynamic_events'] = $verify_dynamic_events;
 
         return $this;
     }
