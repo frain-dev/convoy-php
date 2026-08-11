@@ -401,7 +401,7 @@ class ModelsUpdateEndpoint implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets advanced_signatures
      *
-     * @param bool|null $advanced_signatures Convoy supports two [signature formats](https://getconvoy.io/docs/product-manual/signatures) -- simple or advanced. If left unspecified, we default to false.
+     * @param bool|null $advanced_signatures Convoy supports two [signature formats](https://getconvoy.io/docs/product-manual/signatures) -- simple or advanced. Only applies to outgoing projects; omit it to keep the current value. Incoming projects always use advanced signatures.
      *
      * @return self
      */
