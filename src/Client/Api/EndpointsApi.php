@@ -90,6 +90,9 @@ class EndpointsApi
         'getEndpoint' => [
             'application/json',
         ],
+        'getEndpointPeriodFailureRates' => [
+            'application/json',
+        ],
         'getEndpoints' => [
             'application/json',
         ],
@@ -1776,6 +1779,365 @@ class EndpointsApi
             $resourcePath = str_replace(
                 '{endpointID}',
                 ObjectSerializer::toPathValue($endpoint_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires Bearer authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getEndpointPeriodFailureRates
+     *
+     * Endpoint period failure rates
+     *
+     * @param  string $project_id Project ID (required)
+     * @param  string[]|null $endpoint_id Endpoint IDs (optional)
+     * @param  string|null $start_date Start date (optional)
+     * @param  string|null $end_date End date (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getEndpointPeriodFailureRates'] to see the possible values for this operation
+     *
+     * @throws \Convoy\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Convoy\Client\Model\GetEndpointPeriodFailureRates200Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response
+     */
+    public function getEndpointPeriodFailureRates($project_id, $endpoint_id = null, $start_date = null, $end_date = null, string $contentType = self::contentTypes['getEndpointPeriodFailureRates'][0])
+    {
+        list($response) = $this->getEndpointPeriodFailureRatesWithHttpInfo($project_id, $endpoint_id, $start_date, $end_date, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getEndpointPeriodFailureRatesWithHttpInfo
+     *
+     * Endpoint period failure rates
+     *
+     * @param  string $project_id Project ID (required)
+     * @param  string[]|null $endpoint_id Endpoint IDs (optional)
+     * @param  string|null $start_date Start date (optional)
+     * @param  string|null $end_date End date (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getEndpointPeriodFailureRates'] to see the possible values for this operation
+     *
+     * @throws \Convoy\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Convoy\Client\Model\GetEndpointPeriodFailureRates200Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getEndpointPeriodFailureRatesWithHttpInfo($project_id, $endpoint_id = null, $start_date = null, $end_date = null, string $contentType = self::contentTypes['getEndpointPeriodFailureRates'][0])
+    {
+        $request = $this->getEndpointPeriodFailureRatesRequest($project_id, $endpoint_id, $start_date, $end_date, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\Convoy\Client\Model\GetEndpointPeriodFailureRates200Response',
+                        $request,
+                        $response,
+                    );
+                case 400:
+                    return $this->handleResponseWithDataType(
+                        '\Convoy\Client\Model\GetProjects400Response',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\Convoy\Client\Model\GetProjects400Response',
+                        $request,
+                        $response,
+                    );
+                case 404:
+                    return $this->handleResponseWithDataType(
+                        '\Convoy\Client\Model\GetProjects400Response',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\Convoy\Client\Model\GetEndpointPeriodFailureRates200Response',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Convoy\Client\Model\GetEndpointPeriodFailureRates200Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Convoy\Client\Model\GetProjects400Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Convoy\Client\Model\GetProjects400Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Convoy\Client\Model\GetProjects400Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getEndpointPeriodFailureRatesAsync
+     *
+     * Endpoint period failure rates
+     *
+     * @param  string $project_id Project ID (required)
+     * @param  string[]|null $endpoint_id Endpoint IDs (optional)
+     * @param  string|null $start_date Start date (optional)
+     * @param  string|null $end_date End date (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getEndpointPeriodFailureRates'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getEndpointPeriodFailureRatesAsync($project_id, $endpoint_id = null, $start_date = null, $end_date = null, string $contentType = self::contentTypes['getEndpointPeriodFailureRates'][0])
+    {
+        return $this->getEndpointPeriodFailureRatesAsyncWithHttpInfo($project_id, $endpoint_id, $start_date, $end_date, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getEndpointPeriodFailureRatesAsyncWithHttpInfo
+     *
+     * Endpoint period failure rates
+     *
+     * @param  string $project_id Project ID (required)
+     * @param  string[]|null $endpoint_id Endpoint IDs (optional)
+     * @param  string|null $start_date Start date (optional)
+     * @param  string|null $end_date End date (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getEndpointPeriodFailureRates'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getEndpointPeriodFailureRatesAsyncWithHttpInfo($project_id, $endpoint_id = null, $start_date = null, $end_date = null, string $contentType = self::contentTypes['getEndpointPeriodFailureRates'][0])
+    {
+        $returnType = '\Convoy\Client\Model\GetEndpointPeriodFailureRates200Response';
+        $request = $this->getEndpointPeriodFailureRatesRequest($project_id, $endpoint_id, $start_date, $end_date, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getEndpointPeriodFailureRates'
+     *
+     * @param  string $project_id Project ID (required)
+     * @param  string[]|null $endpoint_id Endpoint IDs (optional)
+     * @param  string|null $start_date Start date (optional)
+     * @param  string|null $end_date End date (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getEndpointPeriodFailureRates'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getEndpointPeriodFailureRatesRequest($project_id, $endpoint_id = null, $start_date = null, $end_date = null, string $contentType = self::contentTypes['getEndpointPeriodFailureRates'][0])
+    {
+
+        // verify the required parameter 'project_id' is set
+        if ($project_id === null || (is_array($project_id) && count($project_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $project_id when calling getEndpointPeriodFailureRates'
+            );
+        }
+
+
+
+
+
+        $resourcePath = '/v1/projects/{projectID}/endpoints/period-failure-rates';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $endpoint_id,
+            'endpointId', // param base name
+            'array', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $start_date,
+            'startDate', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $end_date,
+            'endDate', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+        // path params
+        if ($project_id !== null) {
+            $resourcePath = str_replace(
+                '{projectID}',
+                ObjectSerializer::toPathValue($project_id),
                 $resourcePath
             );
         }
