@@ -1003,7 +1003,7 @@ class EventDeliveriesApi
      *
      * @throws \Convoy\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Convoy\Client\Model\GetEventDeliveriesPaged200Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response
+     * @return \Convoy\Client\Model\GetEventDeliveriesPaged200Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response
      */
     public function getEventDeliveriesPaged($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $sort = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['getEventDeliveriesPaged'][0])
     {
@@ -1034,7 +1034,7 @@ class EventDeliveriesApi
      *
      * @throws \Convoy\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Convoy\Client\Model\GetEventDeliveriesPaged200Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Convoy\Client\Model\GetEventDeliveriesPaged200Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function getEventDeliveriesPagedWithHttpInfo($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $sort = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['getEventDeliveriesPaged'][0])
     {
@@ -1083,6 +1083,12 @@ class EventDeliveriesApi
                         $response,
                     );
                 case 404:
+                    return $this->handleResponseWithDataType(
+                        '\Convoy\Client\Model\GetProjects400Response',
+                        $request,
+                        $response,
+                    );
+                case 504:
                     return $this->handleResponseWithDataType(
                         '\Convoy\Client\Model\GetProjects400Response',
                         $request,
@@ -1137,6 +1143,14 @@ class EventDeliveriesApi
                     $e->setResponseObject($data);
                     throw $e;
                 case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Convoy\Client\Model\GetProjects400Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 504:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Convoy\Client\Model\GetProjects400Response',

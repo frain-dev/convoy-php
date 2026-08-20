@@ -692,7 +692,7 @@ class DatastoreProjectConfig implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets search_policy
      *
-     * @param string|null $search_policy search_policy
+     * @param string|null $search_policy SearchPolicy is an optional Go duration (e.g. \"24h\") shown in project settings. When set, the dashboard explains that payload/JSON search is additionally clamped to this lookback intersected with the Events log date picker. Empty means opt-out.
      *
      * @return self
      */
