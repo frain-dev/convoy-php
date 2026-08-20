@@ -82,6 +82,7 @@ class ModelsEndpointResponse implements ModelInterface, ArrayAccess, \JsonSerial
         'status' => '\Convoy\Client\Model\DatastoreEndpointStatus',
         'success_count' => 'int',
         'support_email' => 'string',
+        'teams_webhook_url' => 'string',
         'uid' => 'string',
         'updated_at' => 'string',
         'url' => 'string'
@@ -119,6 +120,7 @@ class ModelsEndpointResponse implements ModelInterface, ArrayAccess, \JsonSerial
         'status' => null,
         'success_count' => null,
         'support_email' => null,
+        'teams_webhook_url' => null,
         'uid' => null,
         'updated_at' => null,
         'url' => null
@@ -154,6 +156,7 @@ class ModelsEndpointResponse implements ModelInterface, ArrayAccess, \JsonSerial
         'status' => false,
         'success_count' => true,
         'support_email' => false,
+        'teams_webhook_url' => false,
         'uid' => false,
         'updated_at' => false,
         'url' => false
@@ -269,6 +272,7 @@ class ModelsEndpointResponse implements ModelInterface, ArrayAccess, \JsonSerial
         'status' => 'status',
         'success_count' => 'success_count',
         'support_email' => 'support_email',
+        'teams_webhook_url' => 'teams_webhook_url',
         'uid' => 'uid',
         'updated_at' => 'updated_at',
         'url' => 'url'
@@ -304,6 +308,7 @@ class ModelsEndpointResponse implements ModelInterface, ArrayAccess, \JsonSerial
         'status' => 'setStatus',
         'success_count' => 'setSuccessCount',
         'support_email' => 'setSupportEmail',
+        'teams_webhook_url' => 'setTeamsWebhookUrl',
         'uid' => 'setUid',
         'updated_at' => 'setUpdatedAt',
         'url' => 'setUrl'
@@ -339,6 +344,7 @@ class ModelsEndpointResponse implements ModelInterface, ArrayAccess, \JsonSerial
         'status' => 'getStatus',
         'success_count' => 'getSuccessCount',
         'support_email' => 'getSupportEmail',
+        'teams_webhook_url' => 'getTeamsWebhookUrl',
         'uid' => 'getUid',
         'updated_at' => 'getUpdatedAt',
         'url' => 'getUrl'
@@ -425,6 +431,7 @@ class ModelsEndpointResponse implements ModelInterface, ArrayAccess, \JsonSerial
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('success_count', $data ?? [], null);
         $this->setIfExists('support_email', $data ?? [], null);
+        $this->setIfExists('teams_webhook_url', $data ?? [], null);
         $this->setIfExists('uid', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
         $this->setIfExists('url', $data ?? [], null);
@@ -1179,6 +1186,33 @@ class ModelsEndpointResponse implements ModelInterface, ArrayAccess, \JsonSerial
             throw new \InvalidArgumentException('non-nullable support_email cannot be null');
         }
         $this->container['support_email'] = $support_email;
+
+        return $this;
+    }
+
+    /**
+     * Gets teams_webhook_url
+     *
+     * @return string|null
+     */
+    public function getTeamsWebhookUrl()
+    {
+        return $this->container['teams_webhook_url'];
+    }
+
+    /**
+     * Sets teams_webhook_url
+     *
+     * @param string|null $teams_webhook_url teams_webhook_url
+     *
+     * @return self
+     */
+    public function setTeamsWebhookUrl($teams_webhook_url)
+    {
+        if (is_null($teams_webhook_url)) {
+            throw new \InvalidArgumentException('non-nullable teams_webhook_url cannot be null');
+        }
+        $this->container['teams_webhook_url'] = $teams_webhook_url;
 
         return $this;
     }

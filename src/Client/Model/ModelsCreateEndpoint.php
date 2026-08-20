@@ -73,6 +73,7 @@ class ModelsCreateEndpoint implements ModelInterface, ArrayAccess, \JsonSerializ
         'secret' => 'string',
         'slack_webhook_url' => 'string',
         'support_email' => 'string',
+        'teams_webhook_url' => 'string',
         'url' => 'string'
     ];
 
@@ -99,6 +100,7 @@ class ModelsCreateEndpoint implements ModelInterface, ArrayAccess, \JsonSerializ
         'secret' => null,
         'slack_webhook_url' => null,
         'support_email' => null,
+        'teams_webhook_url' => null,
         'url' => null
     ];
 
@@ -123,6 +125,7 @@ class ModelsCreateEndpoint implements ModelInterface, ArrayAccess, \JsonSerializ
         'secret' => false,
         'slack_webhook_url' => false,
         'support_email' => false,
+        'teams_webhook_url' => false,
         'url' => false
     ];
 
@@ -227,6 +230,7 @@ class ModelsCreateEndpoint implements ModelInterface, ArrayAccess, \JsonSerializ
         'secret' => 'secret',
         'slack_webhook_url' => 'slack_webhook_url',
         'support_email' => 'support_email',
+        'teams_webhook_url' => 'teams_webhook_url',
         'url' => 'url'
     ];
 
@@ -251,6 +255,7 @@ class ModelsCreateEndpoint implements ModelInterface, ArrayAccess, \JsonSerializ
         'secret' => 'setSecret',
         'slack_webhook_url' => 'setSlackWebhookUrl',
         'support_email' => 'setSupportEmail',
+        'teams_webhook_url' => 'setTeamsWebhookUrl',
         'url' => 'setUrl'
     ];
 
@@ -275,6 +280,7 @@ class ModelsCreateEndpoint implements ModelInterface, ArrayAccess, \JsonSerializ
         'secret' => 'getSecret',
         'slack_webhook_url' => 'getSlackWebhookUrl',
         'support_email' => 'getSupportEmail',
+        'teams_webhook_url' => 'getTeamsWebhookUrl',
         'url' => 'getUrl'
     ];
 
@@ -350,6 +356,7 @@ class ModelsCreateEndpoint implements ModelInterface, ArrayAccess, \JsonSerializ
         $this->setIfExists('secret', $data ?? [], null);
         $this->setIfExists('slack_webhook_url', $data ?? [], null);
         $this->setIfExists('support_email', $data ?? [], null);
+        $this->setIfExists('teams_webhook_url', $data ?? [], null);
         $this->setIfExists('url', $data ?? [], null);
     }
 
@@ -796,6 +803,33 @@ class ModelsCreateEndpoint implements ModelInterface, ArrayAccess, \JsonSerializ
             throw new \InvalidArgumentException('non-nullable support_email cannot be null');
         }
         $this->container['support_email'] = $support_email;
+
+        return $this;
+    }
+
+    /**
+     * Gets teams_webhook_url
+     *
+     * @return string|null
+     */
+    public function getTeamsWebhookUrl()
+    {
+        return $this->container['teams_webhook_url'];
+    }
+
+    /**
+     * Sets teams_webhook_url
+     *
+     * @param string|null $teams_webhook_url Microsoft Teams webhook URL is an alternative method to support email where endpoint developers can receive failure notifications in a Teams channel. Use a Workflows (Power Automate) webhook URL; retired Office 365 connector URLs no longer deliver.
+     *
+     * @return self
+     */
+    public function setTeamsWebhookUrl($teams_webhook_url)
+    {
+        if (is_null($teams_webhook_url)) {
+            throw new \InvalidArgumentException('non-nullable teams_webhook_url cannot be null');
+        }
+        $this->container['teams_webhook_url'] = $teams_webhook_url;
 
         return $this;
     }
