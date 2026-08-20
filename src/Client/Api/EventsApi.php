@@ -156,6 +156,7 @@ class EventsApi
      * Batch replay events
      *
      * @param  string $project_id Project ID (required)
+     * @param  string|null $body URL-encoded JSON object matched against the event payload. Combined with query as AND when both are set. (optional)
      * @param  string|null $direction direction (optional)
      * @param  string|null $end_date The end date (optional)
      * @param  string[]|null $endpoint_id A list of endpoint ids to filter by (optional)
@@ -163,7 +164,7 @@ class EventsApi
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
-     * @param  string|null $query Any arbitrary value to filter the events payload (optional)
+     * @param  string|null $query Matches event id prefix, idempotency key, event type, and source name. A JSON object uses payload containment, same as body. Text plus JSON ANDs both. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
      * @param  string[]|null $source_id A list of Source IDs to filter the events by. (optional)
      * @param  string|null $start_date The start date (optional)
@@ -173,9 +174,9 @@ class EventsApi
      * @throws \InvalidArgumentException
      * @return \Convoy\Client\Model\BatchReplayEvents200Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response
      */
-    public function batchReplayEvents($project_id, $direction = null, $end_date = null, $endpoint_id = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, string $contentType = self::contentTypes['batchReplayEvents'][0])
+    public function batchReplayEvents($project_id, $body = null, $direction = null, $end_date = null, $endpoint_id = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, string $contentType = self::contentTypes['batchReplayEvents'][0])
     {
-        list($response) = $this->batchReplayEventsWithHttpInfo($project_id, $direction, $end_date, $endpoint_id, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $source_id, $start_date, $contentType);
+        list($response) = $this->batchReplayEventsWithHttpInfo($project_id, $body, $direction, $end_date, $endpoint_id, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $source_id, $start_date, $contentType);
         return $response;
     }
 
@@ -185,6 +186,7 @@ class EventsApi
      * Batch replay events
      *
      * @param  string $project_id Project ID (required)
+     * @param  string|null $body URL-encoded JSON object matched against the event payload. Combined with query as AND when both are set. (optional)
      * @param  string|null $direction (optional)
      * @param  string|null $end_date The end date (optional)
      * @param  string[]|null $endpoint_id A list of endpoint ids to filter by (optional)
@@ -192,7 +194,7 @@ class EventsApi
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
-     * @param  string|null $query Any arbitrary value to filter the events payload (optional)
+     * @param  string|null $query Matches event id prefix, idempotency key, event type, and source name. A JSON object uses payload containment, same as body. Text plus JSON ANDs both. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
      * @param  string[]|null $source_id A list of Source IDs to filter the events by. (optional)
      * @param  string|null $start_date The start date (optional)
@@ -202,9 +204,9 @@ class EventsApi
      * @throws \InvalidArgumentException
      * @return array of \Convoy\Client\Model\BatchReplayEvents200Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function batchReplayEventsWithHttpInfo($project_id, $direction = null, $end_date = null, $endpoint_id = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, string $contentType = self::contentTypes['batchReplayEvents'][0])
+    public function batchReplayEventsWithHttpInfo($project_id, $body = null, $direction = null, $end_date = null, $endpoint_id = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, string $contentType = self::contentTypes['batchReplayEvents'][0])
     {
-        $request = $this->batchReplayEventsRequest($project_id, $direction, $end_date, $endpoint_id, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $source_id, $start_date, $contentType);
+        $request = $this->batchReplayEventsRequest($project_id, $body, $direction, $end_date, $endpoint_id, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $source_id, $start_date, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -323,6 +325,7 @@ class EventsApi
      * Batch replay events
      *
      * @param  string $project_id Project ID (required)
+     * @param  string|null $body URL-encoded JSON object matched against the event payload. Combined with query as AND when both are set. (optional)
      * @param  string|null $direction (optional)
      * @param  string|null $end_date The end date (optional)
      * @param  string[]|null $endpoint_id A list of endpoint ids to filter by (optional)
@@ -330,7 +333,7 @@ class EventsApi
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
-     * @param  string|null $query Any arbitrary value to filter the events payload (optional)
+     * @param  string|null $query Matches event id prefix, idempotency key, event type, and source name. A JSON object uses payload containment, same as body. Text plus JSON ANDs both. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
      * @param  string[]|null $source_id A list of Source IDs to filter the events by. (optional)
      * @param  string|null $start_date The start date (optional)
@@ -339,9 +342,9 @@ class EventsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function batchReplayEventsAsync($project_id, $direction = null, $end_date = null, $endpoint_id = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, string $contentType = self::contentTypes['batchReplayEvents'][0])
+    public function batchReplayEventsAsync($project_id, $body = null, $direction = null, $end_date = null, $endpoint_id = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, string $contentType = self::contentTypes['batchReplayEvents'][0])
     {
-        return $this->batchReplayEventsAsyncWithHttpInfo($project_id, $direction, $end_date, $endpoint_id, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $source_id, $start_date, $contentType)
+        return $this->batchReplayEventsAsyncWithHttpInfo($project_id, $body, $direction, $end_date, $endpoint_id, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $source_id, $start_date, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -355,6 +358,7 @@ class EventsApi
      * Batch replay events
      *
      * @param  string $project_id Project ID (required)
+     * @param  string|null $body URL-encoded JSON object matched against the event payload. Combined with query as AND when both are set. (optional)
      * @param  string|null $direction (optional)
      * @param  string|null $end_date The end date (optional)
      * @param  string[]|null $endpoint_id A list of endpoint ids to filter by (optional)
@@ -362,7 +366,7 @@ class EventsApi
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
-     * @param  string|null $query Any arbitrary value to filter the events payload (optional)
+     * @param  string|null $query Matches event id prefix, idempotency key, event type, and source name. A JSON object uses payload containment, same as body. Text plus JSON ANDs both. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
      * @param  string[]|null $source_id A list of Source IDs to filter the events by. (optional)
      * @param  string|null $start_date The start date (optional)
@@ -371,10 +375,10 @@ class EventsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function batchReplayEventsAsyncWithHttpInfo($project_id, $direction = null, $end_date = null, $endpoint_id = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, string $contentType = self::contentTypes['batchReplayEvents'][0])
+    public function batchReplayEventsAsyncWithHttpInfo($project_id, $body = null, $direction = null, $end_date = null, $endpoint_id = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, string $contentType = self::contentTypes['batchReplayEvents'][0])
     {
         $returnType = '\Convoy\Client\Model\BatchReplayEvents200Response';
-        $request = $this->batchReplayEventsRequest($project_id, $direction, $end_date, $endpoint_id, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $source_id, $start_date, $contentType);
+        $request = $this->batchReplayEventsRequest($project_id, $body, $direction, $end_date, $endpoint_id, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $source_id, $start_date, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -416,6 +420,7 @@ class EventsApi
      * Create request for operation 'batchReplayEvents'
      *
      * @param  string $project_id Project ID (required)
+     * @param  string|null $body URL-encoded JSON object matched against the event payload. Combined with query as AND when both are set. (optional)
      * @param  string|null $direction (optional)
      * @param  string|null $end_date The end date (optional)
      * @param  string[]|null $endpoint_id A list of endpoint ids to filter by (optional)
@@ -423,7 +428,7 @@ class EventsApi
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
-     * @param  string|null $query Any arbitrary value to filter the events payload (optional)
+     * @param  string|null $query Matches event id prefix, idempotency key, event type, and source name. A JSON object uses payload containment, same as body. Text plus JSON ANDs both. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
      * @param  string[]|null $source_id A list of Source IDs to filter the events by. (optional)
      * @param  string|null $start_date The start date (optional)
@@ -432,7 +437,7 @@ class EventsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function batchReplayEventsRequest($project_id, $direction = null, $end_date = null, $endpoint_id = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, string $contentType = self::contentTypes['batchReplayEvents'][0])
+    public function batchReplayEventsRequest($project_id, $body = null, $direction = null, $end_date = null, $endpoint_id = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, string $contentType = self::contentTypes['batchReplayEvents'][0])
     {
 
         // verify the required parameter 'project_id' is set
@@ -454,6 +459,7 @@ class EventsApi
 
 
 
+
         $resourcePath = '/v1/projects/{projectID}/events/batchreplay';
         $formParams = [];
         $queryParams = [];
@@ -461,6 +467,15 @@ class EventsApi
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $body,
+            'body', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $direction,
@@ -635,6 +650,7 @@ class EventsApi
      * Count events matching batch replay filters
      *
      * @param  string $project_id Project ID (required)
+     * @param  string|null $body URL-encoded JSON object matched against the event payload. Combined with query as AND when both are set. (optional)
      * @param  string|null $direction direction (optional)
      * @param  string|null $end_date The end date (optional)
      * @param  string[]|null $endpoint_id A list of endpoint ids to filter by (optional)
@@ -642,7 +658,7 @@ class EventsApi
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
-     * @param  string|null $query Any arbitrary value to filter the events payload (optional)
+     * @param  string|null $query Matches event id prefix, idempotency key, event type, and source name. A JSON object uses payload containment, same as body. Text plus JSON ANDs both. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
      * @param  string[]|null $source_id A list of Source IDs to filter the events by. (optional)
      * @param  string|null $start_date The start date (optional)
@@ -652,9 +668,9 @@ class EventsApi
      * @throws \InvalidArgumentException
      * @return \Convoy\Client\Model\CountAffectedEvents200Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response
      */
-    public function countAffectedEvents($project_id, $direction = null, $end_date = null, $endpoint_id = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, string $contentType = self::contentTypes['countAffectedEvents'][0])
+    public function countAffectedEvents($project_id, $body = null, $direction = null, $end_date = null, $endpoint_id = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, string $contentType = self::contentTypes['countAffectedEvents'][0])
     {
-        list($response) = $this->countAffectedEventsWithHttpInfo($project_id, $direction, $end_date, $endpoint_id, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $source_id, $start_date, $contentType);
+        list($response) = $this->countAffectedEventsWithHttpInfo($project_id, $body, $direction, $end_date, $endpoint_id, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $source_id, $start_date, $contentType);
         return $response;
     }
 
@@ -664,6 +680,7 @@ class EventsApi
      * Count events matching batch replay filters
      *
      * @param  string $project_id Project ID (required)
+     * @param  string|null $body URL-encoded JSON object matched against the event payload. Combined with query as AND when both are set. (optional)
      * @param  string|null $direction (optional)
      * @param  string|null $end_date The end date (optional)
      * @param  string[]|null $endpoint_id A list of endpoint ids to filter by (optional)
@@ -671,7 +688,7 @@ class EventsApi
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
-     * @param  string|null $query Any arbitrary value to filter the events payload (optional)
+     * @param  string|null $query Matches event id prefix, idempotency key, event type, and source name. A JSON object uses payload containment, same as body. Text plus JSON ANDs both. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
      * @param  string[]|null $source_id A list of Source IDs to filter the events by. (optional)
      * @param  string|null $start_date The start date (optional)
@@ -681,9 +698,9 @@ class EventsApi
      * @throws \InvalidArgumentException
      * @return array of \Convoy\Client\Model\CountAffectedEvents200Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function countAffectedEventsWithHttpInfo($project_id, $direction = null, $end_date = null, $endpoint_id = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, string $contentType = self::contentTypes['countAffectedEvents'][0])
+    public function countAffectedEventsWithHttpInfo($project_id, $body = null, $direction = null, $end_date = null, $endpoint_id = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, string $contentType = self::contentTypes['countAffectedEvents'][0])
     {
-        $request = $this->countAffectedEventsRequest($project_id, $direction, $end_date, $endpoint_id, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $source_id, $start_date, $contentType);
+        $request = $this->countAffectedEventsRequest($project_id, $body, $direction, $end_date, $endpoint_id, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $source_id, $start_date, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -802,6 +819,7 @@ class EventsApi
      * Count events matching batch replay filters
      *
      * @param  string $project_id Project ID (required)
+     * @param  string|null $body URL-encoded JSON object matched against the event payload. Combined with query as AND when both are set. (optional)
      * @param  string|null $direction (optional)
      * @param  string|null $end_date The end date (optional)
      * @param  string[]|null $endpoint_id A list of endpoint ids to filter by (optional)
@@ -809,7 +827,7 @@ class EventsApi
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
-     * @param  string|null $query Any arbitrary value to filter the events payload (optional)
+     * @param  string|null $query Matches event id prefix, idempotency key, event type, and source name. A JSON object uses payload containment, same as body. Text plus JSON ANDs both. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
      * @param  string[]|null $source_id A list of Source IDs to filter the events by. (optional)
      * @param  string|null $start_date The start date (optional)
@@ -818,9 +836,9 @@ class EventsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function countAffectedEventsAsync($project_id, $direction = null, $end_date = null, $endpoint_id = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, string $contentType = self::contentTypes['countAffectedEvents'][0])
+    public function countAffectedEventsAsync($project_id, $body = null, $direction = null, $end_date = null, $endpoint_id = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, string $contentType = self::contentTypes['countAffectedEvents'][0])
     {
-        return $this->countAffectedEventsAsyncWithHttpInfo($project_id, $direction, $end_date, $endpoint_id, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $source_id, $start_date, $contentType)
+        return $this->countAffectedEventsAsyncWithHttpInfo($project_id, $body, $direction, $end_date, $endpoint_id, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $source_id, $start_date, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -834,6 +852,7 @@ class EventsApi
      * Count events matching batch replay filters
      *
      * @param  string $project_id Project ID (required)
+     * @param  string|null $body URL-encoded JSON object matched against the event payload. Combined with query as AND when both are set. (optional)
      * @param  string|null $direction (optional)
      * @param  string|null $end_date The end date (optional)
      * @param  string[]|null $endpoint_id A list of endpoint ids to filter by (optional)
@@ -841,7 +860,7 @@ class EventsApi
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
-     * @param  string|null $query Any arbitrary value to filter the events payload (optional)
+     * @param  string|null $query Matches event id prefix, idempotency key, event type, and source name. A JSON object uses payload containment, same as body. Text plus JSON ANDs both. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
      * @param  string[]|null $source_id A list of Source IDs to filter the events by. (optional)
      * @param  string|null $start_date The start date (optional)
@@ -850,10 +869,10 @@ class EventsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function countAffectedEventsAsyncWithHttpInfo($project_id, $direction = null, $end_date = null, $endpoint_id = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, string $contentType = self::contentTypes['countAffectedEvents'][0])
+    public function countAffectedEventsAsyncWithHttpInfo($project_id, $body = null, $direction = null, $end_date = null, $endpoint_id = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, string $contentType = self::contentTypes['countAffectedEvents'][0])
     {
         $returnType = '\Convoy\Client\Model\CountAffectedEvents200Response';
-        $request = $this->countAffectedEventsRequest($project_id, $direction, $end_date, $endpoint_id, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $source_id, $start_date, $contentType);
+        $request = $this->countAffectedEventsRequest($project_id, $body, $direction, $end_date, $endpoint_id, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $source_id, $start_date, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -895,6 +914,7 @@ class EventsApi
      * Create request for operation 'countAffectedEvents'
      *
      * @param  string $project_id Project ID (required)
+     * @param  string|null $body URL-encoded JSON object matched against the event payload. Combined with query as AND when both are set. (optional)
      * @param  string|null $direction (optional)
      * @param  string|null $end_date The end date (optional)
      * @param  string[]|null $endpoint_id A list of endpoint ids to filter by (optional)
@@ -902,7 +922,7 @@ class EventsApi
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
-     * @param  string|null $query Any arbitrary value to filter the events payload (optional)
+     * @param  string|null $query Matches event id prefix, idempotency key, event type, and source name. A JSON object uses payload containment, same as body. Text plus JSON ANDs both. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
      * @param  string[]|null $source_id A list of Source IDs to filter the events by. (optional)
      * @param  string|null $start_date The start date (optional)
@@ -911,7 +931,7 @@ class EventsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function countAffectedEventsRequest($project_id, $direction = null, $end_date = null, $endpoint_id = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, string $contentType = self::contentTypes['countAffectedEvents'][0])
+    public function countAffectedEventsRequest($project_id, $body = null, $direction = null, $end_date = null, $endpoint_id = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, string $contentType = self::contentTypes['countAffectedEvents'][0])
     {
 
         // verify the required parameter 'project_id' is set
@@ -933,6 +953,7 @@ class EventsApi
 
 
 
+
         $resourcePath = '/v1/projects/{projectID}/events/countbatchreplayevents';
         $formParams = [];
         $queryParams = [];
@@ -940,6 +961,15 @@ class EventsApi
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $body,
+            'body', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $direction,
@@ -2780,6 +2810,7 @@ class EventsApi
      * List all events
      *
      * @param  string $project_id Project ID (required)
+     * @param  string|null $body URL-encoded JSON object matched against the event payload. Combined with query as AND when both are set. (optional)
      * @param  string|null $direction direction (optional)
      * @param  string|null $end_date The end date (optional)
      * @param  string[]|null $endpoint_id A list of endpoint ids to filter by (optional)
@@ -2787,7 +2818,7 @@ class EventsApi
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
-     * @param  string|null $query Any arbitrary value to filter the events payload (optional)
+     * @param  string|null $query Matches event id prefix, idempotency key, event type, and source name. A JSON object uses payload containment, same as body. Text plus JSON ANDs both. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
      * @param  string[]|null $source_id A list of Source IDs to filter the events by. (optional)
      * @param  string|null $start_date The start date (optional)
@@ -2795,11 +2826,11 @@ class EventsApi
      *
      * @throws \Convoy\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Convoy\Client\Model\GetEventsPaged200Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response
+     * @return \Convoy\Client\Model\GetEventsPaged200Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response
      */
-    public function getEventsPaged($project_id, $direction = null, $end_date = null, $endpoint_id = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, string $contentType = self::contentTypes['getEventsPaged'][0])
+    public function getEventsPaged($project_id, $body = null, $direction = null, $end_date = null, $endpoint_id = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, string $contentType = self::contentTypes['getEventsPaged'][0])
     {
-        list($response) = $this->getEventsPagedWithHttpInfo($project_id, $direction, $end_date, $endpoint_id, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $source_id, $start_date, $contentType);
+        list($response) = $this->getEventsPagedWithHttpInfo($project_id, $body, $direction, $end_date, $endpoint_id, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $source_id, $start_date, $contentType);
         return $response;
     }
 
@@ -2809,6 +2840,7 @@ class EventsApi
      * List all events
      *
      * @param  string $project_id Project ID (required)
+     * @param  string|null $body URL-encoded JSON object matched against the event payload. Combined with query as AND when both are set. (optional)
      * @param  string|null $direction (optional)
      * @param  string|null $end_date The end date (optional)
      * @param  string[]|null $endpoint_id A list of endpoint ids to filter by (optional)
@@ -2816,7 +2848,7 @@ class EventsApi
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
-     * @param  string|null $query Any arbitrary value to filter the events payload (optional)
+     * @param  string|null $query Matches event id prefix, idempotency key, event type, and source name. A JSON object uses payload containment, same as body. Text plus JSON ANDs both. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
      * @param  string[]|null $source_id A list of Source IDs to filter the events by. (optional)
      * @param  string|null $start_date The start date (optional)
@@ -2824,11 +2856,11 @@ class EventsApi
      *
      * @throws \Convoy\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Convoy\Client\Model\GetEventsPaged200Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Convoy\Client\Model\GetEventsPaged200Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getEventsPagedWithHttpInfo($project_id, $direction = null, $end_date = null, $endpoint_id = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, string $contentType = self::contentTypes['getEventsPaged'][0])
+    public function getEventsPagedWithHttpInfo($project_id, $body = null, $direction = null, $end_date = null, $endpoint_id = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, string $contentType = self::contentTypes['getEventsPaged'][0])
     {
-        $request = $this->getEventsPagedRequest($project_id, $direction, $end_date, $endpoint_id, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $source_id, $start_date, $contentType);
+        $request = $this->getEventsPagedRequest($project_id, $body, $direction, $end_date, $endpoint_id, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $source_id, $start_date, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2872,7 +2904,19 @@ class EventsApi
                         $request,
                         $response,
                     );
+                case 403:
+                    return $this->handleResponseWithDataType(
+                        '\Convoy\Client\Model\GetProjects400Response',
+                        $request,
+                        $response,
+                    );
                 case 404:
+                    return $this->handleResponseWithDataType(
+                        '\Convoy\Client\Model\GetProjects400Response',
+                        $request,
+                        $response,
+                    );
+                case 504:
                     return $this->handleResponseWithDataType(
                         '\Convoy\Client\Model\GetProjects400Response',
                         $request,
@@ -2926,7 +2970,23 @@ class EventsApi
                     );
                     $e->setResponseObject($data);
                     throw $e;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Convoy\Client\Model\GetProjects400Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
                 case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Convoy\Client\Model\GetProjects400Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 504:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Convoy\Client\Model\GetProjects400Response',
@@ -2947,6 +3007,7 @@ class EventsApi
      * List all events
      *
      * @param  string $project_id Project ID (required)
+     * @param  string|null $body URL-encoded JSON object matched against the event payload. Combined with query as AND when both are set. (optional)
      * @param  string|null $direction (optional)
      * @param  string|null $end_date The end date (optional)
      * @param  string[]|null $endpoint_id A list of endpoint ids to filter by (optional)
@@ -2954,7 +3015,7 @@ class EventsApi
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
-     * @param  string|null $query Any arbitrary value to filter the events payload (optional)
+     * @param  string|null $query Matches event id prefix, idempotency key, event type, and source name. A JSON object uses payload containment, same as body. Text plus JSON ANDs both. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
      * @param  string[]|null $source_id A list of Source IDs to filter the events by. (optional)
      * @param  string|null $start_date The start date (optional)
@@ -2963,9 +3024,9 @@ class EventsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getEventsPagedAsync($project_id, $direction = null, $end_date = null, $endpoint_id = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, string $contentType = self::contentTypes['getEventsPaged'][0])
+    public function getEventsPagedAsync($project_id, $body = null, $direction = null, $end_date = null, $endpoint_id = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, string $contentType = self::contentTypes['getEventsPaged'][0])
     {
-        return $this->getEventsPagedAsyncWithHttpInfo($project_id, $direction, $end_date, $endpoint_id, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $source_id, $start_date, $contentType)
+        return $this->getEventsPagedAsyncWithHttpInfo($project_id, $body, $direction, $end_date, $endpoint_id, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $source_id, $start_date, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2979,6 +3040,7 @@ class EventsApi
      * List all events
      *
      * @param  string $project_id Project ID (required)
+     * @param  string|null $body URL-encoded JSON object matched against the event payload. Combined with query as AND when both are set. (optional)
      * @param  string|null $direction (optional)
      * @param  string|null $end_date The end date (optional)
      * @param  string[]|null $endpoint_id A list of endpoint ids to filter by (optional)
@@ -2986,7 +3048,7 @@ class EventsApi
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
-     * @param  string|null $query Any arbitrary value to filter the events payload (optional)
+     * @param  string|null $query Matches event id prefix, idempotency key, event type, and source name. A JSON object uses payload containment, same as body. Text plus JSON ANDs both. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
      * @param  string[]|null $source_id A list of Source IDs to filter the events by. (optional)
      * @param  string|null $start_date The start date (optional)
@@ -2995,10 +3057,10 @@ class EventsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getEventsPagedAsyncWithHttpInfo($project_id, $direction = null, $end_date = null, $endpoint_id = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, string $contentType = self::contentTypes['getEventsPaged'][0])
+    public function getEventsPagedAsyncWithHttpInfo($project_id, $body = null, $direction = null, $end_date = null, $endpoint_id = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, string $contentType = self::contentTypes['getEventsPaged'][0])
     {
         $returnType = '\Convoy\Client\Model\GetEventsPaged200Response';
-        $request = $this->getEventsPagedRequest($project_id, $direction, $end_date, $endpoint_id, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $source_id, $start_date, $contentType);
+        $request = $this->getEventsPagedRequest($project_id, $body, $direction, $end_date, $endpoint_id, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $source_id, $start_date, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -3040,6 +3102,7 @@ class EventsApi
      * Create request for operation 'getEventsPaged'
      *
      * @param  string $project_id Project ID (required)
+     * @param  string|null $body URL-encoded JSON object matched against the event payload. Combined with query as AND when both are set. (optional)
      * @param  string|null $direction (optional)
      * @param  string|null $end_date The end date (optional)
      * @param  string[]|null $endpoint_id A list of endpoint ids to filter by (optional)
@@ -3047,7 +3110,7 @@ class EventsApi
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
-     * @param  string|null $query Any arbitrary value to filter the events payload (optional)
+     * @param  string|null $query Matches event id prefix, idempotency key, event type, and source name. A JSON object uses payload containment, same as body. Text plus JSON ANDs both. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
      * @param  string[]|null $source_id A list of Source IDs to filter the events by. (optional)
      * @param  string|null $start_date The start date (optional)
@@ -3056,7 +3119,7 @@ class EventsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getEventsPagedRequest($project_id, $direction = null, $end_date = null, $endpoint_id = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, string $contentType = self::contentTypes['getEventsPaged'][0])
+    public function getEventsPagedRequest($project_id, $body = null, $direction = null, $end_date = null, $endpoint_id = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, string $contentType = self::contentTypes['getEventsPaged'][0])
     {
 
         // verify the required parameter 'project_id' is set
@@ -3078,6 +3141,7 @@ class EventsApi
 
 
 
+
         $resourcePath = '/v1/projects/{projectID}/events';
         $formParams = [];
         $queryParams = [];
@@ -3085,6 +3149,15 @@ class EventsApi
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $body,
+            'body', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $direction,
