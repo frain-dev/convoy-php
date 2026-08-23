@@ -153,6 +153,7 @@ class EventDeliveriesApi
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
+     * @param  string|null $query Matches delivery id, event id, event type prefix, and endpoint name. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
      * @param  string|null $start_date The start date (optional)
      * @param  string[]|null $status A list of event delivery statuses to filter by (optional)
@@ -163,9 +164,9 @@ class EventDeliveriesApi
      * @throws \InvalidArgumentException
      * @return \Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response
      */
-    public function batchRetryEventDelivery($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $sort = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['batchRetryEventDelivery'][0])
+    public function batchRetryEventDelivery($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['batchRetryEventDelivery'][0])
     {
-        list($response) = $this->batchRetryEventDeliveryWithHttpInfo($project_id, $direction, $end_date, $endpoint_id, $event_id, $event_type, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $sort, $start_date, $status, $subscription_id, $contentType);
+        list($response) = $this->batchRetryEventDeliveryWithHttpInfo($project_id, $direction, $end_date, $endpoint_id, $event_id, $event_type, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $start_date, $status, $subscription_id, $contentType);
         return $response;
     }
 
@@ -184,6 +185,7 @@ class EventDeliveriesApi
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
+     * @param  string|null $query Matches delivery id, event id, event type prefix, and endpoint name. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
      * @param  string|null $start_date The start date (optional)
      * @param  string[]|null $status A list of event delivery statuses to filter by (optional)
@@ -194,9 +196,9 @@ class EventDeliveriesApi
      * @throws \InvalidArgumentException
      * @return array of \Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function batchRetryEventDeliveryWithHttpInfo($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $sort = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['batchRetryEventDelivery'][0])
+    public function batchRetryEventDeliveryWithHttpInfo($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['batchRetryEventDelivery'][0])
     {
-        $request = $this->batchRetryEventDeliveryRequest($project_id, $direction, $end_date, $endpoint_id, $event_id, $event_type, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $sort, $start_date, $status, $subscription_id, $contentType);
+        $request = $this->batchRetryEventDeliveryRequest($project_id, $direction, $end_date, $endpoint_id, $event_id, $event_type, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $start_date, $status, $subscription_id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -324,6 +326,7 @@ class EventDeliveriesApi
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
+     * @param  string|null $query Matches delivery id, event id, event type prefix, and endpoint name. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
      * @param  string|null $start_date The start date (optional)
      * @param  string[]|null $status A list of event delivery statuses to filter by (optional)
@@ -333,9 +336,9 @@ class EventDeliveriesApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function batchRetryEventDeliveryAsync($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $sort = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['batchRetryEventDelivery'][0])
+    public function batchRetryEventDeliveryAsync($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['batchRetryEventDelivery'][0])
     {
-        return $this->batchRetryEventDeliveryAsyncWithHttpInfo($project_id, $direction, $end_date, $endpoint_id, $event_id, $event_type, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $sort, $start_date, $status, $subscription_id, $contentType)
+        return $this->batchRetryEventDeliveryAsyncWithHttpInfo($project_id, $direction, $end_date, $endpoint_id, $event_id, $event_type, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $start_date, $status, $subscription_id, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -358,6 +361,7 @@ class EventDeliveriesApi
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
+     * @param  string|null $query Matches delivery id, event id, event type prefix, and endpoint name. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
      * @param  string|null $start_date The start date (optional)
      * @param  string[]|null $status A list of event delivery statuses to filter by (optional)
@@ -367,10 +371,10 @@ class EventDeliveriesApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function batchRetryEventDeliveryAsyncWithHttpInfo($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $sort = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['batchRetryEventDelivery'][0])
+    public function batchRetryEventDeliveryAsyncWithHttpInfo($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['batchRetryEventDelivery'][0])
     {
         $returnType = '\Convoy\Client\Model\GetProjects400Response';
-        $request = $this->batchRetryEventDeliveryRequest($project_id, $direction, $end_date, $endpoint_id, $event_id, $event_type, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $sort, $start_date, $status, $subscription_id, $contentType);
+        $request = $this->batchRetryEventDeliveryRequest($project_id, $direction, $end_date, $endpoint_id, $event_id, $event_type, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $start_date, $status, $subscription_id, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -421,6 +425,7 @@ class EventDeliveriesApi
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
+     * @param  string|null $query Matches delivery id, event id, event type prefix, and endpoint name. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
      * @param  string|null $start_date The start date (optional)
      * @param  string[]|null $status A list of event delivery statuses to filter by (optional)
@@ -430,7 +435,7 @@ class EventDeliveriesApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function batchRetryEventDeliveryRequest($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $sort = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['batchRetryEventDelivery'][0])
+    public function batchRetryEventDeliveryRequest($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['batchRetryEventDelivery'][0])
     {
 
         // verify the required parameter 'project_id' is set
@@ -439,6 +444,7 @@ class EventDeliveriesApi
                 'Missing the required parameter $project_id when calling batchRetryEventDelivery'
             );
         }
+
 
 
 
@@ -537,6 +543,15 @@ class EventDeliveriesApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $prev_page_cursor,
             'prev_page_cursor', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $query,
+            'query', // param base name
             'string', // openApiType
             'form', // style
             true, // explode
@@ -995,6 +1010,7 @@ class EventDeliveriesApi
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
+     * @param  string|null $query Matches delivery id, event id, event type prefix, and endpoint name. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
      * @param  string|null $start_date The start date (optional)
      * @param  string[]|null $status A list of event delivery statuses to filter by (optional)
@@ -1003,11 +1019,11 @@ class EventDeliveriesApi
      *
      * @throws \Convoy\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Convoy\Client\Model\GetEventDeliveriesPaged200Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response
+     * @return \Convoy\Client\Model\GetEventDeliveriesPaged200Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response
      */
-    public function getEventDeliveriesPaged($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $sort = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['getEventDeliveriesPaged'][0])
+    public function getEventDeliveriesPaged($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['getEventDeliveriesPaged'][0])
     {
-        list($response) = $this->getEventDeliveriesPagedWithHttpInfo($project_id, $direction, $end_date, $endpoint_id, $event_id, $event_type, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $sort, $start_date, $status, $subscription_id, $contentType);
+        list($response) = $this->getEventDeliveriesPagedWithHttpInfo($project_id, $direction, $end_date, $endpoint_id, $event_id, $event_type, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $start_date, $status, $subscription_id, $contentType);
         return $response;
     }
 
@@ -1026,6 +1042,7 @@ class EventDeliveriesApi
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
+     * @param  string|null $query Matches delivery id, event id, event type prefix, and endpoint name. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
      * @param  string|null $start_date The start date (optional)
      * @param  string[]|null $status A list of event delivery statuses to filter by (optional)
@@ -1034,11 +1051,11 @@ class EventDeliveriesApi
      *
      * @throws \Convoy\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Convoy\Client\Model\GetEventDeliveriesPaged200Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Convoy\Client\Model\GetEventDeliveriesPaged200Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getEventDeliveriesPagedWithHttpInfo($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $sort = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['getEventDeliveriesPaged'][0])
+    public function getEventDeliveriesPagedWithHttpInfo($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['getEventDeliveriesPaged'][0])
     {
-        $request = $this->getEventDeliveriesPagedRequest($project_id, $direction, $end_date, $endpoint_id, $event_id, $event_type, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $sort, $start_date, $status, $subscription_id, $contentType);
+        $request = $this->getEventDeliveriesPagedRequest($project_id, $direction, $end_date, $endpoint_id, $event_id, $event_type, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $start_date, $status, $subscription_id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1083,6 +1100,12 @@ class EventDeliveriesApi
                         $response,
                     );
                 case 404:
+                    return $this->handleResponseWithDataType(
+                        '\Convoy\Client\Model\GetProjects400Response',
+                        $request,
+                        $response,
+                    );
+                case 504:
                     return $this->handleResponseWithDataType(
                         '\Convoy\Client\Model\GetProjects400Response',
                         $request,
@@ -1144,6 +1167,14 @@ class EventDeliveriesApi
                     );
                     $e->setResponseObject($data);
                     throw $e;
+                case 504:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Convoy\Client\Model\GetProjects400Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
             }
         
 
@@ -1166,6 +1197,7 @@ class EventDeliveriesApi
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
+     * @param  string|null $query Matches delivery id, event id, event type prefix, and endpoint name. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
      * @param  string|null $start_date The start date (optional)
      * @param  string[]|null $status A list of event delivery statuses to filter by (optional)
@@ -1175,9 +1207,9 @@ class EventDeliveriesApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getEventDeliveriesPagedAsync($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $sort = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['getEventDeliveriesPaged'][0])
+    public function getEventDeliveriesPagedAsync($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['getEventDeliveriesPaged'][0])
     {
-        return $this->getEventDeliveriesPagedAsyncWithHttpInfo($project_id, $direction, $end_date, $endpoint_id, $event_id, $event_type, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $sort, $start_date, $status, $subscription_id, $contentType)
+        return $this->getEventDeliveriesPagedAsyncWithHttpInfo($project_id, $direction, $end_date, $endpoint_id, $event_id, $event_type, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $start_date, $status, $subscription_id, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1200,6 +1232,7 @@ class EventDeliveriesApi
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
+     * @param  string|null $query Matches delivery id, event id, event type prefix, and endpoint name. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
      * @param  string|null $start_date The start date (optional)
      * @param  string[]|null $status A list of event delivery statuses to filter by (optional)
@@ -1209,10 +1242,10 @@ class EventDeliveriesApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getEventDeliveriesPagedAsyncWithHttpInfo($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $sort = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['getEventDeliveriesPaged'][0])
+    public function getEventDeliveriesPagedAsyncWithHttpInfo($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['getEventDeliveriesPaged'][0])
     {
         $returnType = '\Convoy\Client\Model\GetEventDeliveriesPaged200Response';
-        $request = $this->getEventDeliveriesPagedRequest($project_id, $direction, $end_date, $endpoint_id, $event_id, $event_type, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $sort, $start_date, $status, $subscription_id, $contentType);
+        $request = $this->getEventDeliveriesPagedRequest($project_id, $direction, $end_date, $endpoint_id, $event_id, $event_type, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $start_date, $status, $subscription_id, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1263,6 +1296,7 @@ class EventDeliveriesApi
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
+     * @param  string|null $query Matches delivery id, event id, event type prefix, and endpoint name. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
      * @param  string|null $start_date The start date (optional)
      * @param  string[]|null $status A list of event delivery statuses to filter by (optional)
@@ -1272,7 +1306,7 @@ class EventDeliveriesApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getEventDeliveriesPagedRequest($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $sort = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['getEventDeliveriesPaged'][0])
+    public function getEventDeliveriesPagedRequest($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['getEventDeliveriesPaged'][0])
     {
 
         // verify the required parameter 'project_id' is set
@@ -1281,6 +1315,7 @@ class EventDeliveriesApi
                 'Missing the required parameter $project_id when calling getEventDeliveriesPaged'
             );
         }
+
 
 
 
@@ -1379,6 +1414,15 @@ class EventDeliveriesApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $prev_page_cursor,
             'prev_page_cursor', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $query,
+            'query', // param base name
             'string', // openApiType
             'form', // style
             true, // explode
