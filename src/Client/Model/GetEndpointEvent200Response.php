@@ -1,6 +1,6 @@
 <?php
 /**
- * CreateBroadcastEvent201Response
+ * GetEndpointEvent200Response
  *
  * PHP version 8.1
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \Convoy\Client\ObjectSerializer;
 
 /**
- * CreateBroadcastEvent201Response Class Doc Comment
+ * GetEndpointEvent200Response Class Doc Comment
  *
  * @category Class
  * @package  Convoy\Client
@@ -41,7 +41,7 @@ use \Convoy\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class CreateBroadcastEvent201Response implements ModelInterface, ArrayAccess, \JsonSerializable
+class GetEndpointEvent200Response implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class CreateBroadcastEvent201Response implements ModelInterface, ArrayAccess, \J
      *
      * @var string
      */
-    protected static $openAPIModelName = 'CreateBroadcastEvent_201_response';
+    protected static $openAPIModelName = 'GetEndpointEvent_200_response';
 
     /**
      * Array of property to type mappings. Used for (de)serialization

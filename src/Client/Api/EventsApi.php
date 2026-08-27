@@ -1149,7 +1149,7 @@ class EventsApi
      *
      * @throws \Convoy\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Convoy\Client\Model\CreateBroadcastEvent201Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response
+     * @return \Convoy\Client\Model\CreateEndpointEvent201Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response
      */
     public function createBroadcastEvent($project_id, $models_broadcast_event, string $contentType = self::contentTypes['createBroadcastEvent'][0])
     {
@@ -1168,7 +1168,7 @@ class EventsApi
      *
      * @throws \Convoy\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Convoy\Client\Model\CreateBroadcastEvent201Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Convoy\Client\Model\CreateEndpointEvent201Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function createBroadcastEventWithHttpInfo($project_id, $models_broadcast_event, string $contentType = self::contentTypes['createBroadcastEvent'][0])
     {
@@ -1200,7 +1200,7 @@ class EventsApi
             switch($statusCode) {
                 case 201:
                     return $this->handleResponseWithDataType(
-                        '\Convoy\Client\Model\CreateBroadcastEvent201Response',
+                        '\Convoy\Client\Model\CreateEndpointEvent201Response',
                         $request,
                         $response,
                     );
@@ -1240,7 +1240,7 @@ class EventsApi
             }
 
             return $this->handleResponseWithDataType(
-                '\Convoy\Client\Model\CreateBroadcastEvent201Response',
+                '\Convoy\Client\Model\CreateEndpointEvent201Response',
                 $request,
                 $response,
             );
@@ -1249,7 +1249,7 @@ class EventsApi
                 case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Convoy\Client\Model\CreateBroadcastEvent201Response',
+                        '\Convoy\Client\Model\CreateEndpointEvent201Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1321,7 +1321,7 @@ class EventsApi
      */
     public function createBroadcastEventAsyncWithHttpInfo($project_id, $models_broadcast_event, string $contentType = self::contentTypes['createBroadcastEvent'][0])
     {
-        $returnType = '\Convoy\Client\Model\CreateBroadcastEvent201Response';
+        $returnType = '\Convoy\Client\Model\CreateEndpointEvent201Response';
         $request = $this->createBroadcastEventRequest($project_id, $models_broadcast_event, $contentType);
 
         return $this->client
@@ -1482,7 +1482,7 @@ class EventsApi
      *
      * @throws \Convoy\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response
+     * @return \Convoy\Client\Model\CreateEndpointEvent201Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response
      */
     public function createDynamicEvent($project_id, $models_dynamic_event, string $contentType = self::contentTypes['createDynamicEvent'][0])
     {
@@ -1501,7 +1501,7 @@ class EventsApi
      *
      * @throws \Convoy\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Convoy\Client\Model\CreateEndpointEvent201Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function createDynamicEventWithHttpInfo($project_id, $models_dynamic_event, string $contentType = self::contentTypes['createDynamicEvent'][0])
     {
@@ -1533,7 +1533,7 @@ class EventsApi
             switch($statusCode) {
                 case 201:
                     return $this->handleResponseWithDataType(
-                        '\Convoy\Client\Model\GetProjects400Response',
+                        '\Convoy\Client\Model\CreateEndpointEvent201Response',
                         $request,
                         $response,
                     );
@@ -1573,7 +1573,7 @@ class EventsApi
             }
 
             return $this->handleResponseWithDataType(
-                '\Convoy\Client\Model\GetProjects400Response',
+                '\Convoy\Client\Model\CreateEndpointEvent201Response',
                 $request,
                 $response,
             );
@@ -1582,7 +1582,7 @@ class EventsApi
                 case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Convoy\Client\Model\GetProjects400Response',
+                        '\Convoy\Client\Model\CreateEndpointEvent201Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1654,7 +1654,7 @@ class EventsApi
      */
     public function createDynamicEventAsyncWithHttpInfo($project_id, $models_dynamic_event, string $contentType = self::contentTypes['createDynamicEvent'][0])
     {
-        $returnType = '\Convoy\Client\Model\GetProjects400Response';
+        $returnType = '\Convoy\Client\Model\CreateEndpointEvent201Response';
         $request = $this->createDynamicEventRequest($project_id, $models_dynamic_event, $contentType);
 
         return $this->client
@@ -1815,7 +1815,7 @@ class EventsApi
      *
      * @throws \Convoy\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response
+     * @return \Convoy\Client\Model\CreateEndpointEvent201Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response
      */
     public function createEndpointEvent($project_id, $models_create_event, string $contentType = self::contentTypes['createEndpointEvent'][0])
     {
@@ -1834,7 +1834,7 @@ class EventsApi
      *
      * @throws \Convoy\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Convoy\Client\Model\CreateEndpointEvent201Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function createEndpointEventWithHttpInfo($project_id, $models_create_event, string $contentType = self::contentTypes['createEndpointEvent'][0])
     {
@@ -1866,7 +1866,7 @@ class EventsApi
             switch($statusCode) {
                 case 201:
                     return $this->handleResponseWithDataType(
-                        '\Convoy\Client\Model\GetProjects400Response',
+                        '\Convoy\Client\Model\CreateEndpointEvent201Response',
                         $request,
                         $response,
                     );
@@ -1906,7 +1906,7 @@ class EventsApi
             }
 
             return $this->handleResponseWithDataType(
-                '\Convoy\Client\Model\GetProjects400Response',
+                '\Convoy\Client\Model\CreateEndpointEvent201Response',
                 $request,
                 $response,
             );
@@ -1915,7 +1915,7 @@ class EventsApi
                 case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Convoy\Client\Model\GetProjects400Response',
+                        '\Convoy\Client\Model\CreateEndpointEvent201Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1987,7 +1987,7 @@ class EventsApi
      */
     public function createEndpointEventAsyncWithHttpInfo($project_id, $models_create_event, string $contentType = self::contentTypes['createEndpointEvent'][0])
     {
-        $returnType = '\Convoy\Client\Model\GetProjects400Response';
+        $returnType = '\Convoy\Client\Model\CreateEndpointEvent201Response';
         $request = $this->createEndpointEventRequest($project_id, $models_create_event, $contentType);
 
         return $this->client
@@ -2148,7 +2148,7 @@ class EventsApi
      *
      * @throws \Convoy\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response
+     * @return \Convoy\Client\Model\CreateEndpointEvent201Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response
      */
     public function createEndpointFanoutEvent($project_id, $models_fanout_event, string $contentType = self::contentTypes['createEndpointFanoutEvent'][0])
     {
@@ -2167,7 +2167,7 @@ class EventsApi
      *
      * @throws \Convoy\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Convoy\Client\Model\CreateEndpointEvent201Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function createEndpointFanoutEventWithHttpInfo($project_id, $models_fanout_event, string $contentType = self::contentTypes['createEndpointFanoutEvent'][0])
     {
@@ -2199,7 +2199,7 @@ class EventsApi
             switch($statusCode) {
                 case 201:
                     return $this->handleResponseWithDataType(
-                        '\Convoy\Client\Model\GetProjects400Response',
+                        '\Convoy\Client\Model\CreateEndpointEvent201Response',
                         $request,
                         $response,
                     );
@@ -2239,7 +2239,7 @@ class EventsApi
             }
 
             return $this->handleResponseWithDataType(
-                '\Convoy\Client\Model\GetProjects400Response',
+                '\Convoy\Client\Model\CreateEndpointEvent201Response',
                 $request,
                 $response,
             );
@@ -2248,7 +2248,7 @@ class EventsApi
                 case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Convoy\Client\Model\GetProjects400Response',
+                        '\Convoy\Client\Model\CreateEndpointEvent201Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2320,7 +2320,7 @@ class EventsApi
      */
     public function createEndpointFanoutEventAsyncWithHttpInfo($project_id, $models_fanout_event, string $contentType = self::contentTypes['createEndpointFanoutEvent'][0])
     {
-        $returnType = '\Convoy\Client\Model\GetProjects400Response';
+        $returnType = '\Convoy\Client\Model\CreateEndpointEvent201Response';
         $request = $this->createEndpointFanoutEventRequest($project_id, $models_fanout_event, $contentType);
 
         return $this->client
@@ -2481,7 +2481,7 @@ class EventsApi
      *
      * @throws \Convoy\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Convoy\Client\Model\CreateBroadcastEvent201Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response
+     * @return \Convoy\Client\Model\GetEndpointEvent200Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response
      */
     public function getEndpointEvent($project_id, $event_id, string $contentType = self::contentTypes['getEndpointEvent'][0])
     {
@@ -2500,7 +2500,7 @@ class EventsApi
      *
      * @throws \Convoy\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Convoy\Client\Model\CreateBroadcastEvent201Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Convoy\Client\Model\GetEndpointEvent200Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function getEndpointEventWithHttpInfo($project_id, $event_id, string $contentType = self::contentTypes['getEndpointEvent'][0])
     {
@@ -2532,7 +2532,7 @@ class EventsApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\Convoy\Client\Model\CreateBroadcastEvent201Response',
+                        '\Convoy\Client\Model\GetEndpointEvent200Response',
                         $request,
                         $response,
                     );
@@ -2572,7 +2572,7 @@ class EventsApi
             }
 
             return $this->handleResponseWithDataType(
-                '\Convoy\Client\Model\CreateBroadcastEvent201Response',
+                '\Convoy\Client\Model\GetEndpointEvent200Response',
                 $request,
                 $response,
             );
@@ -2581,7 +2581,7 @@ class EventsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Convoy\Client\Model\CreateBroadcastEvent201Response',
+                        '\Convoy\Client\Model\GetEndpointEvent200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2653,7 +2653,7 @@ class EventsApi
      */
     public function getEndpointEventAsyncWithHttpInfo($project_id, $event_id, string $contentType = self::contentTypes['getEndpointEvent'][0])
     {
-        $returnType = '\Convoy\Client\Model\CreateBroadcastEvent201Response';
+        $returnType = '\Convoy\Client\Model\GetEndpointEvent200Response';
         $request = $this->getEndpointEventRequest($project_id, $event_id, $contentType);
 
         return $this->client
@@ -3337,7 +3337,7 @@ class EventsApi
      *
      * @throws \Convoy\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Convoy\Client\Model\CreateBroadcastEvent201Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response
+     * @return \Convoy\Client\Model\GetEndpointEvent200Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response
      */
     public function replayEndpointEvent($project_id, $event_id, string $contentType = self::contentTypes['replayEndpointEvent'][0])
     {
@@ -3356,7 +3356,7 @@ class EventsApi
      *
      * @throws \Convoy\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Convoy\Client\Model\CreateBroadcastEvent201Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Convoy\Client\Model\GetEndpointEvent200Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function replayEndpointEventWithHttpInfo($project_id, $event_id, string $contentType = self::contentTypes['replayEndpointEvent'][0])
     {
@@ -3388,7 +3388,7 @@ class EventsApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\Convoy\Client\Model\CreateBroadcastEvent201Response',
+                        '\Convoy\Client\Model\GetEndpointEvent200Response',
                         $request,
                         $response,
                     );
@@ -3428,7 +3428,7 @@ class EventsApi
             }
 
             return $this->handleResponseWithDataType(
-                '\Convoy\Client\Model\CreateBroadcastEvent201Response',
+                '\Convoy\Client\Model\GetEndpointEvent200Response',
                 $request,
                 $response,
             );
@@ -3437,7 +3437,7 @@ class EventsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Convoy\Client\Model\CreateBroadcastEvent201Response',
+                        '\Convoy\Client\Model\GetEndpointEvent200Response',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -3509,7 +3509,7 @@ class EventsApi
      */
     public function replayEndpointEventAsyncWithHttpInfo($project_id, $event_id, string $contentType = self::contentTypes['replayEndpointEvent'][0])
     {
-        $returnType = '\Convoy\Client\Model\CreateBroadcastEvent201Response';
+        $returnType = '\Convoy\Client\Model\GetEndpointEvent200Response';
         $request = $this->replayEndpointEventRequest($project_id, $event_id, $contentType);
 
         return $this->client
