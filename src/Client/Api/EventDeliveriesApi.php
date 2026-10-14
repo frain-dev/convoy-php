@@ -150,11 +150,14 @@ class EventDeliveriesApi
      * @param  string|null $event_id Event ID to filter by (optional)
      * @param  string|null $event_type EventType to filter by (optional)
      * @param  string|null $idempotency_key IdempotencyKey to filter by (optional)
+     * @param  string|null $idempotency_value Raw value of a source&#39;s single idempotency key location, e.g. a provider delivery ID. Matches deliveries of events ingested with it. Not combinable with idempotencyKey. (optional)
+     * @param  int|null $min_trials Only return deliveries with at least this many attempts; 2 or more means retried. Requires idempotencyValue, eventId, or endpointId. (optional)
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
      * @param  string|null $query Matches delivery id, event id, event type prefix, and endpoint name. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
+     * @param  string[]|null $source_id Limits idempotencyValue matching to these source IDs. (optional)
      * @param  string|null $start_date The start date (optional)
      * @param  string[]|null $status A list of event delivery statuses to filter by (optional)
      * @param  string|null $subscription_id SubscriptionID to filter by (optional)
@@ -164,9 +167,9 @@ class EventDeliveriesApi
      * @throws \InvalidArgumentException
      * @return \Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response
      */
-    public function batchRetryEventDelivery($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['batchRetryEventDelivery'][0])
+    public function batchRetryEventDelivery($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $idempotency_value = null, $min_trials = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['batchRetryEventDelivery'][0])
     {
-        list($response) = $this->batchRetryEventDeliveryWithHttpInfo($project_id, $direction, $end_date, $endpoint_id, $event_id, $event_type, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $start_date, $status, $subscription_id, $contentType);
+        list($response) = $this->batchRetryEventDeliveryWithHttpInfo($project_id, $direction, $end_date, $endpoint_id, $event_id, $event_type, $idempotency_key, $idempotency_value, $min_trials, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $source_id, $start_date, $status, $subscription_id, $contentType);
         return $response;
     }
 
@@ -182,11 +185,14 @@ class EventDeliveriesApi
      * @param  string|null $event_id Event ID to filter by (optional)
      * @param  string|null $event_type EventType to filter by (optional)
      * @param  string|null $idempotency_key IdempotencyKey to filter by (optional)
+     * @param  string|null $idempotency_value Raw value of a source&#39;s single idempotency key location, e.g. a provider delivery ID. Matches deliveries of events ingested with it. Not combinable with idempotencyKey. (optional)
+     * @param  int|null $min_trials Only return deliveries with at least this many attempts; 2 or more means retried. Requires idempotencyValue, eventId, or endpointId. (optional)
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
      * @param  string|null $query Matches delivery id, event id, event type prefix, and endpoint name. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
+     * @param  string[]|null $source_id Limits idempotencyValue matching to these source IDs. (optional)
      * @param  string|null $start_date The start date (optional)
      * @param  string[]|null $status A list of event delivery statuses to filter by (optional)
      * @param  string|null $subscription_id SubscriptionID to filter by (optional)
@@ -196,9 +202,9 @@ class EventDeliveriesApi
      * @throws \InvalidArgumentException
      * @return array of \Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function batchRetryEventDeliveryWithHttpInfo($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['batchRetryEventDelivery'][0])
+    public function batchRetryEventDeliveryWithHttpInfo($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $idempotency_value = null, $min_trials = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['batchRetryEventDelivery'][0])
     {
-        $request = $this->batchRetryEventDeliveryRequest($project_id, $direction, $end_date, $endpoint_id, $event_id, $event_type, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $start_date, $status, $subscription_id, $contentType);
+        $request = $this->batchRetryEventDeliveryRequest($project_id, $direction, $end_date, $endpoint_id, $event_id, $event_type, $idempotency_key, $idempotency_value, $min_trials, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $source_id, $start_date, $status, $subscription_id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -323,11 +329,14 @@ class EventDeliveriesApi
      * @param  string|null $event_id Event ID to filter by (optional)
      * @param  string|null $event_type EventType to filter by (optional)
      * @param  string|null $idempotency_key IdempotencyKey to filter by (optional)
+     * @param  string|null $idempotency_value Raw value of a source&#39;s single idempotency key location, e.g. a provider delivery ID. Matches deliveries of events ingested with it. Not combinable with idempotencyKey. (optional)
+     * @param  int|null $min_trials Only return deliveries with at least this many attempts; 2 or more means retried. Requires idempotencyValue, eventId, or endpointId. (optional)
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
      * @param  string|null $query Matches delivery id, event id, event type prefix, and endpoint name. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
+     * @param  string[]|null $source_id Limits idempotencyValue matching to these source IDs. (optional)
      * @param  string|null $start_date The start date (optional)
      * @param  string[]|null $status A list of event delivery statuses to filter by (optional)
      * @param  string|null $subscription_id SubscriptionID to filter by (optional)
@@ -336,9 +345,9 @@ class EventDeliveriesApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function batchRetryEventDeliveryAsync($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['batchRetryEventDelivery'][0])
+    public function batchRetryEventDeliveryAsync($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $idempotency_value = null, $min_trials = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['batchRetryEventDelivery'][0])
     {
-        return $this->batchRetryEventDeliveryAsyncWithHttpInfo($project_id, $direction, $end_date, $endpoint_id, $event_id, $event_type, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $start_date, $status, $subscription_id, $contentType)
+        return $this->batchRetryEventDeliveryAsyncWithHttpInfo($project_id, $direction, $end_date, $endpoint_id, $event_id, $event_type, $idempotency_key, $idempotency_value, $min_trials, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $source_id, $start_date, $status, $subscription_id, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -358,11 +367,14 @@ class EventDeliveriesApi
      * @param  string|null $event_id Event ID to filter by (optional)
      * @param  string|null $event_type EventType to filter by (optional)
      * @param  string|null $idempotency_key IdempotencyKey to filter by (optional)
+     * @param  string|null $idempotency_value Raw value of a source&#39;s single idempotency key location, e.g. a provider delivery ID. Matches deliveries of events ingested with it. Not combinable with idempotencyKey. (optional)
+     * @param  int|null $min_trials Only return deliveries with at least this many attempts; 2 or more means retried. Requires idempotencyValue, eventId, or endpointId. (optional)
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
      * @param  string|null $query Matches delivery id, event id, event type prefix, and endpoint name. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
+     * @param  string[]|null $source_id Limits idempotencyValue matching to these source IDs. (optional)
      * @param  string|null $start_date The start date (optional)
      * @param  string[]|null $status A list of event delivery statuses to filter by (optional)
      * @param  string|null $subscription_id SubscriptionID to filter by (optional)
@@ -371,10 +383,10 @@ class EventDeliveriesApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function batchRetryEventDeliveryAsyncWithHttpInfo($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['batchRetryEventDelivery'][0])
+    public function batchRetryEventDeliveryAsyncWithHttpInfo($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $idempotency_value = null, $min_trials = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['batchRetryEventDelivery'][0])
     {
         $returnType = '\Convoy\Client\Model\GetProjects400Response';
-        $request = $this->batchRetryEventDeliveryRequest($project_id, $direction, $end_date, $endpoint_id, $event_id, $event_type, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $start_date, $status, $subscription_id, $contentType);
+        $request = $this->batchRetryEventDeliveryRequest($project_id, $direction, $end_date, $endpoint_id, $event_id, $event_type, $idempotency_key, $idempotency_value, $min_trials, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $source_id, $start_date, $status, $subscription_id, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -422,11 +434,14 @@ class EventDeliveriesApi
      * @param  string|null $event_id Event ID to filter by (optional)
      * @param  string|null $event_type EventType to filter by (optional)
      * @param  string|null $idempotency_key IdempotencyKey to filter by (optional)
+     * @param  string|null $idempotency_value Raw value of a source&#39;s single idempotency key location, e.g. a provider delivery ID. Matches deliveries of events ingested with it. Not combinable with idempotencyKey. (optional)
+     * @param  int|null $min_trials Only return deliveries with at least this many attempts; 2 or more means retried. Requires idempotencyValue, eventId, or endpointId. (optional)
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
      * @param  string|null $query Matches delivery id, event id, event type prefix, and endpoint name. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
+     * @param  string[]|null $source_id Limits idempotencyValue matching to these source IDs. (optional)
      * @param  string|null $start_date The start date (optional)
      * @param  string[]|null $status A list of event delivery statuses to filter by (optional)
      * @param  string|null $subscription_id SubscriptionID to filter by (optional)
@@ -435,7 +450,7 @@ class EventDeliveriesApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function batchRetryEventDeliveryRequest($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['batchRetryEventDelivery'][0])
+    public function batchRetryEventDeliveryRequest($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $idempotency_value = null, $min_trials = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['batchRetryEventDelivery'][0])
     {
 
         // verify the required parameter 'project_id' is set
@@ -444,6 +459,9 @@ class EventDeliveriesApi
                 'Missing the required parameter $project_id when calling batchRetryEventDelivery'
             );
         }
+
+
+
 
 
 
@@ -506,7 +524,7 @@ class EventDeliveriesApi
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $event_type,
-            'event_type', // param base name
+            'eventType', // param base name
             'string', // openApiType
             'form', // style
             true, // explode
@@ -517,6 +535,24 @@ class EventDeliveriesApi
             $idempotency_key,
             'idempotencyKey', // param base name
             'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $idempotency_value,
+            'idempotencyValue', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $min_trials,
+            'minTrials', // param base name
+            'integer', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -562,6 +598,15 @@ class EventDeliveriesApi
             $sort,
             'sort', // param base name
             'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $source_id,
+            'sourceId', // param base name
+            'array', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -1007,11 +1052,14 @@ class EventDeliveriesApi
      * @param  string|null $event_id Event ID to filter by (optional)
      * @param  string|null $event_type EventType to filter by (optional)
      * @param  string|null $idempotency_key IdempotencyKey to filter by (optional)
+     * @param  string|null $idempotency_value Raw value of a source&#39;s single idempotency key location, e.g. a provider delivery ID. Matches deliveries of events ingested with it. Not combinable with idempotencyKey. (optional)
+     * @param  int|null $min_trials Only return deliveries with at least this many attempts; 2 or more means retried. Requires idempotencyValue, eventId, or endpointId. (optional)
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
      * @param  string|null $query Matches delivery id, event id, event type prefix, and endpoint name. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
+     * @param  string[]|null $source_id Limits idempotencyValue matching to these source IDs. (optional)
      * @param  string|null $start_date The start date (optional)
      * @param  string[]|null $status A list of event delivery statuses to filter by (optional)
      * @param  string|null $subscription_id SubscriptionID to filter by (optional)
@@ -1021,9 +1069,9 @@ class EventDeliveriesApi
      * @throws \InvalidArgumentException
      * @return \Convoy\Client\Model\GetEventDeliveriesPaged200Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response
      */
-    public function getEventDeliveriesPaged($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['getEventDeliveriesPaged'][0])
+    public function getEventDeliveriesPaged($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $idempotency_value = null, $min_trials = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['getEventDeliveriesPaged'][0])
     {
-        list($response) = $this->getEventDeliveriesPagedWithHttpInfo($project_id, $direction, $end_date, $endpoint_id, $event_id, $event_type, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $start_date, $status, $subscription_id, $contentType);
+        list($response) = $this->getEventDeliveriesPagedWithHttpInfo($project_id, $direction, $end_date, $endpoint_id, $event_id, $event_type, $idempotency_key, $idempotency_value, $min_trials, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $source_id, $start_date, $status, $subscription_id, $contentType);
         return $response;
     }
 
@@ -1039,11 +1087,14 @@ class EventDeliveriesApi
      * @param  string|null $event_id Event ID to filter by (optional)
      * @param  string|null $event_type EventType to filter by (optional)
      * @param  string|null $idempotency_key IdempotencyKey to filter by (optional)
+     * @param  string|null $idempotency_value Raw value of a source&#39;s single idempotency key location, e.g. a provider delivery ID. Matches deliveries of events ingested with it. Not combinable with idempotencyKey. (optional)
+     * @param  int|null $min_trials Only return deliveries with at least this many attempts; 2 or more means retried. Requires idempotencyValue, eventId, or endpointId. (optional)
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
      * @param  string|null $query Matches delivery id, event id, event type prefix, and endpoint name. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
+     * @param  string[]|null $source_id Limits idempotencyValue matching to these source IDs. (optional)
      * @param  string|null $start_date The start date (optional)
      * @param  string[]|null $status A list of event delivery statuses to filter by (optional)
      * @param  string|null $subscription_id SubscriptionID to filter by (optional)
@@ -1053,9 +1104,9 @@ class EventDeliveriesApi
      * @throws \InvalidArgumentException
      * @return array of \Convoy\Client\Model\GetEventDeliveriesPaged200Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getEventDeliveriesPagedWithHttpInfo($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['getEventDeliveriesPaged'][0])
+    public function getEventDeliveriesPagedWithHttpInfo($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $idempotency_value = null, $min_trials = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['getEventDeliveriesPaged'][0])
     {
-        $request = $this->getEventDeliveriesPagedRequest($project_id, $direction, $end_date, $endpoint_id, $event_id, $event_type, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $start_date, $status, $subscription_id, $contentType);
+        $request = $this->getEventDeliveriesPagedRequest($project_id, $direction, $end_date, $endpoint_id, $event_id, $event_type, $idempotency_key, $idempotency_value, $min_trials, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $source_id, $start_date, $status, $subscription_id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1194,11 +1245,14 @@ class EventDeliveriesApi
      * @param  string|null $event_id Event ID to filter by (optional)
      * @param  string|null $event_type EventType to filter by (optional)
      * @param  string|null $idempotency_key IdempotencyKey to filter by (optional)
+     * @param  string|null $idempotency_value Raw value of a source&#39;s single idempotency key location, e.g. a provider delivery ID. Matches deliveries of events ingested with it. Not combinable with idempotencyKey. (optional)
+     * @param  int|null $min_trials Only return deliveries with at least this many attempts; 2 or more means retried. Requires idempotencyValue, eventId, or endpointId. (optional)
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
      * @param  string|null $query Matches delivery id, event id, event type prefix, and endpoint name. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
+     * @param  string[]|null $source_id Limits idempotencyValue matching to these source IDs. (optional)
      * @param  string|null $start_date The start date (optional)
      * @param  string[]|null $status A list of event delivery statuses to filter by (optional)
      * @param  string|null $subscription_id SubscriptionID to filter by (optional)
@@ -1207,9 +1261,9 @@ class EventDeliveriesApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getEventDeliveriesPagedAsync($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['getEventDeliveriesPaged'][0])
+    public function getEventDeliveriesPagedAsync($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $idempotency_value = null, $min_trials = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['getEventDeliveriesPaged'][0])
     {
-        return $this->getEventDeliveriesPagedAsyncWithHttpInfo($project_id, $direction, $end_date, $endpoint_id, $event_id, $event_type, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $start_date, $status, $subscription_id, $contentType)
+        return $this->getEventDeliveriesPagedAsyncWithHttpInfo($project_id, $direction, $end_date, $endpoint_id, $event_id, $event_type, $idempotency_key, $idempotency_value, $min_trials, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $source_id, $start_date, $status, $subscription_id, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1229,11 +1283,14 @@ class EventDeliveriesApi
      * @param  string|null $event_id Event ID to filter by (optional)
      * @param  string|null $event_type EventType to filter by (optional)
      * @param  string|null $idempotency_key IdempotencyKey to filter by (optional)
+     * @param  string|null $idempotency_value Raw value of a source&#39;s single idempotency key location, e.g. a provider delivery ID. Matches deliveries of events ingested with it. Not combinable with idempotencyKey. (optional)
+     * @param  int|null $min_trials Only return deliveries with at least this many attempts; 2 or more means retried. Requires idempotencyValue, eventId, or endpointId. (optional)
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
      * @param  string|null $query Matches delivery id, event id, event type prefix, and endpoint name. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
+     * @param  string[]|null $source_id Limits idempotencyValue matching to these source IDs. (optional)
      * @param  string|null $start_date The start date (optional)
      * @param  string[]|null $status A list of event delivery statuses to filter by (optional)
      * @param  string|null $subscription_id SubscriptionID to filter by (optional)
@@ -1242,10 +1299,10 @@ class EventDeliveriesApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getEventDeliveriesPagedAsyncWithHttpInfo($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['getEventDeliveriesPaged'][0])
+    public function getEventDeliveriesPagedAsyncWithHttpInfo($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $idempotency_value = null, $min_trials = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['getEventDeliveriesPaged'][0])
     {
         $returnType = '\Convoy\Client\Model\GetEventDeliveriesPaged200Response';
-        $request = $this->getEventDeliveriesPagedRequest($project_id, $direction, $end_date, $endpoint_id, $event_id, $event_type, $idempotency_key, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $start_date, $status, $subscription_id, $contentType);
+        $request = $this->getEventDeliveriesPagedRequest($project_id, $direction, $end_date, $endpoint_id, $event_id, $event_type, $idempotency_key, $idempotency_value, $min_trials, $next_page_cursor, $per_page, $prev_page_cursor, $query, $sort, $source_id, $start_date, $status, $subscription_id, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1293,11 +1350,14 @@ class EventDeliveriesApi
      * @param  string|null $event_id Event ID to filter by (optional)
      * @param  string|null $event_type EventType to filter by (optional)
      * @param  string|null $idempotency_key IdempotencyKey to filter by (optional)
+     * @param  string|null $idempotency_value Raw value of a source&#39;s single idempotency key location, e.g. a provider delivery ID. Matches deliveries of events ingested with it. Not combinable with idempotencyKey. (optional)
+     * @param  int|null $min_trials Only return deliveries with at least this many attempts; 2 or more means retried. Requires idempotencyValue, eventId, or endpointId. (optional)
      * @param  string|null $next_page_cursor A pagination cursor to fetch the next page of a list (optional)
      * @param  int|null $per_page The number of items to return per page (optional)
      * @param  string|null $prev_page_cursor A pagination cursor to fetch the previous page of a list (optional)
      * @param  string|null $query Matches delivery id, event id, event type prefix, and endpoint name. (optional)
      * @param  string|null $sort Sort order, values are &#x60;ASC&#x60; or &#x60;DESC&#x60;, defaults to &#x60;DESC&#x60; (optional)
+     * @param  string[]|null $source_id Limits idempotencyValue matching to these source IDs. (optional)
      * @param  string|null $start_date The start date (optional)
      * @param  string[]|null $status A list of event delivery statuses to filter by (optional)
      * @param  string|null $subscription_id SubscriptionID to filter by (optional)
@@ -1306,7 +1366,7 @@ class EventDeliveriesApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getEventDeliveriesPagedRequest($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['getEventDeliveriesPaged'][0])
+    public function getEventDeliveriesPagedRequest($project_id, $direction = null, $end_date = null, $endpoint_id = null, $event_id = null, $event_type = null, $idempotency_key = null, $idempotency_value = null, $min_trials = null, $next_page_cursor = null, $per_page = null, $prev_page_cursor = null, $query = null, $sort = null, $source_id = null, $start_date = null, $status = null, $subscription_id = null, string $contentType = self::contentTypes['getEventDeliveriesPaged'][0])
     {
 
         // verify the required parameter 'project_id' is set
@@ -1315,6 +1375,9 @@ class EventDeliveriesApi
                 'Missing the required parameter $project_id when calling getEventDeliveriesPaged'
             );
         }
+
+
+
 
 
 
@@ -1377,7 +1440,7 @@ class EventDeliveriesApi
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $event_type,
-            'event_type', // param base name
+            'eventType', // param base name
             'string', // openApiType
             'form', // style
             true, // explode
@@ -1388,6 +1451,24 @@ class EventDeliveriesApi
             $idempotency_key,
             'idempotencyKey', // param base name
             'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $idempotency_value,
+            'idempotencyValue', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $min_trials,
+            'minTrials', // param base name
+            'integer', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -1433,6 +1514,15 @@ class EventDeliveriesApi
             $sort,
             'sort', // param base name
             'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $source_id,
+            'sourceId', // param base name
+            'array', // openApiType
             'form', // style
             true, // explode
             false // required
