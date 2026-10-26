@@ -66,6 +66,7 @@ class ModelsUpdateSource implements ModelInterface, ArrayAccess, \JsonSerializab
         'idempotency_keys' => 'string[]',
         'is_disabled' => 'bool',
         'name' => 'string',
+        'provider' => '\Convoy\Client\Model\DatastoreSourceProvider',
         'pub_sub' => '\Convoy\Client\Model\ModelsPubSubConfig',
         'type' => '\Convoy\Client\Model\DatastoreSourceType',
         'verifier' => '\Convoy\Client\Model\ModelsVerifierConfig'
@@ -87,6 +88,7 @@ class ModelsUpdateSource implements ModelInterface, ArrayAccess, \JsonSerializab
         'idempotency_keys' => null,
         'is_disabled' => null,
         'name' => null,
+        'provider' => null,
         'pub_sub' => null,
         'type' => null,
         'verifier' => null
@@ -106,6 +108,7 @@ class ModelsUpdateSource implements ModelInterface, ArrayAccess, \JsonSerializab
         'idempotency_keys' => false,
         'is_disabled' => false,
         'name' => false,
+        'provider' => false,
         'pub_sub' => false,
         'type' => false,
         'verifier' => false
@@ -205,6 +208,7 @@ class ModelsUpdateSource implements ModelInterface, ArrayAccess, \JsonSerializab
         'idempotency_keys' => 'idempotency_keys',
         'is_disabled' => 'is_disabled',
         'name' => 'name',
+        'provider' => 'provider',
         'pub_sub' => 'pub_sub',
         'type' => 'type',
         'verifier' => 'verifier'
@@ -224,6 +228,7 @@ class ModelsUpdateSource implements ModelInterface, ArrayAccess, \JsonSerializab
         'idempotency_keys' => 'setIdempotencyKeys',
         'is_disabled' => 'setIsDisabled',
         'name' => 'setName',
+        'provider' => 'setProvider',
         'pub_sub' => 'setPubSub',
         'type' => 'setType',
         'verifier' => 'setVerifier'
@@ -243,6 +248,7 @@ class ModelsUpdateSource implements ModelInterface, ArrayAccess, \JsonSerializab
         'idempotency_keys' => 'getIdempotencyKeys',
         'is_disabled' => 'getIsDisabled',
         'name' => 'getName',
+        'provider' => 'getProvider',
         'pub_sub' => 'getPubSub',
         'type' => 'getType',
         'verifier' => 'getVerifier'
@@ -313,6 +319,7 @@ class ModelsUpdateSource implements ModelInterface, ArrayAccess, \JsonSerializab
         $this->setIfExists('idempotency_keys', $data ?? [], null);
         $this->setIfExists('is_disabled', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('provider', $data ?? [], null);
         $this->setIfExists('pub_sub', $data ?? [], null);
         $this->setIfExists('type', $data ?? [], null);
         $this->setIfExists('verifier', $data ?? [], null);
@@ -572,6 +579,33 @@ class ModelsUpdateSource implements ModelInterface, ArrayAccess, \JsonSerializab
             throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
         $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets provider
+     *
+     * @return \Convoy\Client\Model\DatastoreSourceProvider|null
+     */
+    public function getProvider()
+    {
+        return $this->container['provider'];
+    }
+
+    /**
+     * Sets provider
+     *
+     * @param \Convoy\Client\Model\DatastoreSourceProvider|null $provider Use this to specify one of our predefined source types.
+     *
+     * @return self
+     */
+    public function setProvider($provider)
+    {
+        if (is_null($provider)) {
+            throw new \InvalidArgumentException('non-nullable provider cannot be null');
+        }
+        $this->container['provider'] = $provider;
 
         return $this;
     }
