@@ -490,15 +490,17 @@ class DeliveryAttemptsApi
      *
      * @param  string $project_id Project ID (required)
      * @param  string $event_delivery_id event delivery id (required)
+     * @param  bool|null $paginated Return a page of ten attempts and next_cursor (optional)
+     * @param  string|null $before Exclusive attempt cursor from next_cursor; requires paginated&#x3D;true (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getDeliveryAttempts'] to see the possible values for this operation
      *
      * @throws \Convoy\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Convoy\Client\Model\GetDeliveryAttempts200Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response
      */
-    public function getDeliveryAttempts($project_id, $event_delivery_id, string $contentType = self::contentTypes['getDeliveryAttempts'][0])
+    public function getDeliveryAttempts($project_id, $event_delivery_id, $paginated = null, $before = null, string $contentType = self::contentTypes['getDeliveryAttempts'][0])
     {
-        list($response) = $this->getDeliveryAttemptsWithHttpInfo($project_id, $event_delivery_id, $contentType);
+        list($response) = $this->getDeliveryAttemptsWithHttpInfo($project_id, $event_delivery_id, $paginated, $before, $contentType);
         return $response;
     }
 
@@ -509,15 +511,17 @@ class DeliveryAttemptsApi
      *
      * @param  string $project_id Project ID (required)
      * @param  string $event_delivery_id event delivery id (required)
+     * @param  bool|null $paginated Return a page of ten attempts and next_cursor (optional)
+     * @param  string|null $before Exclusive attempt cursor from next_cursor; requires paginated&#x3D;true (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getDeliveryAttempts'] to see the possible values for this operation
      *
      * @throws \Convoy\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Convoy\Client\Model\GetDeliveryAttempts200Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response|\Convoy\Client\Model\GetProjects400Response, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getDeliveryAttemptsWithHttpInfo($project_id, $event_delivery_id, string $contentType = self::contentTypes['getDeliveryAttempts'][0])
+    public function getDeliveryAttemptsWithHttpInfo($project_id, $event_delivery_id, $paginated = null, $before = null, string $contentType = self::contentTypes['getDeliveryAttempts'][0])
     {
-        $request = $this->getDeliveryAttemptsRequest($project_id, $event_delivery_id, $contentType);
+        $request = $this->getDeliveryAttemptsRequest($project_id, $event_delivery_id, $paginated, $before, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -637,14 +641,16 @@ class DeliveryAttemptsApi
      *
      * @param  string $project_id Project ID (required)
      * @param  string $event_delivery_id event delivery id (required)
+     * @param  bool|null $paginated Return a page of ten attempts and next_cursor (optional)
+     * @param  string|null $before Exclusive attempt cursor from next_cursor; requires paginated&#x3D;true (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getDeliveryAttempts'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getDeliveryAttemptsAsync($project_id, $event_delivery_id, string $contentType = self::contentTypes['getDeliveryAttempts'][0])
+    public function getDeliveryAttemptsAsync($project_id, $event_delivery_id, $paginated = null, $before = null, string $contentType = self::contentTypes['getDeliveryAttempts'][0])
     {
-        return $this->getDeliveryAttemptsAsyncWithHttpInfo($project_id, $event_delivery_id, $contentType)
+        return $this->getDeliveryAttemptsAsyncWithHttpInfo($project_id, $event_delivery_id, $paginated, $before, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -659,15 +665,17 @@ class DeliveryAttemptsApi
      *
      * @param  string $project_id Project ID (required)
      * @param  string $event_delivery_id event delivery id (required)
+     * @param  bool|null $paginated Return a page of ten attempts and next_cursor (optional)
+     * @param  string|null $before Exclusive attempt cursor from next_cursor; requires paginated&#x3D;true (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getDeliveryAttempts'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getDeliveryAttemptsAsyncWithHttpInfo($project_id, $event_delivery_id, string $contentType = self::contentTypes['getDeliveryAttempts'][0])
+    public function getDeliveryAttemptsAsyncWithHttpInfo($project_id, $event_delivery_id, $paginated = null, $before = null, string $contentType = self::contentTypes['getDeliveryAttempts'][0])
     {
         $returnType = '\Convoy\Client\Model\GetDeliveryAttempts200Response';
-        $request = $this->getDeliveryAttemptsRequest($project_id, $event_delivery_id, $contentType);
+        $request = $this->getDeliveryAttemptsRequest($project_id, $event_delivery_id, $paginated, $before, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -710,12 +718,14 @@ class DeliveryAttemptsApi
      *
      * @param  string $project_id Project ID (required)
      * @param  string $event_delivery_id event delivery id (required)
+     * @param  bool|null $paginated Return a page of ten attempts and next_cursor (optional)
+     * @param  string|null $before Exclusive attempt cursor from next_cursor; requires paginated&#x3D;true (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getDeliveryAttempts'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getDeliveryAttemptsRequest($project_id, $event_delivery_id, string $contentType = self::contentTypes['getDeliveryAttempts'][0])
+    public function getDeliveryAttemptsRequest($project_id, $event_delivery_id, $paginated = null, $before = null, string $contentType = self::contentTypes['getDeliveryAttempts'][0])
     {
 
         // verify the required parameter 'project_id' is set
@@ -733,6 +743,8 @@ class DeliveryAttemptsApi
         }
 
 
+
+
         $resourcePath = '/v1/projects/{projectID}/eventdeliveries/{eventDeliveryID}/deliveryattempts';
         $formParams = [];
         $queryParams = [];
@@ -740,6 +752,24 @@ class DeliveryAttemptsApi
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $paginated,
+            'paginated', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $before,
+            'before', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
         // path params
