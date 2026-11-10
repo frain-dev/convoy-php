@@ -60,7 +60,7 @@ class GetDeliveryAttempts200Response implements ModelInterface, ArrayAccess, \Js
     protected static $openAPITypes = [
         'message' => 'string',
         'status' => 'bool',
-        'data' => '\Convoy\Client\Model\DatastoreDeliveryAttempt[]'
+        'data' => '\Convoy\Client\Model\GetDeliveryAttempts200ResponseAllOfData'
     ];
 
     /**
@@ -361,7 +361,7 @@ class GetDeliveryAttempts200Response implements ModelInterface, ArrayAccess, \Js
     /**
      * Gets data
      *
-     * @return \Convoy\Client\Model\DatastoreDeliveryAttempt[]|null
+     * @return \Convoy\Client\Model\GetDeliveryAttempts200ResponseAllOfData|null
      */
     public function getData()
     {
@@ -371,7 +371,7 @@ class GetDeliveryAttempts200Response implements ModelInterface, ArrayAccess, \Js
     /**
      * Sets data
      *
-     * @param \Convoy\Client\Model\DatastoreDeliveryAttempt[]|null $data data
+     * @param \Convoy\Client\Model\GetDeliveryAttempts200ResponseAllOfData|null $data data
      *
      * @return self
      */
